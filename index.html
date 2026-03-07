@@ -12,241 +12,833 @@
 <link rel="manifest" href="/uno-flip-tarot/site.webmanifest" />
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0f;--sf:#12121a;--sf2:#1a1a26;--bd:rgba(255,255,255,0.08);--gd:#c9a84c;--gl:#e8c97a;--tx:#e8e0d0;--tm:#8a8070}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--tx);font-family:'Cormorant Garamond',serif;font-size:17px;min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1px 1px at 30% 60%,rgba(255,255,255,.2) 0%,transparent 100%),radial-gradient(1px 1px at 50% 10%,rgba(255,255,255,.25) 0%,transparent 100%),radial-gradient(1px 1px at 70% 80%,rgba(255,255,255,.15) 0%,transparent 100%),radial-gradient(2px 2px at 20% 85%,rgba(201,168,76,.2) 0%,transparent 100%),radial-gradient(2px 2px at 60% 45%,rgba(201,168,76,.15) 0%,transparent 100%),radial-gradient(1px 1px at 90% 65%,rgba(255,255,255,.2) 0%,transparent 100%)}
-.wrap{position:relative;z-index:1;max-width:1300px;margin:0 auto;padding:0 24px 100px}
-header{text-align:center;padding:56px 20px 28px}
-header::after{content:'';display:block;width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--gd),transparent);margin:20px auto 0}
-.eyebrow{font-size:12px;letter-spacing:6px;text-transform:uppercase;color:var(--gd);margin-bottom:16px;opacity:.8}
-h1{font-family:'Cinzel Decorative',serif;font-size:clamp(24px,4vw,44px);color:var(--gl);font-weight:400;line-height:1.3;text-shadow:0 0 40px rgba(201,168,76,.3);letter-spacing:2px}
-.hsub{font-size:17px;color:var(--tm);margin-top:12px;font-style:italic;font-weight:300}
-.mnav{display:flex;justify-content:center;margin:28px auto 0;border:1px solid var(--bd);border-radius:50px;width:fit-content;overflow:hidden;background:var(--sf)}
-.mnb{padding:12px 30px;border:none;background:transparent;color:var(--tm);font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s}
-.mnb.active{background:linear-gradient(135deg,#1e1830,#2a2040);color:var(--gl);font-weight:600}
-.stgl{display:flex;justify-content:center;margin:28px auto;border:1px solid var(--bd);border-radius:50px;width:fit-content;overflow:hidden;background:var(--sf)}
-.tb{padding:10px 32px;border:none;background:transparent;color:var(--tm);font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s}
-.tb.al{background:linear-gradient(135deg,#fff8e8,#f0e0b0);color:#3a2a0a;font-weight:600}
-.tb.ad{background:linear-gradient(135deg,#1a0a2e,#2e1050);color:#c8a0ff;font-weight:600}
-.slbl{font-family:'Cinzel Decorative',serif;font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--gd);margin:48px 0 20px;opacity:.7;display:flex;align-items:center;gap:16px}
-.slbl::before,.slbl::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gd),transparent);opacity:.3}
-.lgnd{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0;padding:20px;background:var(--sf);border:1px solid var(--bd);border-radius:16px}
-.li{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--tm)}
-.ld{width:12px;height:12px;border-radius:3px;flex-shrink:0}
-.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:12px;margin-bottom:8px}
-.uc{aspect-ratio:2/3;border-radius:12px;cursor:pointer;position:relative;transition:transform .2s,box-shadow .2s;border:1.5px solid rgba(255,255,255,.1);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;padding:8px 4px}
-.uc:hover{transform:translateY(-6px) scale(1.04);box-shadow:0 20px 40px rgba(0,0,0,.5),0 0 20px var(--cg,rgba(255,255,255,.1));border-color:rgba(255,255,255,.3);z-index:2}
-.uc .cn{font-family:'Cinzel Decorative',serif;font-size:24px;font-weight:700;line-height:1;color:rgba(255,255,255,.95);text-shadow:0 2px 8px rgba(0,0,0,.4)}
-.uc .cl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.75);font-weight:600;line-height:1.2}
-.uc .cs{font-size:20px;margin-bottom:2px}
-.uc::before{content:'';position:absolute;width:80%;height:70%;background:rgba(255,255,255,.12);border-radius:50%;transform:rotate(-10deg)}
-.uc>*{position:relative;z-index:1}
-.cr{background:linear-gradient(145deg,#c82a18,#e84030);--cg:rgba(232,64,48,.4)}
-.cb{background:linear-gradient(145deg,#1a4fc0,#2a6be8);--cg:rgba(42,107,232,.4)}
-.cy{background:linear-gradient(145deg,#c09010,#e8c02a);--cg:rgba(232,192,42,.4)}
-.cg{background:linear-gradient(145deg,#18a038,#2ac854);--cg:rgba(42,200,84,.4)}
-.cwl{background:linear-gradient(145deg,#1a1a1a,#2a2a2a);border:2px solid transparent!important;background-clip:padding-box;position:relative}
-.cwl::after{content:'';position:absolute;inset:-2px;border-radius:12px;background:linear-gradient(135deg,#e84030,#2a6be8,#e8c02a,#2ac854);z-index:-1}
-.co{background:linear-gradient(145deg,#b04010,#e87020);--cg:rgba(232,112,32,.4)}
-.cp{background:linear-gradient(145deg,#a01060,#e84090);--cg:rgba(232,64,144,.4)}
-.ct{background:linear-gradient(145deg,#108888,#20c8c8);--cg:rgba(32,200,200,.4)}
-.cpu{background:linear-gradient(145deg,#5020a0,#8040e8);--cg:rgba(128,64,232,.4)}
-.cwd{background:linear-gradient(145deg,#0a0010,#150025);position:relative}
-.cwd::after{content:'';position:absolute;inset:-2px;border-radius:12px;background:linear-gradient(135deg,#e87020,#e84090,#20c8c8,#8040e8);z-index:-1}
-.cf{background:linear-gradient(145deg,#1a0a0a,#3a1a00);border:2px solid var(--gd)!important;--cg:rgba(201,168,76,.5)}
-.hidden{display:none}
-.tp{display:none}.tp.active{display:block}
-.mov{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
-.mov.open{opacity:1;pointer-events:all}
-.mod{background:var(--sf);border:1px solid rgba(255,255,255,.12);border-radius:24px;max-width:600px;width:100%;padding:44px;position:relative;transform:translateY(20px) scale(.96);transition:transform .3s;box-shadow:0 40px 80px rgba(0,0,0,.6),0 0 60px var(--mg,rgba(201,168,76,.1));max-height:90vh;overflow-y:auto}
-.mov.open .mod{transform:translateY(0) scale(1)}
-.mcl{position:absolute;top:18px;right:22px;background:none;border:none;color:var(--tm);font-size:26px;cursor:pointer;line-height:1;transition:color .2s}
-.mcl:hover{color:var(--tx)}
-.mpv{width:86px;height:128px;border-radius:12px;margin:0 auto 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:relative;overflow:hidden}
-.mpv::before{content:'';position:absolute;width:80%;height:70%;background:rgba(255,255,255,.12);border-radius:50%;transform:rotate(-10deg)}
-.mpv>*{position:relative;z-index:1}
-.mpv .cn{font-family:'Cinzel Decorative',serif;font-size:30px;font-weight:700;color:rgba(255,255,255,.95)}
-.mpv .cs{font-size:24px}.mpv .cl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.75)}
-.meb{text-align:center;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--gd);margin-bottom:8px;opacity:.8}
-.mti{font-family:'Cinzel Decorative',serif;font-size:22px;color:var(--gl);text-align:center;margin-bottom:6px;font-weight:400}
-.msu{text-align:center;font-style:italic;color:var(--tm);font-size:16px;margin-bottom:24px}
-.mdv{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--gd),transparent);opacity:.3;margin:22px 0}
-.mst{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gd);opacity:.7;margin-bottom:10px}
-.mtx{font-size:17px;line-height:1.85;color:var(--tx);font-weight:300}
-.mkw{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.kw{background:var(--sf2);border:1px solid var(--bd);border-radius:20px;padding:5px 16px;font-size:13px;color:var(--gd);letter-spacing:1px}
-.mbg{display:inline-flex;align-items:center;gap:8px;background:var(--sf2);border:1px solid var(--gd);border-radius:8px;padding:9px 18px;margin-bottom:20px}
-.mbl{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gd);opacity:.7}
-.mbv{font-family:'Cinzel Decorative',serif;font-size:15px;color:var(--gl)}
-.rvb{background:linear-gradient(135deg,rgba(100,50,160,.14),rgba(50,15,90,.2));border:1px solid rgba(150,90,255,.22);border-radius:14px;padding:20px 22px}
-.rvt{display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#b090ff;margin-bottom:10px}
-.rvx{font-size:17px;line-height:1.85;color:#d0c0f0;font-weight:300;font-style:italic}
-.spintro{font-size:17px;line-height:1.9;color:var(--tm);max-width:700px;margin:40px auto;text-align:center;font-style:italic}
-.spgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-bottom:48px}
-.spc{background:var(--sf);border:1px solid var(--bd);border-radius:20px;padding:28px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
-.spc::before{content:'';position:absolute;inset:0;background:var(--sc,rgba(201,168,76,.04));pointer-events:none}
-.spc:hover{border-color:rgba(201,168,76,.4);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
-.spn{font-family:'Cinzel Decorative',serif;font-size:16px;color:var(--gl);margin-bottom:6px}
-.spc2{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gd);opacity:.6;margin-bottom:12px}
-.spd{font-size:16px;line-height:1.75;color:var(--tm);font-weight:300}
-.spaa{display:none}.spaa.vis{display:block}
-.bkb{display:inline-flex;align-items:center;gap:8px;background:var(--sf);border:1px solid var(--bd);border-radius:30px;padding:10px 22px;cursor:pointer;color:var(--tm);font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:2px;text-transform:uppercase;margin-bottom:36px;transition:all .2s}
-.bkb:hover{color:var(--tx);border-color:rgba(255,255,255,.2)}
-.sat{font-family:'Cinzel Decorative',serif;font-size:26px;color:var(--gl);text-align:center;margin-bottom:8px}
-.sas{text-align:center;font-style:italic;color:var(--tm);font-size:17px;margin-bottom:40px}
-.sctl{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:0 0 36px}
-.sbt{padding:13px 28px;border-radius:30px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:1px;cursor:pointer;transition:all .25s}
-.sbt:hover{border-color:var(--gd);color:var(--gl)}
-.sbt.pri{background:linear-gradient(135deg,#2a1e10,#3a2c14);border-color:var(--gd);color:var(--gl)}
-.sbt.pri:hover{background:linear-gradient(135deg,#3a2e18,#4a3c1e);box-shadow:0 0 20px rgba(201,168,76,.2)}
-.spc3{display:flex;flex-direction:column;gap:18px;margin-bottom:36px}
-.spo{display:grid;grid-template-columns:88px 1fr;gap:22px;align-items:start;background:var(--sf);border:1px solid var(--bd);border-radius:18px;padding:22px;transition:border-color .2s}
-.spo.fld{border-color:rgba(201,168,76,.28)}
-.slt{aspect-ratio:2/3;border-radius:10px;border:2px dashed rgba(255,255,255,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;background:rgba(255,255,255,.02);min-height:116px}
-.slt:hover{border-color:var(--gd);background:rgba(201,168,76,.05)}
-.slt.fs{border-style:solid;border-color:rgba(255,255,255,.22)}
-.slt .sn{font-family:'Cinzel Decorative',serif;font-size:20px;color:rgba(255,255,255,.2)}
-.slt .si{font-size:22px}.slt .sl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:4px}
-.slt::before{content:'';position:absolute;width:80%;height:70%;background:rgba(255,255,255,.05);border-radius:50%;transform:rotate(-10deg)}
-.slt>*{position:relative;z-index:1}
-.pi{flex:1}
-.pn{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gd);opacity:.6;margin-bottom:4px}
-.pname{font-family:'Cinzel Decorative',serif;font-size:17px;color:var(--gl);margin-bottom:8px}
-.pd{font-size:16px;color:var(--tm);line-height:1.7;margin-bottom:14px}
-.pr{background:var(--sf2);border:1px solid var(--bd);border-radius:12px;padding:16px 18px;display:none}
-.pr.vis{display:block}
-.prn{font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--gl);margin-bottom:6px}
-.prt{font-size:16px;line-height:1.78;color:var(--tx);font-weight:300}
-.prv{font-size:15px;color:#b090ff;font-style:italic;margin-top:8px}
-.cmb{background:var(--sf);border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:32px;margin-top:24px;display:none}
-.cmb.vis{display:block}
-.cmbt{font-family:'Cinzel Decorative',serif;font-size:18px;color:var(--gl);margin-bottom:22px;text-align:center}
-.ci{border-left:2px solid var(--gd);padding-left:18px;margin-bottom:20px}
-.ci:last-child{margin-bottom:0}
-.cil{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gd);opacity:.7;margin-bottom:6px}
-.cit{font-size:17px;line-height:1.8;color:var(--tx);font-weight:300}
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(201,168,76,.3);border-radius:3px}
-@media(max-width:640px){.cgrid{grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px}.mod{padding:28px 16px}.spo{grid-template-columns:68px 1fr;gap:14px}.spgrid{grid-template-columns:1fr}.mnb{padding:10px 18px;font-size:14px}}
+  :root {
+    --bg:#0a0a0f; --surface:#12121a; --surface2:#1a1a26;
+    --border:rgba(255,255,255,0.08); --gold:#c9a84c; --gold-light:#e8c97a;
+    --text:#e8e0d0; --text-muted:#8a8070;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background-image:
+    radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,0.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 30% 60%,rgba(255,255,255,0.2) 0%,transparent 100%),
+    radial-gradient(1px 1px at 50% 10%,rgba(255,255,255,0.25) 0%,transparent 100%),
+    radial-gradient(1px 1px at 70% 80%,rgba(255,255,255,0.15) 0%,transparent 100%),
+    radial-gradient(1px 1px at 85% 35%,rgba(255,255,255,0.3) 0%,transparent 100%),
+    radial-gradient(2px 2px at 20% 85%,rgba(201,168,76,0.2) 0%,transparent 100%),
+    radial-gradient(2px 2px at 60% 45%,rgba(201,168,76,0.15) 0%,transparent 100%),
+    radial-gradient(1px 1px at 90% 65%,rgba(255,255,255,0.2) 0%,transparent 100%),
+    radial-gradient(1px 1px at 15% 50%,rgba(255,255,255,0.1) 0%,transparent 100%),
+    radial-gradient(1px 1px at 75% 15%,rgba(255,255,255,0.2) 0%,transparent 100%);
+    pointer-events:none;z-index:0;}
+  .container{position:relative;z-index:1;max-width:1300px;margin:0 auto;padding:0 24px 100px;}
+
+  /* NAV */
+  .main-nav{display:flex;justify-content:center;padding:24px 0 0;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(12px);}
+  .nav-tab{padding:14px 36px;border:none;background:transparent;color:var(--text-muted);font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all 0.3s ease;border-bottom:2px solid transparent;position:relative;top:1px;}
+  .nav-tab.active{color:var(--gold-light);border-bottom-color:var(--gold);}
+  .nav-tab:hover:not(.active){color:var(--text);}
+
+  /* HEADER */
+  header{text-align:center;padding:52px 20px 36px;}
+  header::after{content:'';display:block;width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:24px auto 0;}
+  .header-eyebrow{font-size:12px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;opacity:0.8;}
+  h1{font-family:'Cinzel Decorative',serif;font-size:clamp(24px,4vw,44px);color:var(--gold-light);font-weight:400;line-height:1.3;text-shadow:0 0 40px rgba(201,168,76,0.3);letter-spacing:2px;}
+  .header-sub{font-size:18px;color:var(--text-muted);margin-top:12px;font-style:italic;font-weight:300;}
+
+  .page{display:none;} .page.active{display:block;}
+
+  /* SIDE TOGGLE */
+  .side-toggle{display:flex;justify-content:center;margin:32px auto;border:1px solid var(--border);border-radius:50px;width:fit-content;overflow:hidden;background:var(--surface);}
+  .toggle-btn{padding:12px 36px;border:none;background:transparent;color:var(--text-muted);font-family:'Cormorant Garamond',serif;font-size:17px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s ease;}
+  .toggle-btn.active-light{background:linear-gradient(135deg,#fff8e8,#f0e0b0);color:#3a2a0a;font-weight:600;}
+  .toggle-btn.active-dark{background:linear-gradient(135deg,#1a0a2e,#2e1050);color:#c8a0ff;font-weight:600;}
+
+  /* SECTION LABELS */
+  .section-label{font-family:'Cinzel Decorative',serif;font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin:52px 0 22px;opacity:0.7;display:flex;align-items:center;gap:16px;}
+  .section-label::before,.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.3;}
+
+  /* CARD GRID */
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:14px;margin-bottom:8px;}
+  .uno-card{aspect-ratio:2/3;border-radius:12px;cursor:pointer;position:relative;transition:transform 0.2s ease,box-shadow 0.2s ease;border:1.5px solid rgba(255,255,255,0.1);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;padding:8px 4px;}
+  .uno-card:hover{transform:translateY(-7px) scale(1.05);box-shadow:0 22px 44px rgba(0,0,0,0.5),0 0 22px var(--card-glow,rgba(255,255,255,0.1));border-color:rgba(255,255,255,0.35);z-index:2;}
+  .uno-card .card-num{font-family:'Cinzel Decorative',serif;font-size:24px;font-weight:700;line-height:1;color:rgba(255,255,255,0.95);text-shadow:0 2px 8px rgba(0,0,0,0.4);}
+  .uno-card .card-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.8);font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.2;}
+  .uno-card .card-symbol{font-size:20px;margin-bottom:2px;}
+  .uno-card::before{content:'';position:absolute;width:80%;height:70%;background:rgba(255,255,255,0.12);border-radius:50%;transform:rotate(-10deg);}
+  .uno-card>*{position:relative;z-index:1;}
+
+  .card-red{background:linear-gradient(145deg,#c82a18,#e84030);--card-glow:rgba(232,64,48,0.4);}
+  .card-blue{background:linear-gradient(145deg,#1a4fc0,#2a6be8);--card-glow:rgba(42,107,232,0.4);}
+  .card-yellow{background:linear-gradient(145deg,#c09010,#e8c02a);--card-glow:rgba(232,192,42,0.4);}
+  .card-green{background:linear-gradient(145deg,#18a038,#2ac854);--card-glow:rgba(42,200,84,0.4);}
+  .card-orange{background:linear-gradient(145deg,#b04010,#e87020);--card-glow:rgba(232,112,32,0.4);}
+  .card-pink{background:linear-gradient(145deg,#a01060,#e84090);--card-glow:rgba(232,64,144,0.4);}
+  .card-teal{background:linear-gradient(145deg,#108888,#20c8c8);--card-glow:rgba(32,200,200,0.4);}
+  .card-purple{background:linear-gradient(145deg,#5020a0,#8040e8);--card-glow:rgba(128,64,232,0.4);}
+  .card-wild-light{background:linear-gradient(145deg,#1a1a1a,#2a2a2a);position:relative;}
+  .card-wild-light::after{content:'';position:absolute;inset:-2px;border-radius:12px;background:linear-gradient(135deg,#e84030,#2a6be8,#e8c02a,#2ac854);z-index:-1;}
+  .card-wild-dark{background:linear-gradient(145deg,#0a0010,#150025);position:relative;}
+  .card-wild-dark::after{content:'';position:absolute;inset:-2px;border-radius:12px;background:linear-gradient(135deg,#e87020,#e84090,#20c8c8,#8040e8);z-index:-1;}
+  .card-flip{background:linear-gradient(145deg,#1a0a0a,#3a1a00);border:2px solid var(--gold)!important;--card-glow:rgba(201,168,76,0.5);}
+  .side-panel.hidden{display:none;}
+
+  /* LEGEND */
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:24px 0;padding:22px;background:var(--surface);border:1px solid var(--border);border-radius:16px;}
+  .legend-item{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--text-muted);}
+  .legend-dot{width:13px;height:13px;border-radius:3px;flex-shrink:0;}
+
+  /* MODAL */
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(10px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
+  .modal-overlay.open{opacity:1;pointer-events:all;}
+  .modal{background:var(--surface);border:1px solid rgba(255,255,255,0.12);border-radius:24px;max-width:680px;width:100%;padding:44px;position:relative;transform:translateY(20px) scale(0.96);transition:transform 0.3s ease;box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 60px var(--modal-glow,rgba(201,168,76,0.1));max-height:90vh;overflow-y:auto;}
+  .modal-overlay.open .modal{transform:translateY(0) scale(1);}
+  .modal-close{position:absolute;top:18px;right:22px;background:none;border:none;color:var(--text-muted);font-size:26px;cursor:pointer;line-height:1;padding:4px;transition:color 0.2s;}
+  .modal-close:hover{color:var(--text);}
+
+  /* TAROT IMAGERY BLOCK */
+  .tarot-imagery{background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:22px;margin-bottom:22px;}
+  .imagery-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .imagery-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);}
+  .imagery-title{font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--gold-light);font-weight:400;}
+  .imagery-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px;font-style:italic;}
+  .imagery-scene{font-size:15px;line-height:1.85;color:var(--text);font-weight:300;font-style:italic;border-left:2px solid rgba(201,168,76,0.3);padding-left:14px;}
+  .imagery-symbols{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .imagery-symbol{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:3px 12px;font-size:12px;color:var(--gold);letter-spacing:0.5px;}
+
+  .modal-card-preview{width:88px;height:132px;border-radius:12px;margin:0 auto 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;position:relative;overflow:hidden;}
+  .modal-card-preview::before{content:'';position:absolute;width:80%;height:70%;background:rgba(255,255,255,0.12);border-radius:50%;transform:rotate(-10deg);}
+  .modal-card-preview>*{position:relative;z-index:1;}
+  .modal-card-preview .card-num{font-family:'Cinzel Decorative',serif;font-size:32px;font-weight:700;color:rgba(255,255,255,0.95);}
+  .modal-card-preview .card-symbol{font-size:24px;}
+  .modal-card-preview .card-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.8);}
+
+  .modal-eyebrow{text-align:center;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;opacity:0.8;}
+  .modal-title{font-family:'Cinzel Decorative',serif;font-size:22px;color:var(--gold-light);text-align:center;margin-bottom:7px;font-weight:400;}
+  .modal-subtitle{text-align:center;font-style:italic;color:var(--text-muted);font-size:17px;margin-bottom:24px;}
+  .modal-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.3;margin:20px 0;}
+  .modal-section-title{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:10px;}
+  .modal-text{font-size:16px;line-height:1.85;color:var(--text);font-weight:300;}
+  .modal-keywords{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .keyword{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--gold);letter-spacing:1px;}
+  .keyword.reversed-kw{background:rgba(128,0,200,0.1);border-color:rgba(180,100,255,0.25);color:#c090ff;}
+
+  .modal-tarot-badge{display:inline-flex;align-items:center;gap:10px;background:var(--surface2);border:1px solid var(--gold);border-radius:8px;padding:10px 18px;margin-bottom:22px;}
+  .tarot-badge-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:0.7;}
+  .tarot-badge-value{font-family:'Cinzel Decorative',serif;font-size:15px;color:var(--gold-light);}
+
+  .reversed-block{background:rgba(80,0,150,0.08);border:1px solid rgba(180,100,255,0.2);border-radius:14px;padding:22px;margin-top:4px;}
+  .reversed-block .modal-section-title{color:#c090ff;}
+  .reversed-block .modal-text{color:#d8c8f0;}
+  .reversed-icon{font-size:18px;display:inline-block;transform:rotate(180deg);margin-right:6px;vertical-align:middle;}
+
+  /* SPREADS */
+  .spread-intro{font-size:18px;line-height:1.9;color:var(--text-muted);font-style:italic;max-width:700px;margin:0 auto 48px;text-align:center;}
+  .spread-cards-container{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin:32px 0;min-height:160px;align-items:flex-end;}
+  .spread-slot{width:96px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .spread-slot-card{width:96px;height:144px;border-radius:12px;border:2px dashed rgba(201,168,76,0.35);display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;position:relative;transition:all 0.25s ease;background:var(--surface);overflow:hidden;}
+  .spread-slot-card.has-card{border-style:solid;border-color:rgba(255,255,255,0.15);cursor:default;}
+  .spread-slot-card.has-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(0,0,0,0.4);}
+  .spread-slot-card.reversed-card{transform:rotate(180deg);}
+  .spread-slot-card.reversed-card:hover{transform:rotate(180deg) translateY(-4px);}
+  .spread-slot-card::before{content:'';position:absolute;width:80%;height:70%;background:rgba(255,255,255,0.08);border-radius:50%;transform:rotate(-10deg);}
+  .spread-slot-card>*{position:relative;z-index:1;text-align:center;}
+  .spread-slot-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);text-align:center;line-height:1.4;}
+  .spread-slot-pos{font-size:13px;color:var(--gold);opacity:0.7;font-style:italic;}
+  .reversed-tag{font-size:10px;color:#c090ff;letter-spacing:1px;text-transform:uppercase;opacity:0.9;margin-top:2px;}
+
+  .spread-controls{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:28px 0;}
+  .spread-btn{padding:13px 30px;border:1px solid var(--border);border-radius:50px;background:var(--surface);color:var(--text);font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:2px;cursor:pointer;transition:all 0.25s ease;text-transform:uppercase;}
+  .spread-btn:hover{border-color:var(--gold);color:var(--gold);}
+  .spread-btn.primary{background:linear-gradient(135deg,rgba(201,168,76,0.2),rgba(201,168,76,0.05));border-color:var(--gold);color:var(--gold-light);}
+  .spread-btn.primary:hover{background:linear-gradient(135deg,rgba(201,168,76,0.35),rgba(201,168,76,0.1));}
+  .spread-btn.danger{border-color:rgba(232,64,48,0.4);color:rgba(232,64,48,0.8);}
+  .spread-btn.danger:hover{border-color:#e84030;color:#e84030;}
+
+  .spread-selector{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:36px;}
+  .spread-type-btn{padding:10px 24px;border:1px solid var(--border);border-radius:50px;background:transparent;color:var(--text-muted);font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:1px;cursor:pointer;transition:all 0.25s ease;}
+  .spread-type-btn.active{background:var(--surface2);border-color:var(--gold);color:var(--gold-light);}
+  .spread-type-btn:hover:not(.active){border-color:rgba(201,168,76,0.4);color:var(--text);}
+
+  .spread-description{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px 28px;margin-bottom:32px;font-size:16px;line-height:1.8;color:var(--text-muted);max-width:700px;margin-left:auto;margin-right:auto;}
+  .spread-description strong{color:var(--text);font-weight:600;}
+
+  .interpretation-panel{background:var(--surface);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:36px;margin-top:40px;display:none;}
+  .interpretation-panel.visible{display:block;}
+  .interp-header{font-family:'Cinzel Decorative',serif;font-size:18px;color:var(--gold-light);margin-bottom:8px;}
+  .interp-subheader{font-size:15px;color:var(--text-muted);font-style:italic;margin-bottom:28px;}
+  .interp-card{border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:18px;display:flex;gap:20px;align-items:flex-start;}
+  .interp-mini-card{width:52px;height:78px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;position:relative;overflow:hidden;}
+  .interp-mini-card::before{content:'';position:absolute;width:80%;height:70%;background:rgba(255,255,255,0.1);border-radius:50%;transform:rotate(-10deg);}
+  .interp-mini-card>*{position:relative;z-index:1;}
+  .interp-mini-reversed{transform:rotate(180deg);}
+  .interp-card-body{flex:1;}
+  .interp-card-title{font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--gold-light);margin-bottom:5px;}
+  .interp-card-pos{font-size:12px;color:var(--gold);opacity:0.7;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
+  .interp-card-text{font-size:16px;line-height:1.75;color:var(--text);font-weight:300;}
+  .interp-card-text.reversed-text{color:#d8c8f0;font-style:italic;}
+  .reversed-pill{display:inline-block;background:rgba(128,0,200,0.2);border:1px solid rgba(180,100,255,0.3);border-radius:20px;padding:2px 10px;font-size:11px;color:#c090ff;letter-spacing:1px;text-transform:uppercase;margin-left:8px;vertical-align:middle;}
+
+  .combo-insight{background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.25);border-radius:14px;padding:24px;margin-top:28px;}
+  .combo-insight-title{font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--gold);margin-bottom:12px;letter-spacing:2px;}
+  .combo-insight-text{font-size:17px;line-height:1.85;color:var(--text);font-weight:300;}
+
+  ::-webkit-scrollbar{width:6px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  ::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.3);border-radius:3px;}
+
+  @media(max-width:600px){
+    .card-grid{grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px;}
+    .modal{padding:28px 18px;}
+    .modal-title{font-size:18px;}
+    .nav-tab{padding:12px 18px;font-size:14px;letter-spacing:1px;}
+    .spread-slot{width:80px;}
+    .spread-slot-card{width:80px;height:120px;}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <div class="eyebrow">✦ A Mystic's Companion ✦</div>
-  <h1>Uno Flip<br>Tarot Oracle</h1>
-  <p class="hsub">Click any card to reveal its tarot correspondence, upright reading &amp; reversed meaning</p>
-</header>
-<nav class="mnav">
-  <button class="mnb active" onclick="showTab('cards',this)">🃏 Card Reference</button>
-  <button class="mnb" onclick="showTab('spreads',this)">✦ Tarot Spreads</button>
-</nav>
+<div class="container">
+  <header>
+    <div class="header-eyebrow">✦ A mystic's companion ✦</div>
+    <h1>Uno Flip<br>Tarot Oracle</h1>
+    <p class="header-sub">Click any card to reveal its tarot correspondence</p>
+  </header>
 
-<div class="tp active" id="tab-cards">
-  <div class="stgl">
-    <button class="tb al" id="btn-light" onclick="showSide('light')">☀ Light Side</button>
-    <button class="tb" id="btn-dark" onclick="showSide('dark')">🌑 Dark Side</button>
-  </div>
-  <div id="pl">
-    <div class="lgnd">
-      <div class="li"><div class="ld" style="background:#e8402a"></div>Red — Wands (Fire · Action)</div>
-      <div class="li"><div class="ld" style="background:#2a6be8"></div>Blue — Cups (Water · Emotion)</div>
-      <div class="li"><div class="ld" style="background:#e8c02a"></div>Yellow — Swords (Air · Mind)</div>
-      <div class="li"><div class="ld" style="background:#2ac854"></div>Green — Pentacles (Earth · Body)</div>
+  <nav class="main-nav">
+    <button class="nav-tab active" onclick="showPage('reference')">✦ Card Reference</button>
+    <button class="nav-tab" onclick="showPage('spreads')">◈ Tarot Spreads</button>
+  </nav>
+
+  <!-- REFERENCE PAGE -->
+  <div class="page active" id="page-reference">
+    <div class="side-toggle">
+      <button class="toggle-btn active-light" id="btn-light" onclick="showSide('light')">☀ Light Side</button>
+      <button class="toggle-btn" id="btn-dark" onclick="showSide('dark')">🌑 Dark Side</button>
     </div>
-    <div class="slbl">🔴 Red · Suit of Wands · Fire &amp; Passion</div><div class="cgrid" id="g-red"></div>
-    <div class="slbl">🔵 Blue · Suit of Cups · Water &amp; Emotion</div><div class="cgrid" id="g-blue"></div>
-    <div class="slbl">🟡 Yellow · Suit of Swords · Air &amp; Mind</div><div class="cgrid" id="g-yellow"></div>
-    <div class="slbl">🟢 Green · Suit of Pentacles · Earth &amp; Body</div><div class="cgrid" id="g-green"></div>
-    <div class="slbl">✦ Special Cards · Major Arcana Energy</div><div class="cgrid" id="g-sl"></div>
-  </div>
-  <div class="hidden" id="pd">
-    <div class="lgnd">
-      <div class="li"><div class="ld" style="background:#e87020"></div>Orange — Shadow Wands (Repressed Fire)</div>
-      <div class="li"><div class="ld" style="background:#e84090"></div>Pink — Shadow Cups (Wounded Heart)</div>
-      <div class="li"><div class="ld" style="background:#20c8c8"></div>Teal — Shadow Swords (Dark Mind)</div>
-      <div class="li"><div class="ld" style="background:#8040e8"></div>Purple — Shadow Pentacles (Hidden Worth)</div>
+    <div class="sides-container">
+      <div class="side-panel" id="panel-light">
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#e8402a"></div> Red — Wands (Fire · Action)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#2a6be8"></div> Blue — Cups (Water · Emotion)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#e8c02a"></div> Yellow — Swords (Air · Mind)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#2ac854"></div> Green — Pentacles (Earth · Body)</div>
+        </div>
+        <div class="section-label">🔴 Red · Suit of Wands · Fire & Passion</div>
+        <div class="card-grid" id="grid-red"></div>
+        <div class="section-label">🔵 Blue · Suit of Cups · Water & Emotion</div>
+        <div class="card-grid" id="grid-blue"></div>
+        <div class="section-label">🟡 Yellow · Suit of Swords · Air & Mind</div>
+        <div class="card-grid" id="grid-yellow"></div>
+        <div class="section-label">🟢 Green · Suit of Pentacles · Earth & Body</div>
+        <div class="card-grid" id="grid-green"></div>
+        <div class="section-label">✦ Special Cards · Major Arcana Energy</div>
+        <div class="card-grid" id="grid-special-light"></div>
+      </div>
+      <div class="side-panel hidden" id="panel-dark">
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#e87020"></div> Orange — Shadow Wands (Repressed Fire)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#e84090"></div> Pink — Shadow Cups (Wounded Heart)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#20c8c8"></div> Teal — Shadow Swords (Dark Mind)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#8040e8"></div> Purple — Shadow Pentacles (Hidden Worth)</div>
+        </div>
+        <div class="section-label">🟠 Orange · Shadow Wands · Repressed Fire</div>
+        <div class="card-grid" id="grid-orange"></div>
+        <div class="section-label">🩷 Pink · Shadow Cups · Wounded Heart</div>
+        <div class="card-grid" id="grid-pink"></div>
+        <div class="section-label">🩵 Teal · Shadow Swords · Dark Mind</div>
+        <div class="card-grid" id="grid-teal"></div>
+        <div class="section-label">🟣 Purple · Shadow Pentacles · Hidden Worth</div>
+        <div class="card-grid" id="grid-purple"></div>
+        <div class="section-label">✦ Dark Special Cards · Shadow Major Arcana</div>
+        <div class="card-grid" id="grid-special-dark"></div>
+      </div>
     </div>
-    <div class="slbl">🟠 Orange · Shadow Wands · Repressed Fire</div><div class="cgrid" id="g-orange"></div>
-    <div class="slbl">🩷 Pink · Shadow Cups · Wounded Heart</div><div class="cgrid" id="g-pink"></div>
-    <div class="slbl">🩵 Teal · Shadow Swords · Dark Mind</div><div class="cgrid" id="g-teal"></div>
-    <div class="slbl">🟣 Purple · Shadow Pentacles · Hidden Worth</div><div class="cgrid" id="g-purple"></div>
-    <div class="slbl">✦ Dark Special Cards · Shadow Major Arcana</div><div class="cgrid" id="g-sd"></div>
+  </div>
+
+  <!-- SPREADS PAGE -->
+  <div class="page" id="page-spreads">
+    <div style="padding-top:48px;">
+      <p class="spread-intro">Choose a spread, draw your cards, and let the oracle speak. Cards drawn sideways are reversed — they carry the shadow of their upright meaning.</p>
+      <div class="spread-selector" id="spread-selector"></div>
+      <div class="spread-description" id="spread-description"></div>
+      <div class="spread-cards-container" id="spread-slots"></div>
+      <div class="spread-controls">
+        <button class="spread-btn primary" onclick="drawCards()">✦ Draw Cards</button>
+        <button class="spread-btn" onclick="interpretSpread()">◈ Interpret Spread</button>
+        <button class="spread-btn danger" onclick="clearSpread()">✕ Clear</button>
+      </div>
+      <div class="interpretation-panel" id="interpretation-panel">
+        <div class="interp-header" id="interp-header"></div>
+        <div class="interp-subheader" id="interp-subheader"></div>
+        <div id="interp-cards"></div>
+        <div class="combo-insight">
+          <div class="combo-insight-title">✦ COMBINATION INSIGHT</div>
+          <div class="combo-insight-text" id="combo-text"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="tp" id="tab-spreads">
-  <div id="sp-sel">
-    <p class="spintro">Choose a spread, then draw your Uno Flip cards. A card landing dark-side-up is treated as reversed. Click a slot to draw a single card, or draw all at once.</p>
-    <div class="spgrid" id="sp-grid"></div>
-  </div>
-  <div class="spaa" id="sp-area">
-    <button class="bkb" onclick="backSpreads()">← Back to Spreads</button>
-    <div class="sat" id="sp-title"></div>
-    <div class="sas" id="sp-sub"></div>
-    <div class="sctl">
-      <button class="sbt pri" onclick="drawAll()">✦ Draw All Cards</button>
-      <button class="sbt" onclick="clearSp()">↺ Clear &amp; Reset</button>
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div class="modal-card-preview" id="modal-preview"></div>
+    <div class="modal-eyebrow" id="modal-eyebrow"></div>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-subtitle" id="modal-subtitle"></div>
+    <div style="text-align:center;margin-bottom:22px;">
+      <div class="modal-tarot-badge">
+        <span class="tarot-badge-label">Tarot ↔</span>
+        <span class="tarot-badge-value" id="modal-tarot"></span>
+      </div>
     </div>
-    <div class="spc3" id="sp-pos"></div>
-    <div class="cmb" id="cmb">
-      <div class="cmbt">✦ Combined Reading</div>
-      <div id="cmb-c"></div>
-    </div>
-  </div>
-</div>
-</div>
 
-<div class="mov" id="mov" onclick="closeMO(event)">
-  <div class="mod" id="mod">
-    <button class="mcl" onclick="closeM()">✕</button>
-    <div class="mpv" id="mpv"></div>
-    <div class="meb" id="meb"></div>
-    <div class="mti" id="mti"></div>
-    <div class="msu" id="msu"></div>
-    <div style="text-align:center;margin-bottom:20px"><div class="mbg"><span class="mbl">Tarot ↔</span><span class="mbv" id="mbv"></span></div></div>
-    <div class="mst">UPRIGHT MEANING</div><div class="mtx" id="mm"></div>
-    <div class="mdv"></div>
-    <div class="mst">IN A READING</div><div class="mtx" id="mr"></div>
-    <div class="mdv"></div>
-    <div class="rvb"><div class="rvt">↶ Reversed — When the card lands upside-down or dark-side-up</div><div class="rvx" id="mrv"></div></div>
-    <div class="mdv"></div>
-    <div class="mst">KEYWORDS</div><div class="mkw" id="mkw"></div>
+    <!-- TAROT IMAGERY -->
+    <div class="tarot-imagery" id="modal-imagery-block">
+      <div class="imagery-header">
+        <div class="imagery-icon" id="modal-imagery-icon">🎴</div>
+        <div>
+          <div class="imagery-title" id="modal-imagery-title">Traditional Card Imagery</div>
+          <div class="imagery-subtitle" id="modal-imagery-card-name"></div>
+        </div>
+      </div>
+      <div class="imagery-scene" id="modal-imagery-scene"></div>
+      <div class="imagery-symbols" id="modal-imagery-symbols"></div>
+    </div>
+
+    <div class="modal-section-title">UPRIGHT MEANING</div>
+    <div class="modal-text" id="modal-meaning"></div>
+    <div class="modal-divider"></div>
+    <div class="modal-section-title">IN A READING (UPRIGHT)</div>
+    <div class="modal-text" id="modal-reading"></div>
+    <div class="modal-divider"></div>
+    <div class="modal-section-title">KEYWORDS</div>
+    <div class="modal-keywords" id="modal-keywords"></div>
+    <div class="modal-divider"></div>
+    <div class="reversed-block">
+      <div class="modal-section-title"><span class="reversed-icon">☽</span> REVERSED MEANING</div>
+      <div class="modal-text" id="modal-reversed"></div>
+      <div style="margin-top:16px;">
+        <div class="modal-section-title">IN A READING (REVERSED)</div>
+        <div class="modal-text" id="modal-reversed-reading"></div>
+      </div>
+      <div style="margin-top:14px;">
+        <div class="modal-section-title">REVERSED KEYWORDS</div>
+        <div class="modal-keywords" id="modal-reversed-keywords"></div>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
-const SD={red:{name:"Wands",el:"Fire",theme:"passion, creativity, ambition"},blue:{name:"Cups",el:"Water",theme:"emotions, intuition, relationships"},yellow:{name:"Swords",el:"Air",theme:"mind, conflict, truth"},green:{name:"Pentacles",el:"Earth",theme:"material world, body, stability"},orange:{name:"Shadow Wands",el:"Shadow Fire",theme:"blocked passion, burnout, misdirected drive"},pink:{name:"Shadow Cups",el:"Shadow Water",theme:"wounded emotions, illusions, deep longing"},teal:{name:"Shadow Swords",el:"Shadow Air",theme:"obsessive thoughts, harsh truths, mental spirals"},purple:{name:"Shadow Pentacles",el:"Shadow Earth",theme:"scarcity mindset, hidden worth, buried potential"}};
-const NM={1:{t:"Ace",u:"Pure seed energy of the suit. Raw potential, a new beginning, an unexpected gift or spark. The universe hands you the pure essence of this element.",r:"Something is just beginning — a fresh start in the domain of this suit. Take it. Don't overthink it.",rv:"The gift is present but blocked — through fear, poor timing, or self-doubt. The spark exists but hasn't been fanned. Ask what is preventing the start.",k:["New beginning","Pure potential","Gift","Seed","Spark"]},2:{t:"Two",u:"Duality, choice, balance between two forces. You are at a crossroads within this suit's domain. Partnership or conflict — it depends on how you engage.",r:"A decision or partnership is forming. Two paths or two people — your relationship to them defines your next step.",rv:"Paralysis at the crossroads. The choice exists but you've stalled. Or you're forcing balance where there is none. Something needs to be acknowledged.",k:["Choice","Duality","Balance","Partnership","Crossroads"]},3:{t:"Three",u:"Initial fruition. The seed has sprouted. Collaboration, early celebration, creative expansion. Three is the first number of visible result.",r:"Early results are showing. Celebrate the progress but know the journey has just begun.",rv:"The collaboration has fractured, or the celebration is premature. Growth is happening but underground — not yet visible. Don't force the bloom.",k:["Growth","Collaboration","Early success","Expansion","Community"]},4:{t:"Four",u:"Stability, pause, foundation. A plateau — either a stable resting place or stagnation depending on your mindset. Four is the number of walls and corners.",r:"Something has solidified. Ask whether this stability is restful grounding or avoidance of the next step.",rv:"The stable structure has become a prison. What was a foundation is now a trap. Movement is needed even if it disrupts the comfort.",k:["Stability","Foundation","Pause","Security","Rest"]},5:{t:"Five",u:"Conflict, disruption, instability. The number of challenge. Five arrives to shake what was settled at Four. Necessary tension that demands growth.",r:"Conflict or disruption is here. Don't resist — this friction is carving you into your next form.",rv:"The conflict has been suppressed or turned inward. You're fighting yourself rather than the situation. Or clinging to conflict that has already resolved.",k:["Conflict","Challenge","Disruption","Tension","Change"]},6:{t:"Six",u:"Harmony after struggle. The return of flow after disruption. Giving, receiving, cycles of reciprocity. A breath after the storm.",r:"Relief is available. A cycle of giving and receiving is in play — are you both offering and accepting?",rv:"The exchange is imbalanced — strings attached to generosity, or receiving without giving back. Nostalgia keeps you in a past version of harmony.",k:["Harmony","Reciprocity","Recovery","Flow","Grace"]},7:{t:"Seven",u:"Mastery and testing. You've come far — now comes the challenge of wisdom. Seven asks: do you truly know this? A moment of strategic assessment.",r:"You know more than you give yourself credit for. Trust your accumulated skill. But stay sharp — the test is real.",rv:"Skill is being doubted or misused. Either false confidence covering deep insecurity, or genuine talent being undermined. Reassess the strategy.",k:["Mastery","Strategy","Testing","Wisdom","Skill"]},8:{t:"Eight",u:"Movement, speed, momentum. Things are happening quickly now. Skill in motion.",r:"Events are moving fast. You have the ability to navigate this — act with precision, not panic.",rv:"Speed without direction, or complete paralysis when movement is needed. Find the current again.",k:["Speed","Momentum","Movement","Precision","Acceleration"]},9:{t:"Nine",u:"Near-completion, integration, the threshold before the end. Nine carries the weight of all that came before. Deep embodiment — you are becoming the suit.",r:"You are close to the end of this cycle. The work is almost done. What needs to be integrated before you cross the threshold?",rv:"The threshold has become a wall. Fear of completion, exhaustion before the finish line. The nightmares at the end of the journey. One more step.",k:["Near-completion","Integration","Threshold","Embodiment","Culmination"]}};
-const SNM={1:{t:"Shadow Ace",u:"A potential blocked at the source. The gift of this element exists but something — fear, timing, circumstance — prevents it from being received.",r:"Something wants to begin but cannot yet. Examine what is holding the spark from catching.",rv:"The block is dissolving. What was suppressed is starting to surface — the potential wasn't gone, only delayed. Watch for the first ember.",k:["Blocked potential","False start","Suppressed gift","Missed opportunity"]},2:{t:"Shadow Two",u:"Paralysis between two choices. The crossroads becomes a standstill. Indecision, or a choice being made unconsciously that you haven't acknowledged.",r:"You may be stuck in a loop. A choice exists — but you haven't let yourself see it clearly.",rv:"The paralysis is breaking. A previously hidden option is emerging. Or surrender was the real answer all along.",k:["Paralysis","Indecision","Hidden choice","Stalemate","Denial"]},3:{t:"Shadow Three",u:"Early effort that hasn't borne fruit, or growth that comes with unexpected cost. Collaboration gone sideways.",r:"Something built together may be showing cracks. Or you are not giving yourself credit for what has grown.",rv:"The fracture is healing. The collaboration can be repaired. Growth that was hidden underground is ready to surface.",k:["Setback","Premature celebration","Fractured collaboration","Hidden growth"]},4:{t:"Shadow Four",u:"Stagnation mistaken for stability. Clinging to comfort when movement is needed. The foundation has become a cage.",r:"Ask whether you are resting or hiding. The stillness feels safe — but is it?",rv:"The cage is opening. Movement that was too frightening before is now becoming possible.",k:["Stagnation","Avoidance","Clinging","False security","Comfort zone"]},5:{t:"Shadow Five",u:"Conflict that has gone inward. External disruption turned into internal war. Self-sabotage.",r:"The battle has moved inside you. The real conflict now is with yourself.",rv:"The inner war is resolving. Self-compassion is starting to replace self-destruction.",k:["Internal conflict","Self-sabotage","Internalized chaos","Inner war"]},6:{t:"Shadow Six",u:"Imbalanced exchange — taking without giving, or giving without receiving. Toxic cycles of reciprocity. Nostalgia trapping you in the past.",r:"Look at how you give and receive in this area. Is the flow healthy, or is someone being drained?",rv:"The toxic cycle is being seen for what it is. A healthier rhythm is trying to establish itself.",k:["Imbalance","Toxic reciprocity","Nostalgia","One-sided exchange"]},7:{t:"Shadow Seven",u:"Skill used for self-deception or manipulation. Mistrust of your own mastery. The strategy is off.",r:"What you think you know may need re-examination. Is the mastery real — or is it a defense?",rv:"The self-deception is lifting. The true skill beneath the performance is starting to emerge.",k:["Self-deception","False mastery","Manipulation","Doubt","Overconfidence"]},8:{t:"Shadow Eight",u:"Momentum without direction. Moving fast toward the wrong thing. Feeling trapped in endless motion.",r:"Are you running toward something — or away from it? Speed without direction is just chaos.",rv:"The misdirected momentum is correcting. Clarity about direction is emerging.",k:["Misdirected speed","Trapped","Running away","Chaos","Frenetic energy"]},9:{t:"Shadow Nine",u:"The weight of near-completion becomes unbearable. Anxiety, exhaustion, or nightmares before the finish line.",r:"The end is near and it's terrifying. The discomfort is real, but it is not a sign to stop.",rv:"The fear is lifting. The anxiety before completion is dissolving. What felt impossible is now within reach.",k:["Anxiety","Nightmares","Final resistance","Exhaustion","Fear of completion"]}};
-const SC={light:[{id:"sl1",label:"Skip",sym:"⊘",cc:"cwl",t:"The Hermit (IX)",u:"Intentional withdrawal from the outer world to seek inner wisdom. A necessary pause — not avoidance, but the kind of solitude that lights the way forward.",r:"A situation is calling you inward. Pause the action. The answer you seek requires stepping away from the noise.",rv:"The Hermit's solitude has curdled into isolation. Withdrawal meant to be temporary has become avoidance. The lamp needs to be brought back out into the world.",k:["Withdrawal","Inner wisdom","Solitude","Reflection","Guidance"]},{id:"sl2",label:"Reverse",sym:"↺",cc:"cwl",t:"Wheel of Fortune (X)",u:"The cycle turns. What was moving forward now moves in a new direction. Fortune shifts — not necessarily for better or worse, but irrevocably different.",r:"A reversal is in motion. Surrender to the new direction rather than fighting it — the wheel turns for everyone.",rv:"Resistance to an inevitable turning. You're trying to hold the wheel still. The cycle turns whether you accept it or not.",k:["Change","Reversal","Cycles","Fortune","Turning point"]},{id:"sl3",label:"Draw One",sym:"+1",cc:"cwl",t:"The Tower (XVI) Minor",u:"A smaller disruption arrives with something unexpected. Not the full Tower, but a warning tremor. Something must be received or integrated that you did not plan for.",r:"A surprise arrives — something extra to carry. Handle it with equanimity and it becomes a gift rather than a burden.",rv:"The minor disruption was bypassed too quickly. Something that needed to be processed was pushed aside. The tremor still needs to be felt.",k:["Surprise","Minor disruption","Unexpected load","Adaptability"]},{id:"sl4",label:"Draw Two",sym:"+2",cc:"cwl",t:"The Tower (XVI)",u:"The Tower arrives. Sudden disruption, the shattering of false structures, a shock that cannot be ignored. The universe removes what was never solid to begin with.",r:"Something is being dismantled. It may hurt. But what falls was already hollow. Let it go.",rv:"The Tower's destruction is being resisted. The structure that should fall is being propped up. The collapse is delayed — and will be worse.",k:["Disruption","Sudden change","Collapse","Liberation through chaos","Revelation"]},{id:"sl5",label:"Wild",sym:"★",cc:"cwl",t:"The Fool (0)",u:"Pure, boundless potential. The Fool stands at the cliff's edge — not foolish, but unencumbered by the past. Any direction is possible.",r:"You are free. More free than you may realize. Choose direction not from fear, but from pure desire.",rv:"Recklessness masquerading as freedom. The leap is happening without looking. Or the Fool is frozen at the edge, afraid to move at all.",k:["Freedom","New journey","Unlimited potential","Innocence","Leap of faith"]},{id:"sl6",label:"Wild Draw Two",sym:"★+2",cc:"cwl",t:"The Magician (I)",u:"The Magician holds all four elements — complete power. He directs that power with intention, sometimes at a cost to others. Wild Draw Two is power with consequence.",r:"You hold real power in this situation. Use it deliberately. What you direct your will toward will manifest — be careful what you choose.",rv:"The Magician's power is misdirected or scattered. The skills are present but the will is absent, or aimed at the wrong target.",k:["Power","Will","Manifestation","Skill","Directed energy"]},{id:"sl7",label:"Flip",sym:"◑",cc:"cf",t:"Judgement (XX) / The Sun",u:"The moment of revelation — the light side becomes aware of the dark, and transformation begins. Something hidden is about to surface. A clarion call to rise.",r:"A significant shift is imminent. Something will be revealed. You are being called to a higher awareness.",rv:"The call to transformation is being ignored. The revelation is knocking but the door isn't opening. The flip has happened but its meaning hasn't been integrated.",k:["Revelation","Transformation","Awakening","The full picture","Turn"]}],dark:[{id:"sd1",label:"Skip",sym:"⊘",cc:"co",t:"The Hermit — Shadow",u:"Isolation that has curdled into loneliness, or avoidance disguised as wisdom. The Hermit's light dims when withdrawal becomes permanent.",r:"Are you truly seeking wisdom — or running from connection? The solitude has gone on long enough.",rv:"The isolation is beginning to break. A reluctant return toward connection. The shadow Hermit starts to turn his lamp outward again.",k:["Isolation","Avoidance","Withdrawn","Loneliness","Fear of connection"]},{id:"sd2",label:"Skip Everyone",sym:"⊘⊘",cc:"cpu",t:"The World — Shadow",u:"Total cessation. Either profound completion of a cycle — or total shutdown. Everyone is affected. This card carries the weight of absolute endings.",r:"Everything pauses. Something enormous has completed or collapsed. This is the silence before a new world begins.",rv:"The total ending is being resisted. A cycle that needed to complete was cut short. Something is unfinished at the largest scale.",k:["Total ending","Complete cycle","Shutdown","Pre-rebirth","Universal pause"]},{id:"sd3",label:"Reverse",sym:"↺",cc:"ct",t:"Wheel of Fortune — Shadow",u:"The wheel turns against you — or you resist what the wheel is trying to do. Fighting inevitable change, or caught in a karmic loop.",r:"Something keeps cycling back. The pattern will repeat until something changes in you, not just around you.",rv:"The karmic loop is finally breaking. An old pattern that has repeated endlessly is being recognized and released. Real change is now possible.",k:["Karmic loop","Resistance","Repeating patterns","Fighting change","Stuck cycle"]},{id:"sd4",label:"Draw Five",sym:"+5",cc:"cp",t:"The Devil (XV)",u:"Accumulation of excess — five cards of burden at once. The Devil is addiction, attachment, and chains we pretend we cannot remove.",r:"What have you taken on that is no longer yours to carry? What attachment is making you collect weight?",rv:"The chains of the Devil are loosening. Attachments that felt permanent are dissolving. Awareness of the pattern is the first act of liberation.",k:["Excess","Addiction","Burden","Chains","Attachment","Materialism"]},{id:"sd5",label:"Wild",sym:"★",cc:"cwd",t:"The Fool — Shadow",u:"Recklessness. Leaping without looking in a way that causes harm. The Fool's freedom becomes chaos — the open road becomes running away.",r:"Examine the leap you're about to take. Is it true freedom or escape? The direction matters now more than ever.",rv:"The recklessness is being tempered. The dark Fool begins to look before the leap, or finally stops running and turns to face what was left behind.",k:["Recklessness","Escape","Running away","Dark freedom","Chaos"]},{id:"sd6",label:"Wild Draw Color",sym:"★🌈",cc:"cwd",t:"The Magician — Shadow",u:"Power used for manipulation. The Magician's tools deployed without ethics — the ability to shape reality turned toward self-interest or control.",r:"There is manipulation in play — either yours or someone else's. Great power is in the room. Watch how it's being directed.",rv:"The shadow Magician is being exposed. Manipulation is coming to light. Skills used for control are being redirected toward genuine creation.",k:["Manipulation","Abuse of power","Control","Shadow will","Coercion"]},{id:"sd7",label:"Flip",sym:"◑",cc:"cf",t:"The Moon (XVIII)",u:"The flip from dark back to light — or deeper into darkness. The Moon rules illusion. On the dark side, Flip signals that what seemed real may be a projection.",r:"Something is not as it appears. Emotions are high, clarity is low. Wait before acting — the full picture is still hidden.",rv:"The Moon's veil is lifting. The illusion is beginning to dissolve. What was murky is becoming visible — though the full truth may still take time.",k:["Illusion","Hidden truth","Subconscious","Fear","Confusion","The unseen"]}]};
-const SPREADS=[{id:"one",name:"The Single Card",count:"1 Card",color:"rgba(201,168,76,.06)",desc:"A daily draw or moment of focus. One card holds the entire message — sometimes the most powerful reading is the most direct.",q:"What do I need to know right now?",pos:[{n:"The Message",d:"The single energy present in this moment. Let this card speak without filtering it."}],combo:(c)=>[{l:"Your Message",t:`The ${c[0]?.name||'...'} is your anchor for right now. Sit with its energy without reaching for more. Sometimes one clear signal outweighs a chorus.`}]},{id:"three",name:"Past · Present · Future",count:"3 Cards",color:"rgba(42,107,232,.06)",desc:"The classic three-card spread. Where you've been, where you are, and the energy moving toward you.",q:"What is the arc of this situation?",pos:[{n:"The Root",d:"What came before — the past energy that shaped this moment."},{n:"The Now",d:"The current energy. What is alive and active in this situation right now."},{n:"The Current",d:"What is emerging — the direction the energy is flowing if nothing changes."}],combo:(c)=>[{l:"The Arc",t:`From ${c[0]?.name||'...'} into ${c[1]?.name||'...'}, moving toward ${c[2]?.name||'...'}. Notice whether this feels like a natural progression or an unexpected turn.`},{l:"What to Watch",t:"The distance between past and present reveals whether you've moved with the current or against it. Present and future together show what action — or non-action — is invited."}]},{id:"cross",name:"The Four Directions",count:"4 Cards",color:"rgba(232,64,144,.06)",desc:"A compass spread for decisions — what guides, what grounds, what to release, and what to embrace.",q:"How do I navigate this crossroads?",pos:[{n:"Above — What Guides",d:"The higher perspective. What the situation is calling you toward at its best."},{n:"Below — What Grounds",d:"The foundation beneath you. What is solid, what you can stand on."},{n:"Left — What to Release",d:"The energy you are being asked to let go of. What keeps you from moving forward."},{n:"Right — What to Embrace",d:"The energy moving toward you. What you are being invited to welcome or integrate."}],combo:(c)=>[{l:"The Axis",t:`${c[0]?.name||'...'} above and ${c[1]?.name||'...'} below define your vertical axis — the tension between aspiration and reality.`},{l:"The Crossroads",t:`Releasing ${c[2]?.name||'...'} and embracing ${c[3]?.name||'...'} is the specific movement being asked of you. Notice if these feel manageable or overwhelming.`}]},{id:"shadow",name:"Light & Shadow Self",count:"4 Cards",color:"rgba(128,64,232,.06)",desc:"A deep reading of the conscious and subconscious at play. Who you show the world — and who lives underneath.",q:"What am I showing, and what am I hiding?",pos:[{n:"Your Light Face",d:"The energy you present to the world. Your conscious self and visible identity."},{n:"Your Shadow Self",d:"What operates beneath the surface — the hidden driver, the suppressed desire."},{n:"Your Gift",d:"The strength available to you — often tied to your wound."},{n:"Your Integration",d:"What the two sides of you are asking to be woven together. The invitation toward wholeness."}],combo:(c)=>[{l:"The Split",t:`The space between ${c[0]?.name||'...'} and ${c[1]?.name||'...'} is your inner tension. How wide is the gap between who you show others and who you know yourself to be?`},{l:"The Bridge",t:`${c[2]?.name||'...'} as your gift and ${c[3]?.name||'...'} as your integration — these two describe the work of becoming more whole.`}]},{id:"six",name:"The Six-Card Spread",count:"6 Cards",color:"rgba(42,200,84,.06)",desc:"A fuller reading for complex situations — self, environment, hopes, fears, what crosses you, and the outcome.",q:"What is the full landscape of this situation?",pos:[{n:"You at the Center",d:"Who you are in this situation. Your essential energy right now."},{n:"What Crosses You",d:"The energy working against or with you — the main challenge or complement."},{n:"The Environment",d:"The external forces, people, and conditions surrounding the situation."},{n:"What You Hope For",d:"Your conscious or unconscious hope — what you want to happen."},{n:"What You Fear",d:"The hidden fear — what you don't want to face."},{n:"The Outcome",d:"The energy toward which everything is moving if the current course continues."}],combo:(c)=>[{l:"Your Core Tension",t:`${c[0]?.name||'...'} at your center, crossed by ${c[1]?.name||'...'}. This pairing is the heart of the reading — the rest elaborate on this fundamental dynamic.`},{l:"Inner Landscape",t:`The gap between what you hope (${c[3]?.name||'...'}) and fear (${c[4]?.name||'...'}) often reveals more than any other pair. Do these feel like opposites — or secretly the same thing?`},{l:"The Horizon",t:`${c[5]?.name||'...'} as outcome energy — not destiny, but direction. The question is whether the current course deserves to continue.`}]}];
-let curSpread=null,drawn=[];
-const sym=s=>({"Wands":"🔥","Shadow Wands":"🌑","Cups":"💧","Shadow Cups":"🩸","Swords":"⚔️","Shadow Swords":"🌪","Pentacles":"🌿","Shadow Pentacles":"💀"})[s]||"✦";
-const gw=s=>({"red":"rgba(232,64,48,.2)","blue":"rgba(42,107,232,.2)","yellow":"rgba(232,192,42,.2)","green":"rgba(42,200,84,.2)","orange":"rgba(232,112,32,.2)","pink":"rgba(232,64,144,.2)","teal":"rgba(32,200,200,.2)","purple":"rgba(128,64,232,.2)"})[s]||"rgba(201,168,76,.2)";
-const sbg=cc=>({"cr":"linear-gradient(145deg,#c82a18,#e84030)","cb":"linear-gradient(145deg,#1a4fc0,#2a6be8)","cy":"linear-gradient(145deg,#c09010,#e8c02a)","cg":"linear-gradient(145deg,#18a038,#2ac854)","co":"linear-gradient(145deg,#b04010,#e87020)","cp":"linear-gradient(145deg,#a01060,#e84090)","ct":"linear-gradient(145deg,#108888,#20c8c8)","cpu":"linear-gradient(145deg,#5020a0,#8040e8)","cwl":"linear-gradient(145deg,#1a1a1a,#2a2a2a)","cwd":"linear-gradient(145deg,#0a0010,#150025)","cf":"linear-gradient(145deg,#1a0a0a,#3a1a00)"})[cc]||"linear-gradient(145deg,#1a1a26,#2a2a36)";
-function buildPool(){const p=[];const suits=[{s:"red",cc:"cr",sh:false},{s:"blue",cc:"cb",sh:false},{s:"yellow",cc:"cy",sh:false},{s:"green",cc:"cg",sh:false},{s:"orange",cc:"co",sh:true},{s:"pink",cc:"cp",sh:true},{s:"teal",cc:"ct",sh:true},{s:"purple",cc:"cpu",sh:true}];suits.forEach(({s,cc,sh})=>{const M=sh?SNM:NM,si=SD[s];for(let n=1;n<=9;n++){const m=M[n],rev=Math.random()>.65;p.push({name:`${n} of ${si.name}`,sn:`${n}`,sym:sym(si.name),cc,rev,rt:m.r,rvt:m.rv,u:m.u,k:m.k})}});[...SC.light,...SC.dark].forEach(sc=>{const rev=Math.random()>.7;p.push({name:sc.label,sn:sc.sym,sym:sc.sym,cc:sc.cc,rev,rt:sc.r,rvt:sc.rv,u:sc.u,k:sc.k})});return p;}
-function mkCards(suit,cc,shadow){const grid=document.getElementById(`g-${suit}`);const M=shadow?SNM:NM,si=SD[suit];for(let n=1;n<=9;n++){const m=M[n],el=document.createElement('div');el.className=`uc ${cc}`;el.innerHTML=`<div class="cs">${sym(si.name)}</div><div class="cn">${n}</div><div class="cl">${si.name}</div>`;el.onclick=()=>openM(n,suit,cc,si,m,shadow);grid.appendChild(el)}}
-function mkSpec(side){const grid=document.getElementById(`g-s${side==='light'?'l':'d'}`);SC[side].forEach(c=>{const el=document.createElement('div');el.className=`uc ${c.cc}`;el.innerHTML=`<div class="cs">${c.sym}</div><div class="cl">${c.label}</div>`;el.onclick=()=>openSM(c);grid.appendChild(el)})}
-function setM(id,val){document.getElementById(id).textContent=val}
-function openM(n,suit,cc,si,m,shadow){document.getElementById('mpv').className=`mpv ${cc}`;document.getElementById('mpv').innerHTML=`<div class="cs">${sym(si.name)}</div><div class="cn">${n}</div><div class="cl">${si.name}</div>`;setM('meb',`${shadow?'🌑 Shadow Side':'☀ Light Side'} · ${si.el}`);setM('mti',`${n} of ${si.name}`);setM('msu',si.theme);setM('mbv',`${m.t} of ${shadow?'Shadow ':''}${si.name.replace('Shadow ','')}`);setM('mm',m.u);setM('mr',m.r);setM('mrv',m.rv);document.getElementById('mkw').innerHTML=m.k.map(x=>`<span class="kw">${x}</span>`).join('');document.getElementById('mod').style.setProperty('--mg',gw(suit));document.getElementById('mov').classList.add('open')}
-function openSM(c){document.getElementById('mpv').className=`mpv ${c.cc}`;document.getElementById('mpv').innerHTML=`<div class="cs">${c.sym}</div><div class="cl">${c.label}</div>`;setM('meb','Special Card · Major Arcana Energy');setM('mti',c.label);setM('msu','Action card · Archetypal force');setM('mbv',c.t);setM('mm',c.u);setM('mr',c.r);setM('mrv',c.rv);document.getElementById('mkw').innerHTML=c.k.map(x=>`<span class="kw">${x}</span>`).join('');document.getElementById('mod').style.setProperty('--mg','rgba(201,168,76,.2)');document.getElementById('mov').classList.add('open')}
-const closeMO=e=>{if(e.target===document.getElementById('mov'))document.getElementById('mov').classList.remove('open')};
-const closeM=()=>document.getElementById('mov').classList.remove('open');
-function showSide(s){document.getElementById('pl').classList.toggle('hidden',s!=='light');document.getElementById('pd').classList.toggle('hidden',s!=='dark');document.getElementById('btn-light').className=`tb${s==='light'?' al':''}`;document.getElementById('btn-dark').className=`tb${s==='dark'?' ad':''}`}
-function showTab(tab,btn){document.querySelectorAll('.tp').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.mnb').forEach(b=>b.classList.remove('active'));document.getElementById(`tab-${tab}`).classList.add('active');btn.classList.add('active')}
-function renderSpGrid(){const g=document.getElementById('sp-grid');SPREADS.forEach(s=>{const el=document.createElement('div');el.className='spc';el.style.setProperty('--sc',s.color);el.innerHTML=`<div class="spn">${s.name}</div><div class="spc2">✦ ${s.count}</div><div class="spd">${s.desc}</div>`;el.onclick=()=>openSpread(s.id);g.appendChild(el)})}
-function openSpread(id){curSpread=SPREADS.find(s=>s.id===id);drawn=new Array(curSpread.pos.length).fill(null);document.getElementById('sp-sel').style.display='none';document.getElementById('sp-area').classList.add('vis');document.getElementById('sp-title').textContent=curSpread.name;document.getElementById('sp-sub').textContent=`"${curSpread.q}"`;document.getElementById('cmb').classList.remove('vis');renderPos()}
-function backSpreads(){document.getElementById('sp-sel').style.display='block';document.getElementById('sp-area').classList.remove('vis');curSpread=null;drawn=[]}
-function renderPos(){const cont=document.getElementById('sp-pos');cont.innerHTML='';curSpread.pos.forEach((pos,i)=>{const d=drawn[i],rev=d?.rev||false;const div=document.createElement('div');div.className=`spo${d?' fld':''}`;div.innerHTML=`<div class="slt${d?' fs':''}" style="${d?`background:${sbg(d.cc)};border-color:rgba(255,255,255,.3);transform:${rev?'rotate(180deg)':'none'};`:''};" onclick="drawOne(${i})">${d?`<div class="si">${d.sym}</div><div class="sl" style="transform:${rev?'rotate(180deg)':'none'};color:rgba(255,255,255,.8)">${d.sn}</div>`:`<div class="sn">${i+1}</div><div class="sl">tap to draw</div>`}</div><div class="pi"><div class="pn">Position ${i+1}</div><div class="pname">${pos.n}</div><div class="pd">${pos.d}</div><div class="pr${d?' vis':''}" id="pr-${i}">${d?`<div class="prn">${d.name}${rev?' <span style="color:#b090ff;font-size:13px;">(Reversed)</span>':''}</div><div class="prt">${rev?d.rvt:d.rt}</div>${rev?'<div class="prv">↶ Reversed energy: the shadow side is speaking.</div>':''}`:''}` + `</div></div></div>`;cont.appendChild(div)})}
-function drawOne(i){const pool=buildPool().sort(()=>Math.random()-.5);drawn[i]=pool[0];renderPos();checkCombo()}
-function drawAll(){const pool=buildPool().sort(()=>Math.random()-.5);drawn=curSpread.pos.map((_,i)=>pool[i%pool.length]);renderPos();checkCombo()}
-function clearSp(){drawn=new Array(curSpread.pos.length).fill(null);document.getElementById('cmb').classList.remove('vis');renderPos()}
-function checkCombo(){if(!drawn.every(c=>c!==null))return;const ins=curSpread.combo(drawn);document.getElementById('cmb-c').innerHTML=ins.map(x=>`<div class="ci"><div class="cil">${x.l}</div><div class="cit">${x.t}</div></div>`).join('');document.getElementById('cmb').classList.add('vis');setTimeout(()=>document.getElementById('cmb').scrollIntoView({behavior:'smooth',block:'nearest'}),300)}
-mkCards('red','cr',false);mkCards('blue','cb',false);mkCards('yellow','cy',false);mkCards('green','cg',false);mkSpec('light');
-mkCards('orange','co',true);mkCards('pink','cp',true);mkCards('teal','ct',true);mkCards('purple','cpu',true);mkSpec('dark');
-renderSpGrid();
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
+// ═══════════════════════════════════════════════════════════════ DATA
+
+const suitData = {
+  red:    {name:"Wands",            element:"Fire",         theme:"passion, creativity, ambition"},
+  blue:   {name:"Cups",             element:"Water",        theme:"emotions, intuition, relationships"},
+  yellow: {name:"Swords",           element:"Air",          theme:"mind, conflict, truth"},
+  green:  {name:"Pentacles",        element:"Earth",        theme:"material world, body, stability"},
+  orange: {name:"Shadow Wands",     element:"Shadow Fire",  theme:"blocked passion, burnout, misdirected drive"},
+  pink:   {name:"Shadow Cups",      element:"Shadow Water", theme:"wounded emotions, illusions, deep longing"},
+  teal:   {name:"Shadow Swords",    element:"Shadow Air",   theme:"obsessive thoughts, harsh truths, mental spirals"},
+  purple: {name:"Shadow Pentacles", element:"Shadow Earth", theme:"scarcity mindset, hidden worth, buried potential"},
+};
+
+// Tarot imagery for numbered cards by suit and number
+const tarotImagery = {
+  // WANDS (Red)
+  red: {
+    1:{icon:"🔥",cardName:"Ace of Wands",scene:"A hand emerges from a cloud, gripping a thick wooden staff that sprouts fresh green leaves. Lightning crackles around it. The sky is golden and the horizon glows with possibility.",symbols:["Sprouting wand","Cloud hand","Golden sky","Budding leaves","Rising sun"]},
+    2:{icon:"🌍",cardName:"Two of Wands",scene:"A cloaked figure stands on a castle parapet, one hand gripping a wand planted in the stone, the other holding a small globe. They gaze across an ocean toward distant lands, already owning the world.",symbols:["Globe","Castle wall","Two wands","Distant horizon","Cloak of authority"]},
+    3:{icon:"⛵",cardName:"Three of Wands",scene:"A merchant stands on a cliff overlooking a harbor, watching three ships sail away carrying their cargo. The three wands frame them like a gate. The work is done — now we wait for return.",symbols:["Three ships","Cliff overlook","Wands as pillars","Sailing vessels","Watching figure"]},
+    4:{icon:"🎊",cardName:"Four of Wands",scene:"Four wands are adorned with garlands of flowers and fruit, forming a canopy. Beneath it, two figures dance and celebrate. A grand estate gleams in the background. Everything is in bloom.",symbols:["Floral garlands","Dancing figures","Castle background","Four pillars","Celebration wreath"]},
+    5:{icon:"⚔️",cardName:"Five of Wands",scene:"Five young men clash and wrestle with their wands, but no one is clearly winning or losing. The struggle seems almost playful — a training ground, a competition, not a war. Chaos without malice.",symbols:["Five combatants","Clashing wands","Open sky","Youth and energy","No clear victor"]},
+    6:{icon:"🏆",cardName:"Six of Wands",scene:"A warrior rides a white horse through cheering crowds, a laurel wreath on their head and a wand held high. Victory is public and sweet. The crowd presses close but the rider remains elevated.",symbols:["White horse","Laurel wreath","Crowd of admirers","Raised wand","Victory procession"]},
+    7:{icon:"🛡️",cardName:"Seven of Wands",scene:"A figure stands on high ground, fiercely defending their position against six unseen attackers below. One wand raised, face fierce. They have the advantage of elevation — but the pressure is real.",symbols:["High ground","Six wands below","Defensive stance","Mismatched shoes","Single defender"]},
+    8:{icon:"💨",cardName:"Eight of Wands",scene:"Eight wands fly through open air at great speed, angled downward as if racing toward a target. Below lies lush, peaceful countryside. The wands move without hands — pure directed energy.",symbols:["Eight flying wands","Open sky","Downward angle","Green countryside","Trajectory"]},
+    9:{icon:"🩹",cardName:"Nine of Wands",scene:"A wounded figure leans on a staff, nine wands behind them like a fence they've built through sheer stubbornness. Their head is bandaged but their eyes are alert. Not done yet — just battered.",symbols:["Bandaged head","Nine wands as barrier","Weary vigilance","Leaning staff","Battle scars"]},
+  },
+  // CUPS (Blue)
+  blue: {
+    1:{icon:"🏆",cardName:"Ace of Cups",scene:"A dove descends from clouds to drop a wafer into an overflowing golden chalice. The cup pours water in five streams into a lake of lotus flowers below. Divine love pouring into the world.",symbols:["Overflowing chalice","Dove with wafer","Five streams","Lotus pond","Cloud hand"]},
+    2:{icon:"💞",cardName:"Two of Cups",scene:"A man and woman face each other, each holding a cup, as if making a toast or vow. Between them floats a caduceus entwined with serpents topped by a lion's head. A covenant of mutual feeling.",symbols:["Caduceus","Two pledging figures","Matching cups","Lion's wings","Exchange of gaze"]},
+    3:{icon:"🥂",cardName:"Three of Cups",scene:"Three women dance in a circle in a garden of fruit and flowers, cups raised high. Their robes are colorful and flowing. A harvest has come. Joy is shared, multiplied by three.",symbols:["Dancing trio","Raised cups","Garden harvest","Flowing robes","Circle of joy"]},
+    4:{icon:"😶",cardName:"Four of Cups",scene:"A young man sits under a tree, arms crossed, staring at three cups before him on the ground. A fourth cup is offered by a hand emerging from a cloud — and he doesn't even notice it.",symbols:["Cloud hand offering","Ignored fourth cup","Crossed arms","Three cups ignored","Solitary tree"]},
+    5:{icon:"😢",cardName:"Five of Cups",scene:"A dark-cloaked figure stands before three spilled cups, staring at what was lost. Behind them, two cups still stand upright — but they haven't turned around to see them. A bridge leads to shelter beyond.",symbols:["Three spilled cups","Two upright cups","Black cloak","Bridge to safety","Turned back"]},
+    6:{icon:"🌸",cardName:"Six of Cups",scene:"A small child hands a cup filled with flowers to another, smaller child in a courtyard garden. The scene is bathed in golden light. An older figure walks away in the background. Innocence and nostalgia.",symbols:["Flower-filled cup","Two children","Golden garden","Retreating figure","Six cups of flowers"]},
+    7:{icon:"✨",cardName:"Seven of Cups",scene:"A silhouetted figure stands before seven cups floating in clouds, each containing a different vision — a castle, a dragon, jewels, a wreath, a figure, a snake, and a glowing face. Fantasy overwhelming reality.",symbols:["Seven visions","Cloud cups","Silhouetted figure","Castle","Dragon and serpent","Jewels"]},
+    8:{icon:"🌙",cardName:"Eight of Cups",scene:"Under a solar eclipse, a cloaked figure walks away from eight stacked cups toward dark mountains. The cups are neatly arranged — nothing is broken. They're simply leaving what no longer calls to them.",symbols:["Solar eclipse","Eight stacked cups","Walking away","Dark mountains","Red cloak","Staff for journey"]},
+    9:{icon:"😊",cardName:"Nine of Cups",scene:"A plump, satisfied merchant sits on a bench with arms crossed and a wide smile, nine golden cups arranged on a curved shelf behind them. Everything they wished for. The wish come true card.",symbols:["Nine gleaming cups","Satisfied posture","Arms crossed contentedly","Curved shelf","Merchant's regalia"]},
+  },
+  // SWORDS (Yellow)
+  yellow: {
+    1:{icon:"⚡",cardName:"Ace of Swords",scene:"A hand emerges from clouds gripping a great sword, its tip adorned with a crown and two small branches of olive and palm. Lightning and clouds surround it. Pure cutting truth, newly arrived.",symbols:["Crowned sword","Cloud hand","Olive branch","Lightning","Mountain peaks below"]},
+    2:{icon:"🙈",cardName:"Two of Swords",scene:"A blindfolded figure sits on a stone bench before the sea, two heavy swords crossed over their chest. The moon rises behind them. They cannot see — or will not. Peace through willful ignorance.",symbols:["Blindfold","Crossed swords","Moonlit sea","Crescent moon","Balanced but tense"]},
+    3:{icon:"💔",cardName:"Three of Swords",scene:"Three swords pierce a red heart floating in a gray, stormy sky. Rain falls. Nothing else. The image is stark, unsparing. Grief has arrived without apology. There is no softening it.",symbols:["Three piercing swords","Bleeding heart","Storm clouds","Heavy rain","No comfort"]},
+    4:{icon:"🛏️",cardName:"Four of Swords",scene:"A knight lies in effigy on a tomb, hands clasped in prayer, a single sword beneath them and three swords mounted on the wall above. A stained glass window glows peacefully. Rest after battle.",symbols:["Stone effigy","Prayer hands","Three mounted swords","Stained glass","Sacred rest"]},
+    5:{icon:"😈",cardName:"Five of Swords",scene:"A sneering figure gathers three swords off the ground while two defeated opponents walk away. The sky is turbulent and torn. Victory was won — but at what cost? Something cruel lingers in the air.",symbols:["Three gathered swords","Two retreating figures","Stormy sky","Smirking victor","Hollow triumph"]},
+    6:{icon:"⛵",cardName:"Six of Swords",scene:"A ferryman poles a small boat across still water. A cloaked adult and child huddle in the bow, surrounded by six upright swords. Moving away from troubled waters toward a distant, calmer shore.",symbols:["Ferryman","Six upright swords","Cloaked passengers","Calm ahead","Troubled water behind"]},
+    7:{icon:"🦊",cardName:"Seven of Swords",scene:"A figure sneaks away from a military camp, arms full of five swords, glancing back over their shoulder with a sly smile. Two swords remain planted in the ground. Cunning escape — or betrayal.",symbols:["Five stolen swords","Sneaking figure","Military camp","Two left behind","Sly backward glance"]},
+    8:{icon:"🔒",cardName:"Eight of Swords",scene:"A woman stands blindfolded and loosely bound, surrounded by eight swords driven into the ground around her. Behind her, a distant castle. The bonds are loose — she could leave. But she doesn't know that.",symbols:["Eight surrounding swords","Blindfold","Loose bindings","Castle in distance","Self-imposed cage"]},
+    9:{icon:"😰",cardName:"Nine of Swords",scene:"A figure sits bolt upright in bed, face in hands, nine swords mounted on the dark wall behind them. The quilt is patterned with roses and astrological symbols. The worst suffering happens in the mind at 3am.",symbols:["Nine mounted swords","Hands over face","Dark bedroom","Rose-patterned quilt","Night terror"]},
+  },
+  // PENTACLES (Green)
+  green: {
+    1:{icon:"🌿",cardName:"Ace of Pentacles",scene:"A hand emerges from golden clouds, offering a single gleaming pentacle on an open palm. Below lies a lush garden with an archway of flowers leading to distant mountains. The gift of material abundance.",symbols:["Golden pentacle","Cloud hand","Flower archway","Garden path","Mountain horizon"]},
+    2:{icon:"☯️",cardName:"Two of Pentacles",scene:"A young jester juggles two pentacles connected by an infinity loop of ribbon. Behind him, two ships rise and fall on enormous waves. Balance in motion — the natural rhythm of abundance.",symbols:["Infinity ribbon","Juggling figure","Two ships","Rough sea","Jester's cap"]},
+    3:{icon:"🏛️",cardName:"Three of Pentacles",scene:"A young stonemason works on an arch in a cathedral while a monk and an architect review the plans. Three pentacles are carved above. Skilled work, collaboration, mastery recognized by others.",symbols:["Cathedral arch","Stonemason","Three carved pentacles","Monk and architect","Blueprint"]},
+    4:{icon:"💰",cardName:"Four of Pentacles",scene:"A crowned figure sits rigidly, one pentacle balanced on their head, one clutched to their chest, one under each foot. A city blurs behind them. They have much — and fear losing all of it.",symbols:["Crown pentacle","Chest-clutched coin","Feet on pentacles","Distant city","Rigid posture"]},
+    5:{icon:"❄️",cardName:"Five of Pentacles",scene:"Two ragged figures trudge through snow past a church window glowing with warmth and light, five pentacles visible in the stained glass. They are outside in the cold — but have they tried the door?",symbols:["Church window","Two beggars","Snow and cold","Five pentacles in glass","Bell around neck"]},
+    6:{icon:"⚖️",cardName:"Six of Pentacles",scene:"A wealthy merchant in fine robes holds golden scales in one hand while dropping coins into the hands of two kneeling beggars with the other. Generosity — but who controls the scales?",symbols:["Golden scales","Kneeling beggars","Merchant in purple","Coins dropping","Power of giving"]},
+    7:{icon:"🌾",cardName:"Seven of Pentacles",scene:"A young farmer leans on their hoe, gazing thoughtfully at a vine heavy with seven pentacles. The hard labor is done — now they pause to assess what has grown. Rest, evaluation, and quiet pride.",symbols:["Heavy vine","Leaning farmer","Seven pentacles","Hoe","Harvest pause"]},
+    8:{icon:"🔨",cardName:"Eight of Pentacles",scene:"A craftsman sits at a workbench, carefully carving pentacles one by one. Six are already mounted on a post beside him. He works alone, diligently, away from the city. Mastery through repetition.",symbols:["Craftsman at bench","Six mounted pentacles","Work in progress","Distant city","Apprentice's focus"]},
+    9:{icon:"🌹",cardName:"Nine of Pentacles",scene:"An elegantly dressed woman stands in a lush vineyard, nine pentacles around her, a falcon perched on her gloved hand. She has built this garden herself. Abundance that is self-created and fully enjoyed.",symbols:["Falcon on glove","Nine pentacle vines","Elegant robes","Snail at feet","Self-sufficient garden"]},
+  },
+  // SHADOW WANDS (Orange) — same tarot base but shadow framing
+  orange: {
+    1:{icon:"🌑",cardName:"Ace of Wands (Shadow)",scene:"The hand grips the wand — but the leaves are wilting, the sky is overcast. The spark is present but trapped, smothered, unable to catch. The wand is held too tightly to be useful.",symbols:["Wilting leaves","Clenched fist","Overcast sky","Smothered flame","Unreleased potential"]},
+    2:{icon:"🌑",cardName:"Two of Wands (Shadow)",scene:"The figure on the parapet holds the globe but cannot look away from it. They're frozen in place, unable to choose a direction. The ships remain in harbor. The horizon has become an anxiety rather than a vision.",symbols:["Frozen figure","Unmoved ships","Globe as burden","Paralyzed gaze","Empty horizon"]},
+    3:{icon:"🌑",cardName:"Three of Wands (Shadow)",scene:"The ships return, but empty. Or worse — they don't return at all. The merchant waits on the cliff, and the wait has grown heavy. What was sent out did not come back as hoped.",symbols:["Empty ships","Waiting figure","Fading hope","Long horizon","Returning with nothing"]},
+    4:{icon:"🌑",cardName:"Four of Wands (Shadow)",scene:"The garlands have dried. The celebration happened — but there's something hollow underneath it. The figures still dance but the music feels obligatory. The home is beautiful but suffocating.",symbols:["Dried garlands","Forced celebration","Beautiful cage","Hollow festivity","Trapped in comfort"]},
+    5:{icon:"🌑",cardName:"Five of Wands (Shadow)",scene:"The five combatants no longer look playful. The struggle has turned inward — one figure fighting their own shadow, their own wand turning against them. Self-sabotage wearing the mask of external conflict.",symbols:["Fighting own shadow","Turned wand","Inward battle","No opponents","Self-inflicted struggle"]},
+    6:{icon:"🌑",cardName:"Six of Wands (Shadow)",scene:"The rider is still on the horse — but the crowd has thinned or turned. The laurel wreath sits crooked. Victory was announced prematurely, or the triumph is being claimed by someone who didn't earn it.",symbols:["Thinning crowd","Crooked wreath","Hollow victory","Unearned acclaim","Unstable horse"]},
+    7:{icon:"🌑",cardName:"Seven of Wands (Shadow)",scene:"The figure on the high ground has been fighting so long they've lost track of why. The defense has become compulsive. They push away allies along with enemies. No one can get through — including help.",symbols:["Exhausted defender","Misidentified threats","Repelled allies","Compulsive defense","Lost purpose"]},
+    8:{icon:"🌑",cardName:"Eight of Wands (Shadow)",scene:"The eight wands fly — but they're heading in circles, or crashing into each other mid-air. Frantic motion without trajectory. Speed amplifying confusion rather than cutting through it.",symbols:["Circling wands","Mid-air collisions","Frantic energy","No direction","Amplified chaos"]},
+    9:{icon:"🌑",cardName:"Nine of Wands (Shadow)",scene:"The figure has built the fence of wands so high they can no longer see out. The protection has become a prison. They're still guarding against a threat that may have passed long ago.",symbols:["Wall too high","Invisible threat","Self-imprisoned","Outdated defense","Exhausted paranoia"]},
+  },
+  // SHADOW CUPS (Pink)
+  pink: {
+    1:{icon:"🩸",cardName:"Ace of Cups (Shadow)",scene:"The chalice overflows — but the liquid is murky. The dove circles but doesn't land. Love is present but cannot be received, or it arrives in a form that cannot be recognized or held.",symbols:["Murky overflow","Circling dove","Ungraspable love","Blocked heart","Emotional static"]},
+    2:{icon:"🩸",cardName:"Two of Cups (Shadow)",scene:"The two figures face each other, but the caduceus between them writhes with tension rather than harmony. The cups are raised — but not meeting. Connection attempted but missing. Or one of the cups is empty.",symbols:["Tense caduceus","Misaligned cups","Reaching but missing","One empty cup","Broken covenant"]},
+    3:{icon:"🩸",cardName:"Three of Cups (Shadow)",scene:"The three dancers still move together, but two of them are whispering. The third doesn't know they're being talked about. The celebration has a secret. Beneath the joy, a fracture is forming.",symbols:["Whispering two","Excluded third","Hidden fracture","False camaraderie","Smiling betrayal"]},
+    4:{icon:"🩸",cardName:"Four of Cups (Shadow)",scene:"The fourth cup — the one from the cloud — has been sitting on the ground for so long it's gathered dust. The figure under the tree has been there for years. The gift has gone cold from being ignored.",symbols:["Dusty fourth cup","Years under the tree","Missed gift","Calcified withdrawal","Opportunity decayed"]},
+    5:{icon:"🩸",cardName:"Five of Cups (Shadow)",scene:"The figure in black has now sat down in front of the spilled cups and refuses to turn around. The two standing cups behind them have started to tip as well. Grief extending past its natural end.",symbols:["Seated in grief","Tipping standing cups","Refused comfort","Extended mourning","Drowning in the spill"]},
+    6:{icon:"🩸",cardName:"Six of Cups (Shadow)",scene:"The small child holds out the flower-cup, but it's to someone they can no longer reach — a ghost, a memory, someone who has moved on. The garden is real but the person receiving the gift is from the past.",symbols:["Gift to a ghost","Memory made real","Past as present","Unreachable recipient","Nostalgic delusion"]},
+    7:{icon:"🩸",cardName:"Seven of Cups (Shadow)",scene:"The silhouette has reached into one of the vision-cups and pulled out something that looks real — but it's dissolving in their hands. They chose illusion. Now they're holding smoke and calling it gold.",symbols:["Dissolving choice","Grasped illusion","Smoke in hands","Chosen fantasy","Reality dissolving"]},
+    8:{icon:"🩸",cardName:"Eight of Cups (Shadow)",scene:"The cloaked figure has turned around and is walking back toward the eight cups. They tried to leave — but couldn't. The eclipse still blocks the sun. The return is resignation, not renewal.",symbols:["Returning figure","Unfinished departure","Eclipse persisting","Resignation","Return to what was left"]},
+    9:{icon:"🩸",cardName:"Nine of Cups (Shadow)",scene:"The merchant still sits before the nine cups — but they're alone, and the contentment has a hollow quality. Everything was achieved, and yet something unnamed is missing. Satisfaction without meaning.",symbols:["Hollow satisfaction","Nine cups untouched","Lone figure","Achieved and empty","Meaningless wealth"]},
+  },
+  // SHADOW SWORDS (Teal)
+  teal: {
+    1:{icon:"🌪",cardName:"Ace of Swords (Shadow)",scene:"The crowned sword rises — but turned inward, pointed at the one who holds it. Truth weaponized against the self. Or the sword is too heavy to lift, its clarity too sharp to be usable.",symbols:["Self-directed blade","Too heavy to wield","Turned-in truth","Crown as burden","Unused clarity"]},
+    2:{icon:"🌪",cardName:"Two of Swords (Shadow)",scene:"The blindfolded figure has pulled the two swords even tighter across their chest. The sea behind them is stormier now. The peace they bought with ignorance is beginning to cost more than the truth would have.",symbols:["Tighter crossed swords","Stormier sea","Expensive ignorance","Enforced peace","Cracking blindfold"]},
+    3:{icon:"🌪",cardName:"Three of Swords (Shadow)",scene:"The three swords still pierce the heart — but now the figure holds them there themselves, pressing them in deeper. Old pain being reactivated, replayed. Grief maintained past its season.",symbols:["Self-pressed swords","Reactivated wound","Storm without end","Self-inflicted grief","Pain held deliberately"]},
+    4:{icon:"🌪",cardName:"Four of Swords (Shadow)",scene:"The knight on the tomb has been there too long. The stone is cracking beneath them. The rest has calcified into avoidance. The window's light has gone out. The sanctuary has become a hiding place.",symbols:["Cracking tomb","Extinguished window","Too long in rest","Sanctuary as escape","Petrified pause"]},
+    5:{icon:"🌪",cardName:"Five of Swords (Shadow)",scene:"The sneering victor from before — but now we see their face clearly. It's hollow. The swords they gathered don't give them what they thought. The two defeated figures are already rebuilding. The victory was pyrrhic.",symbols:["Hollow victor","Rebuilding defeated","Pyrrhic triumph","Useless swords","Empty winning"]},
+    6:{icon:"🌪",cardName:"Six of Swords (Shadow)",scene:"The ferryman's boat is stuck. The swords have pinned it in place. The cloaked figure and child cannot move away from the turbulent water no matter how hard the ferryman poles. Transition blocked.",symbols:["Stuck boat","Swords as anchors","Blocked passage","Stalled crossing","Ferryman straining"]},
+    7:{icon:"🌪",cardName:"Seven of Swords (Shadow)",scene:"The thief has returned to the camp — they were caught. Or worse, the swords they stole were cursed. What was taken has turned against the one who took it. Cunning collapsed into consequence.",symbols:["Caught thief","Cursed swords","Cunning's consequence","Returned to camp","Self-trapped by schemes"]},
+    8:{icon:"🌪",cardName:"Eight of Swords (Shadow)",scene:"The blindfolded figure has tightened their own bindings. The swords around them have moved closer. They sense they could leave — but the fear of what lies outside the cage has become stronger than the cage itself.",symbols:["Self-tightened bonds","Closer swords","Fear of freedom","Known cage preferred","Self-imprisoned"]},
+    9:{icon:"🌪",cardName:"Nine of Swords (Shadow)",scene:"The figure in bed has now laid back down — but can't sleep. The nine swords on the wall are casting shadows that move. The mind at 3am has become permanent. Day has stopped offering relief.",symbols:["Permanent night terror","Moving sword shadows","No daylight relief","Lying down but awake","Endless mental spiral"]},
+  },
+  // SHADOW PENTACLES (Purple)
+  purple: {
+    1:{icon:"💀",cardName:"Ace of Pentacles (Shadow)",scene:"The hand offers the pentacle — but it's tarnished, or the one reaching for it cannot open their fist to receive it. The garden gate behind is locked. The path to abundance is there, but access is blocked.",symbols:["Tarnished coin","Closed receiving fist","Locked garden gate","Blocked path","Inaccessible abundance"]},
+    2:{icon:"💀",cardName:"Two of Pentacles (Shadow)",scene:"The jester has dropped one of the pentacles. They're scrambling to pick it up while the other spins dangerously. The ships behind are capsizing. Balance has been lost — only chaos management remains.",symbols:["Dropped pentacle","Scrambling figure","Capsizing ships","Broken infinity","Chaos management"]},
+    3:{icon:"💀",cardName:"Three of Pentacles (Shadow)",scene:"The stonemason and the architects are arguing. The blueprints are torn. The three pentacles carved above them are crooked. Collaborative work has broken down into ego and miscommunication.",symbols:["Torn blueprints","Arguing figures","Crooked pentacles","Broken collaboration","Ego conflict"]},
+    4:{icon:"💀",cardName:"Four of Pentacles (Shadow)",scene:"The hoarding figure has now built walls around themselves with their pentacles — literally. The city behind is completely blocked. They are safe and utterly alone. Security as total isolation.",symbols:["Pentacle walls","Complete isolation","Blocked city","Extreme hoarding","Safety as prison"]},
+    5:{icon:"💀",cardName:"Five of Pentacles (Shadow)",scene:"The two beggars outside the church — but the door is locked. Or they've given up trying it. The cold has become familiar. They've stopped believing warmth is available to them.",symbols:["Locked church door","Given up begging","Familiar cold","Lost faith in help","Chosen hardship"]},
+    6:{icon:"💀",cardName:"Six of Pentacles (Shadow)",scene:"The scales are rigged. The merchant gives with one hand and takes with three. The kneeling beggars don't see the strings attached to the coins. Charity as control. Generosity weaponized.",symbols:["Rigged scales","Hidden strings","Weaponized charity","Controlled giving","Manipulative merchant"]},
+    7:{icon:"💀",cardName:"Seven of Pentacles (Shadow)",scene:"The farmer looks at the vine — but the pentacles are rotten, or they've worked so long they can no longer see the fruit. Burnout at the harvest. Or the crop failed despite everything.",symbols:["Rotting pentacles","Burned-out farmer","Failed harvest","Unseen fruit","Endless labor unrewarded"]},
+    8:{icon:"💀",cardName:"Eight of Pentacles (Shadow)",scene:"The craftsman is still at the bench — but the pentacles they carve are all identical and mechanical. The skill is there but the soul is gone. Production without passion. Work as deadening routine.",symbols:["Mechanical repetition","Soulless craft","Identical pentacles","Deadened routine","Skill without joy"]},
+    9:{icon:"💀",cardName:"Nine of Pentacles (Shadow)",scene:"The woman in the garden — but the falcon is gone. The vines are overgrown. She's tended this garden so obsessively that it has become her only world. Abundance as isolation, not freedom.",symbols:["Missing falcon","Overgrown vines","Garden as only world","Obsessive tending","Abundance as cage"]},
+  },
+};
+
+const numberMeanings = {
+  1:{tarot:"Ace",  meaning:"Pure seed energy of the suit. Raw potential, a new beginning, an unexpected gift or spark. The universe hands you the pure essence of this element.",reading:"Something is just beginning — a fresh start in the domain of this suit. Take it. Don't overthink it.",reversed:"The potential exists but is blocked or delayed. A gift that hasn't arrived yet, or energy that needs an outlet it hasn't found.",reversedReading:"Something is trying to begin and failing. Look at what is capping the energy. Sometimes fear; sometimes wrong timing. Sit with it.",keywords:["New beginning","Pure potential","Gift","Seed","Spark"],reversedKeywords:["Blocked start","False beginning","Delayed gift","Capped energy","Suppressed spark"]},
+  2:{tarot:"Two",  meaning:"Duality, choice, balance between two forces. You are at a crossroads within this suit's domain. Partnership or conflict — it depends on how you engage.",reading:"A decision or partnership is forming. Two paths or two people — your relationship to them defines your next step.",reversed:"The balance has tipped. A choice avoided too long, or a partnership becoming one-sided. Two forces are pulling apart.",reversedReading:"What have you been refusing to decide? Avoidance is itself a choice — and this card reversed says that choice is costing you.",keywords:["Choice","Duality","Balance","Partnership","Crossroads"],reversedKeywords:["Avoidance","Imbalance","Stalemate","One-sided","Indecision"]},
+  3:{tarot:"Three",meaning:"Initial fruition. The seed has sprouted. Collaboration, early celebration, creative expansion. Three is the first number of visible result.",reading:"Early results are showing. Celebrate the progress but know the journey has just begun.",reversed:"Growth stalled or going unrecognised. Collaboration that fell through, or work not yet bearing visible fruit.",reversedReading:"You may be doing more than you're being credited for. Or look at where you've been waiting for others when you need to build alone.",keywords:["Growth","Collaboration","Early success","Expansion","Community"],reversedKeywords:["Stalled growth","Unrecognised work","Broken collaboration","Delayed bloom","Credit denied"]},
+  4:{tarot:"Four", meaning:"Stability, pause, foundation. A plateau — either a stable resting place or stagnation depending on your mindset.",reading:"Something has solidified. Ask whether this stability is restful grounding or avoidance of the next step.",reversed:"The pause becomes restlessness, or the foundation is crumbling. What felt stable is shifting.",reversedReading:"Either you are being called out of comfort before you're ready, or you've been ready to move and haven't. The stillness is ending.",keywords:["Stability","Foundation","Pause","Security","Rest"],reversedKeywords:["Restlessness","Crumbling base","Forced change","Comfort disrupted","Stagnation breaking"]},
+  5:{tarot:"Five", meaning:"Conflict, disruption, instability. The number of challenge. Five arrives to shake what was settled at Four. Necessary tension that demands growth.",reading:"Conflict or disruption is here. Don't resist — this friction is carving you into your next form.",reversed:"Conflict that has died down — or never truly resolved and now festers beneath the surface.",reversedReading:"Look for the grievance that went unaddressed. Five reversed signals it's time to revisit an old wound.",keywords:["Conflict","Challenge","Disruption","Tension","Change"],reversedKeywords:["Festering wound","Unresolved conflict","Suppressed tension","Invisible friction","Old grievance"]},
+  6:{tarot:"Six",  meaning:"Harmony after struggle. The return of flow after Five's disruption. Giving, receiving, cycles of reciprocity. A breath after the storm.",reading:"Relief is available. A cycle of giving and receiving is in play — are you both offering and accepting?",reversed:"The harmony is superficial, or the exchange is imbalanced. Generosity without reciprocity.",reversedReading:"Who owes whom what? Six reversed points to an exchange that has gone lopsided. Restore balance.",keywords:["Harmony","Reciprocity","Recovery","Flow","Grace"],reversedKeywords:["Superficial harmony","Imbalanced exchange","Withheld generosity","Blocked flow","Toxic reciprocity"]},
+  7:{tarot:"Seven",meaning:"Mastery and testing. You've come far — now comes the challenge of wisdom. Seven asks: do you truly know this?",reading:"You know more than you give yourself credit for. Trust your accumulated skill. But stay sharp — the test is real.",reversed:"Skill underutilized, or a strategy that has stopped working. Overconfidence leading to mistakes.",reversedReading:"Are you hiding your capability? Seven reversed often appears when someone plays small, or stops questioning their approach.",keywords:["Mastery","Strategy","Testing","Wisdom","Skill"],reversedKeywords:["Underused skill","Failed strategy","Overconfidence","Playing small","Outdated approach"]},
+  8:{tarot:"Eight",meaning:"Movement, speed, momentum. Eight is the number of cycles completing and accelerating — things are happening quickly now.",reading:"Events are moving fast. You have the ability to navigate this — act with precision, not panic.",reversed:"Stuck energy, or motion that has no purpose. Running fast in circles. Speed without meaningful direction.",reversedReading:"What are you spinning on? Eight reversed appears when effort is expended but nothing moves forward.",keywords:["Speed","Momentum","Movement","Precision","Acceleration"],reversedKeywords:["Stuck energy","Circular motion","Wasted effort","Misdirected speed","Running in place"]},
+  9:{tarot:"Nine", meaning:"Near-completion, integration, the threshold before the end. Nine carries the weight of all that came before.",reading:"You are close to the end of this cycle. What needs to be integrated before you cross the threshold?",reversed:"Almost there — but something keeps you from crossing over. Self-sabotage at the last moment, or unfinished integration.",reversedReading:"What are you afraid of completing? Sometimes Nine reversed is protecting you from the next step by making this one feel endless.",keywords:["Near-completion","Integration","Threshold","Embodiment","Culmination"],reversedKeywords:["Last-minute sabotage","Fear of completion","Unfinished integration","Threshold anxiety","Endless almost"]},
+};
+
+const shadowNumberMeanings = {
+  1:{tarot:"Shadow Ace",  meaning:"A potential blocked at the source. The gift of this element exists but something — fear, timing, circumstance — prevents it from being received.",reading:"Something wants to begin but cannot yet. Examine what is holding the spark from catching.",reversed:"The block itself is lifting. What was suppressed begins to surface — not fully formed, but undeniable.",reversedReading:"Something long-suppressed is coming back. Don't push it down again. This reversed shadow card asks you to finally receive what you've refused.",keywords:["Blocked potential","False start","Suppressed gift","Missed opportunity"],reversedKeywords:["Lifting block","Surfacing truth","Reluctant receiving","Suppression ending","Returning spark"]},
+  2:{tarot:"Shadow Two",  meaning:"Paralysis between two choices. The crossroads becomes a standstill. Indecision, or a choice being made unconsciously.",reading:"You may be stuck in a loop. A choice exists — but you haven't let yourself see it clearly.",reversed:"The paralysis is breaking. You are being forced — or freed — to finally choose.",reversedReading:"The fork in the road is collapsing into a single path. Ready or not, your direction is clarifying.",keywords:["Paralysis","Indecision","Hidden choice","Stalemate","Denial"],reversedKeywords:["Forced choice","Clarity emerging","Paralysis breaking","Direction solidifying","Denial cracking"]},
+  3:{tarot:"Shadow Three",meaning:"Early effort that hasn't borne fruit, or growth that comes with unexpected cost. Collaboration gone sideways.",reading:"Something built together may be showing cracks. You may not be giving yourself credit for what has grown.",reversed:"Hidden growth suddenly becomes visible. A collaboration you thought failed yields unexpected results.",reversedReading:"Look again at something you wrote off. In shadow reversed, things that seemed broken may have been quietly healing.",keywords:["Setback","Premature celebration","Fractured collaboration","Hidden growth"],reversedKeywords:["Unexpected results","Quiet healing","Written-off success","Late blooming","Revealed effort"]},
+  4:{tarot:"Shadow Four",  meaning:"Stagnation mistaken for stability. Clinging to comfort when movement is needed. The foundation has become a cage.",reading:"Ask whether you are resting or hiding. The stillness feels safe — but is it?",reversed:"The cage opens. Movement that felt impossible is now possible — or even necessary.",reversedReading:"Something is shifting whether you're ready or not. The false safety is dissolving. Step out before the walls do it for you.",keywords:["Stagnation","Avoidance","Clinging","False security","Comfort zone"],reversedKeywords:["Cage opening","Forced movement","Dissolving safety","Readiness despite fear","Walls coming down"]},
+  5:{tarot:"Shadow Five",  meaning:"Conflict that has gone inward. External disruption turned into internal war. Self-sabotage.",reading:"The battle has moved inside you. The real conflict now is with yourself.",reversed:"The internal war is softening. A truce — perhaps not full resolution, but the harshest fighting is winding down.",reversedReading:"Give yourself a ceasefire. You don't have to fix everything at once. This reversed shadow card is permission to stop fighting yourself.",keywords:["Internal conflict","Self-sabotage","Internalized chaos","Inner war"],reversedKeywords:["Ceasefire","Softening war","Inner truce","Easing self-battle","Permission to rest"]},
+  6:{tarot:"Shadow Six",   meaning:"Imbalanced exchange — taking without giving, or giving without receiving. Toxic cycles of reciprocity.",reading:"Look at how you give and receive in this area. Is the flow healthy, or is someone draining or being drained?",reversed:"The imbalance is being corrected. Old debts — emotional or material — are being settled.",reversedReading:"Something that has been extracted from you is being repaid. Or you are finally letting go of the past and reclaiming your energy.",keywords:["Imbalance","Toxic reciprocity","Nostalgia","One-sided exchange"],reversedKeywords:["Corrected balance","Debt repaid","Reclaimed energy","Released past","Flow restored"]},
+  7:{tarot:"Shadow Seven", meaning:"Skill used for self-deception or manipulation. Mistrust of your own mastery. Strategy gone wrong.",reading:"What you think you know may need re-examination. Is the mastery real — or is it a defense?",reversed:"The self-deception is cracking. You are beginning to see through your own rationalizations.",reversedReading:"The fog is lifting. Whatever you've been telling yourself to justify a pattern — you're starting to see it for what it is.",keywords:["Self-deception","False mastery","Manipulation","Doubt","Overconfidence"],reversedKeywords:["Fog lifting","Cracked rationalization","Honest assessment","Seen through","Deception dissolving"]},
+  8:{tarot:"Shadow Eight", meaning:"Momentum without direction. Moving fast toward the wrong thing. Trapped in endless motion.",reading:"Are you running toward something — or away from it? Speed without direction is just chaos.",reversed:"The misdirected motion is slowing, or the frozen state is cracking. A new direction is emerging.",reversedReading:"You are about to find your direction again. The chaos is organizing itself. Stay open to the trajectory that presents itself.",keywords:["Misdirected speed","Trapped","Running away","Chaos","Frenetic energy"],reversedKeywords:["Direction emerging","Chaos organizing","Motion clarifying","Speed with purpose","Trajectory found"]},
+  9:{tarot:"Shadow Nine",  meaning:"The weight of near-completion becomes unbearable. Anxiety, exhaustion, nightmares before the finish line.",reading:"The end is near and it's terrifying. The discomfort is real, but it is not a sign to stop.",reversed:"The anxiety is releasing. What felt like an impossible burden is beginning to lighten.",reversedReading:"The nightmares are calming. The weight is still there but you can carry it now. Shadow Nine reversed is the first real rest in a long time.",keywords:["Anxiety","Nightmares","Final resistance","Exhaustion","Fear of completion"],reversedKeywords:["Anxiety lifting","Weight lightening","Earned rest","Terror calming","Burden releasing"]},
+};
+
+const specialCards = {
+  light:[
+    {id:"skip-light",   label:"Skip",         symbol:"⊘",   colorClass:"card-wild-light", tarot:"The Hermit (IX)",
+     imagery:{icon:"🕯️",cardName:"The Hermit",scene:"An old man stands alone on a snowy mountain peak, robed in grey. In one hand he holds a staff for support; in the other, a lantern that contains a six-pointed star — the light of wisdom — held high to guide those who follow from below. He has climbed higher than anyone else to see further.",symbols:["Lantern of wisdom","Six-pointed star","Grey robe","Mountain peak","Staff","Solitude"]},
+     meaning:"Intentional withdrawal from the outer world to seek inner wisdom. A necessary pause — not avoidance, but the kind of solitude that lights the way forward.",reading:"A situation is calling you inward. Pause the action. The answer you seek requires stepping away from the noise.",reversed:"Isolation that has overstayed its welcome. The Hermit's wisdom turns into avoidance when the pause is extended past its purpose.",reversedReading:"It's time to return. The retreat has served you — but now the world is calling and continuing to hide is its own kind of harm.",keywords:["Withdrawal","Inner wisdom","Solitude","Reflection","Guidance"],reversedKeywords:["Overstayed isolation","Avoidance","Refusing connection","Wisdom curdled","Retreat as hiding"]},
+    {id:"rev-light",    label:"Reverse",       symbol:"↺",   colorClass:"card-wild-light", tarot:"Wheel of Fortune (X)",
+     imagery:{icon:"🎡",cardName:"The Wheel of Fortune",scene:"A great golden wheel turns in the heavens, flanked by an angel, an eagle, a lion, and a bull — the four fixed signs of the zodiac. Three figures rise and fall on the wheel's rim: a serpent descends, Anubis ascends, a sphinx holds a sword at the top. The wheel turns whether we wish it or not.",symbols:["Turning wheel","Four zodiac guardians","Sphinx at top","Anubis rising","Serpent descending","Hebrew letters TARO"]},
+     meaning:"The cycle turns. What was moving forward now moves in a new direction. Fortune shifts — not for better or worse, but irrevocably different.",reading:"A reversal is in motion. Surrender to the new direction rather than fighting it — the wheel turns for everyone.",reversed:"The wheel is stuck. A cycle that should have moved on has stalled — either through resistance or circumstances beyond control.",reversedReading:"Something is refusing to change, or change is being refused. Ask what you're gripping so tightly that the wheel cannot turn.",keywords:["Change","Reversal","Cycles","Fortune","Turning point"],reversedKeywords:["Stuck cycle","Resisted change","Karmic loop","Stalled fortune","Fighting fate"]},
+    {id:"d1-light",     label:"Draw One",      symbol:"+1",  colorClass:"card-wild-light", tarot:"The Tower (Minor)",
+     imagery:{icon:"⚡",cardName:"The Tower (echo)",scene:"A small bolt of lightning glances off a high tower, not striking the crown but shaking the stones. One figure steadies themselves against the parapet. A warning tremor, not the full strike. The building stands, but nothing feels solid anymore.",symbols:["Glancing lightning","Steadying figure","Shaken stones","Standing tower","Warning tremor"]},
+     meaning:"A smaller disruption arrives carrying something unexpected. Not the full Tower, but a warning tremor. Something must be received, addressed, or integrated.",reading:"A surprise arrives — something extra to carry. Handle it with equanimity and it becomes a gift rather than a burden.",reversed:"The disruption turns inward. Rather than something arriving from outside, this signals a self-created upset.",reversedReading:"Are you bracing for an impact that may not come? Draw One reversed asks you to look inward at the tremors you've authored.",keywords:["Surprise","Minor disruption","Unexpected load","Adaptability"],reversedKeywords:["Self-created upset","Bracing for nothing","Internal tremor","Authored instability","Anticipated dread"]},
+    {id:"d2-light",     label:"Draw Two",      symbol:"+2",  colorClass:"card-wild-light", tarot:"The Tower (XVI)",
+     imagery:{icon:"🏚️",cardName:"The Tower",scene:"A tall stone tower is struck by lightning from a black sky. The crown of the tower is blown off and two human figures fall headlong from the windows, arms outstretched, into darkness. Flames pour from the windows. The structure was built on false foundations and the truth has arrived violently.",symbols:["Lightning bolt","Crown blown off","Two falling figures","Flames in windows","False foundations","Black sky"]},
+     meaning:"The Tower arrives. Sudden disruption, the shattering of false structures, a shock that cannot be ignored. What falls was never solid to begin with.",reading:"Something is being dismantled. It may hurt. But what falls was already hollow. Let it go.",reversed:"The Tower's destruction has already happened and you are in the aftermath. Or: you are resisting the necessary collapse.",reversedReading:"If it's already fallen — now is the time to clear the rubble, not mourn the structure. If it hasn't yet — stop clinging. It must come down.",keywords:["Disruption","Sudden change","Collapse","Liberation through chaos","Revelation"],reversedKeywords:["Aftermath","Delayed collapse","Resisted ruin","Prolonged inevitable","Rubble not cleared"]},
+    {id:"wild-light",   label:"Wild",          symbol:"★",   colorClass:"card-wild-light", tarot:"The Fool (0)",
+     imagery:{icon:"🌄",cardName:"The Fool",scene:"A young traveler in bright motley stands at the very edge of a cliff, face tilted toward the sun, entirely unafraid. A small white dog barks at their heels. In one hand they carry a white rose; over their shoulder, a small bindle. One step from stepping off — into the sky or into a new world.",symbols:["Cliff edge","White rose","Small dog warning","Motley clothes","Bindle on stick","Sun-turned face","One step from the edge"]},
+     meaning:"Pure, boundless potential. The Fool stands at the cliff's edge — not foolish, but unencumbered by the past. Any direction is possible.",reading:"You are free. More free than you may realize. Choose direction not from fear, but from pure desire.",reversed:"Recklessness, naïveté, or refusing to grow up. The Fool's freedom becomes irresponsibility.",reversedReading:"Freedom without wisdom is just chaos. Reversed Wild asks: what are you being cavalier about that deserves real attention?",keywords:["Freedom","New journey","Unlimited potential","Innocence","Leap of faith"],reversedKeywords:["Recklessness","Naïveté","Irresponsibility","Refusal to grow","Cliff without wings"]},
+    {id:"wd2-light",    label:"Wild Draw Two", symbol:"★+2", colorClass:"card-wild-light", tarot:"The Magician (I)",
+     imagery:{icon:"🪄",cardName:"The Magician",scene:"A young man in red and white robes stands at a table bearing all four tarot suit symbols — a wand, a cup, a sword, and a pentacle. One hand points a wand to the heavens; the other points to the earth. Above his head, an infinity symbol. He is the conduit between divine will and material reality.",symbols:["All four suits on table","Infinity symbol","One hand to sky","One hand to earth","Red and white robes","Wand raised","White lilies and red roses"]},
+     meaning:"The Magician holds all four suits — complete power directed with intention. Power with consequence: you can do anything, but the energy must go somewhere.",reading:"You hold real power in this situation. Use it deliberately. What you direct your will toward will manifest.",reversed:"Power misused, talent wasted, or inability to channel ability into real-world results. The tools are all there and nothing is being built.",reversedReading:"What are you doing with your gifts? Reversed Magician is the most capable person in the room — who is also doing the least with it.",keywords:["Power","Will","Manifestation","Skill","Directed energy"],reversedKeywords:["Wasted talent","Misused power","Inaction despite ability","Skill without output","Capability squandered"]},
+    {id:"flip-light",   label:"Flip",          symbol:"◑",   colorClass:"card-flip",        tarot:"Judgement (XX)",
+     imagery:{icon:"🎺",cardName:"Judgement",scene:"From grey clouds, the Archangel Gabriel descends, blowing a great trumpet hung with a banner bearing a red cross. Below, from grey coffins rising out of the sea, men, women, and children raise their arms toward the heavens, called to their final reckoning. The dead are rising. There is no hiding now.",symbols:["Archangel Gabriel","Great trumpet","Red cross banner","Rising figures","Open coffins","Sea of grey","Arms raised to heaven"]},
+     meaning:"The moment of revelation — the light side becomes aware of the dark, and transformation begins. A clarion call to rise and see the full picture.",reading:"A significant shift is imminent. Something will be revealed or turned inside out. You are being called to a higher awareness.",reversed:"The awakening is being refused. The call to rise has come — and you are not answering.",reversedReading:"Something in you knows it's time to change and is resisting with everything it has. The Flip reversed says: the refusal has a cost.",keywords:["Revelation","Transformation","Awakening","The full picture","Turn"],reversedKeywords:["Refused awakening","Ignored call","Costly resistance","False transformation","Surface-only change"]},
+  ],
+  dark:[
+    {id:"skip-dark",    label:"Skip",          symbol:"⊘",   colorClass:"card-orange",  tarot:"The Hermit — Shadow",
+     imagery:{icon:"🕯️",cardName:"The Hermit (Shadow)",scene:"The same mountain peak — but the lantern has gone dark. The old man sits rather than stands, the staff dropped. He has been here so long he's forgotten he came to find something. Wisdom has curdled into withdrawal.",symbols:["Darkened lantern","Seated figure","Dropped staff","Forgotten purpose","Overgrown path"]},
+     meaning:"Isolation that has curdled into loneliness, or avoidance disguised as wisdom. The Hermit's light dims when withdrawal becomes permanent retreat.",reading:"Are you truly seeking wisdom — or running from connection? The solitude has gone on long enough.",reversed:"The isolation is breaking open. The hermit is being pulled back into the world — willingly or not.",reversedReading:"You are ready to re-emerge, even if it doesn't feel like readiness. Let someone in.",keywords:["Isolation","Avoidance","Withdrawn","Loneliness","Fear of connection"],reversedKeywords:["Re-emergence","Forced return","Broken isolation","Reluctant connection","Opening up"]},
+    {id:"skipall-dark", label:"Skip Everyone", symbol:"⊘⊘", colorClass:"card-purple",  tarot:"The World — Shadow",
+     imagery:{icon:"🌑",cardName:"The World (Shadow)",scene:"The dancing figure at the center of The World stands still, the laurel wreath fallen, the two wands pointing downward. The four guardians at the corners have turned away. The completion feels not like triumph but like total silence. Everything has ended — and nothing new has begun.",symbols:["Still dancer","Fallen wreath","Downward wands","Turned guardians","Absolute silence","Completed but hollow"]},
+     meaning:"Total cessation. Either profound completion of a cycle — or total shutdown. This card carries the weight of absolute endings, or the stillness before rebirth.",reading:"Everything pauses. Something enormous has completed or collapsed. This is the silence before a new world begins.",reversed:"The stasis is cracking. After the great ending, something new insists on beginning.",reversedReading:"The void has done its work. Something is ready to be born. You don't need to understand it yet — just allow it.",keywords:["Total ending","Complete cycle","Shutdown","Pre-rebirth","Universal pause"],reversedKeywords:["Stasis cracking","New beginning insisting","Void completed","Ready to be born","Silence breaking"]},
+    {id:"rev-dark",     label:"Reverse",       symbol:"↺",   colorClass:"card-teal",    tarot:"Wheel of Fortune — Shadow",
+     imagery:{icon:"🎡",cardName:"The Wheel (Shadow)",scene:"The wheel turns — but the sphinx at the top is gone, replaced by the same figure who was just rising. They've gone around again. And again. The figures on the wheel are worn smooth from repetition. The lesson is not being learned.",symbols:["Missing sphinx","Worn figures","Repeating ascent","No progress markers","Endless rotation","Unlearned lesson"]},
+     meaning:"The wheel turns against you — or rather, you resist what the wheel is trying to do. Fighting inevitable change, or caught in a karmic loop.",reading:"Something keeps cycling back. The pattern will repeat until something changes in you, not just around you.",reversed:"The loop is finally breaking. The karmic pattern that kept repeating has met a force strong enough to interrupt it.",reversedReading:"The repetition is ending. What changes broke this loop? Hold onto that — it's the key.",keywords:["Karmic loop","Resistance","Repeating patterns","Fighting change","Stuck cycle"],reversedKeywords:["Loop breaking","Pattern interrupted","Karmic shift","Change accepted","Cycle ended"]},
+    {id:"d5-dark",      label:"Draw Five",     symbol:"+5",  colorClass:"card-pink",    tarot:"The Devil (XV)",
+     imagery:{icon:"😈",cardName:"The Devil",scene:"A horned, bat-winged devil sits on a black pedestal, hand raised in a dark benediction. Chained to the pedestal below him stand a man and woman — but their chains are loose enough to slip off. They stay because they've stopped believing they can leave. The chains are real and imaginary at once.",symbols:["Bat wings","Loose chains","Inverted pentagram","Chained figures","Black pedestal","Reversed torch","Horns and tail on humans"]},
+     meaning:"The accumulation of excess — five cards of burden arriving at once. The Devil is addiction, attachment, the chains we pretend we cannot remove.",reading:"What have you taken on that is no longer yours to carry? What attachment is making you collect weight?",reversed:"The chains are seen for what they are. The spell of the Devil breaks when you look at it directly.",reversedReading:"You are beginning to see the attachment clearly. The chain is real — but so is your ability to slip it off.",keywords:["Excess","Addiction","Burden","Chains","Attachment","Materialism"],reversedKeywords:["Seen chains","Breaking spell","Released attachment","Recognized addiction","Freedom glimpsed"]},
+    {id:"wild-dark",    label:"Wild",          symbol:"★",   colorClass:"card-wild-dark",tarot:"The Fool — Shadow",
+     imagery:{icon:"🌄",cardName:"The Fool (Shadow)",scene:"The same cliff edge — but the Fool isn't looking at the sun. They're looking back, running from something. The white rose is dropped. The little dog is no longer warning them; it's chasing them. The step off the cliff is not a leap of faith but an escape.",symbols:["Dropped white rose","Running posture","Looking backward","Chasing dog","No forward gaze","Cliff as escape","Motley torn"]},
+     meaning:"Recklessness. Leaping without looking in a way that causes harm. The Fool's freedom becomes chaos, the open road becomes running away.",reading:"Examine the leap you're about to take. Is it true freedom or escape? The direction matters now more than ever.",reversed:"The recklessness is catching up. Or — the shadow Fool's chaos finally cracks open something real and honest.",reversedReading:"The escape route has closed. Now you must face what you were running from — and there's surprising freedom in that.",keywords:["Recklessness","Escape","Running away","Dark freedom","Chaos"],reversedKeywords:["Escape closed","Facing the source","Recklessness met","Honest chaos","Forced grounding"]},
+    {id:"wdc-dark",     label:"Wild Draw Color",symbol:"★🌈",colorClass:"card-wild-dark",tarot:"The Magician — Shadow",
+     imagery:{icon:"🪄",cardName:"The Magician (Shadow)",scene:"The same table, the same tools — but the Magician's gaze has turned calculating. The wand points not to heaven but at someone else. The infinity symbol above their head has become a chain. Power turned to manipulation; will directed at control of others rather than co-creation with the universe.",symbols:["Calculating gaze","Wand aimed outward","Infinity as chain","Tools as weapons","Dominating stance","Diverted will"]},
+     meaning:"Power used for manipulation. The Magician's tools deployed without ethics — the ability to shape reality, turned toward self-interest or control.",reading:"There is manipulation in play — either yours or someone else's. Great power is in the room. Watch how it's being directed.",reversed:"The manipulation is exposed. The false magician's tricks are visible. Power returns to its rightful direction.",reversedReading:"Someone's game is becoming clear — including possibly your own. Exposure now leads to honest use of real power.",keywords:["Manipulation","Abuse of power","Control","Shadow will","Coercion"],reversedKeywords:["Exposed manipulation","Tricks revealed","Power redirected","Honest will","Control broken"]},
+    {id:"flip-dark",    label:"Flip",          symbol:"◑",   colorClass:"card-flip",     tarot:"The Moon (XVIII)",
+     imagery:{icon:"🌕",cardName:"The Moon",scene:"A full moon hangs between two stone towers, its face wearing an expression of dreamlike vacancy. Below, a dog and a wolf howl at it from opposite banks of a stream. A crayfish crawls from the water onto shore. A winding path leads between the towers into unknown darkness. Nothing is as it appears.",symbols:["Full and crescent moon","Howling dog and wolf","Emerging crayfish","Two towers","Winding dark path","Reflected light only","Disturbed water"]},
+     meaning:"The flip from dark back to light — or deeper into darkness. The Moon rules illusion, the unconscious, what lurks beneath the surface.",reading:"Something is not as it appears. Emotions are high, and clarity is low. Wait before acting — the full picture is still hidden.",reversed:"The Moon's illusions are beginning to clear. What was distorted by fear or projection is coming into true focus.",reversedReading:"The fog is lifting, but slowly. What you see now is closer to truth than what you saw before. Trust the gradual reveal.",keywords:["Illusion","Hidden truth","Subconscious","Fear","Confusion","The unseen"],reversedKeywords:["Clearing fog","Illusions dissolving","Fear examined","Truth emerging","Distortion lifting"]},
+  ],
+};
+
+// ═══════════════════════════════════════════════════════════════ SPREADS
+
+const spreads = [
+  {name:"One Card",question:"What energy is present right now?",positions:["Present Energy"],desc:"<strong>The Single Card Pull.</strong> The simplest and most direct oracle. One card, one question, one honest answer. Draw when you need clarity without complexity."},
+  {name:"Past · Present · Future",question:"Where have I been, where am I, and where am I going?",positions:["Past","Present","Future"],desc:"<strong>The Three-Card Spread.</strong> The classic. Three moments in a single thread: what shaped this situation, what is alive in it right now, and what is emerging ahead."},
+  {name:"Mind · Body · Spirit",question:"What does each layer of my being need right now?",positions:["Mind","Body","Spirit"],desc:"<strong>The Three Planes.</strong> A reading for wholeness. Each card speaks to a different layer of your experience — the thinking self, the physical self, and the deeper self underneath both."},
+  {name:"Situation · Obstacle · Advice",question:"What is happening, what stands in my way, and what should I do?",positions:["The Situation","The Obstacle","The Advice"],desc:"<strong>The Problem Oracle.</strong> Bring a specific challenge. The first card names what's actually happening; the second names the real obstacle (often internal); the third offers a direction forward."},
+  {name:"Celtic Cross",question:"What is the full story of this situation?",positions:["Present","Challenge","Distant Past","Recent Past","Potential","Near Future","Self","External","Hopes/Fears","Outcome"],desc:"<strong>The Celtic Cross.</strong> The most complete spread in the tarot tradition. Ten positions map the full landscape of a situation — its history, its energies, its obstacles, and its likely outcome. Use for significant questions."},
+];
+
+let currentSpread = spreads[0];
+let drawnCards = [];
+
+function initSpreads() {
+  const sel = document.getElementById('spread-selector');
+  spreads.forEach((s,i) => {
+    const b = document.createElement('button');
+    b.className = 'spread-type-btn' + (i===0?' active':'');
+    b.textContent = s.name;
+    b.onclick = () => selectSpread(i, b);
+    sel.appendChild(b);
+  });
+  updateSpreadDesc();
+  renderSlots();
+}
+
+function selectSpread(i, btn) {
+  currentSpread = spreads[i];
+  document.querySelectorAll('.spread-type-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  updateSpreadDesc();
+  clearSpread();
+}
+
+function updateSpreadDesc() {
+  document.getElementById('spread-description').innerHTML = currentSpread.desc;
+}
+
+function buildCardPool() {
+  const pool = [];
+  const colors = ['red','blue','yellow','green','orange','pink','teal','purple'];
+  colors.forEach(c => {
+    for(let n=1;n<=9;n++) pool.push({type:'number',suit:c,num:n});
+  });
+  specialCards.light.forEach(c => pool.push({type:'special',side:'light',data:c}));
+  specialCards.dark.forEach(c => pool.push({type:'special',side:'dark',data:c}));
+  return pool;
+}
+
+function renderSlots(cards) {
+  const container = document.getElementById('spread-slots');
+  container.innerHTML = '';
+  currentSpread.positions.forEach((pos,i) => {
+    const slot = document.createElement('div');
+    slot.className = 'spread-slot';
+    const cardDiv = document.createElement('div');
+    const cardData = cards && cards[i];
+    if(cardData) {
+      const cd = getCardData(cardData.card, false);
+      cardDiv.className = `spread-slot-card has-card ${cd.colorClass}${cardData.reversed?' reversed-card':''}`;
+      cardDiv.innerHTML = `<div style="text-align:center"><div style="font-size:18px">${cd.symbol}</div><div style="font-size:11px;letter-spacing:1px;color:rgba(255,255,255,0.8);text-transform:uppercase;margin-top:4px">${cd.shortTitle}</div></div>`;
+    } else {
+      cardDiv.className = 'spread-slot-card';
+      cardDiv.innerHTML = `<span style="color:var(--text-muted);font-size:24px">✦</span>`;
+    }
+    const label = document.createElement('div');
+    label.className = 'spread-slot-label';
+    label.textContent = pos;
+    const posNum = document.createElement('div');
+    posNum.className = 'spread-slot-pos';
+    posNum.textContent = `Position ${i+1}`;
+    slot.appendChild(cardDiv);
+    slot.appendChild(label);
+    slot.appendChild(posNum);
+    if(cardData && cardData.reversed) {
+      const rev = document.createElement('div');
+      rev.className = 'reversed-tag';
+      rev.textContent = '↻ Reversed';
+      slot.appendChild(rev);
+    }
+    container.appendChild(slot);
+  });
+}
+
+function getCardData(card, reversed) {
+  if(card.type === 'number') {
+    const sInfo = suitData[card.suit];
+    const mData = card.suit.startsWith('orange')||card.suit.startsWith('pink')||card.suit.startsWith('teal')||card.suit.startsWith('purple') ? shadowNumberMeanings[card.num] : numberMeanings[card.num];
+    const isShadow = ['orange','pink','teal','purple'].includes(card.suit);
+    return {
+      colorClass: `card-${card.suit}`,
+      symbol: getSuitSymbol(sInfo.name),
+      shortTitle: `${card.num} ${sInfo.name}`,
+      title: `${card.num} of ${sInfo.name}`,
+      tarot: `${mData.tarot} of ${sInfo.name.replace('Shadow ','')}`,
+      reading: reversed ? mData.reversedReading : mData.reading,
+    };
+  } else {
+    const d = card.data;
+    return {
+      colorClass: d.colorClass,
+      symbol: d.symbol,
+      shortTitle: d.label,
+      title: d.label,
+      tarot: d.tarot,
+      reading: reversed ? d.reversedReading : d.reading,
+    };
+  }
+}
+
+function drawCards() {
+  const pool = buildCardPool();
+  const count = currentSpread.positions.length;
+  const shuffled = pool.sort(()=>Math.random()-0.5);
+  drawnCards = [];
+  for(let i=0;i<count;i++) {
+    drawnCards.push({card: shuffled[i], reversed: Math.random()<0.35});
+  }
+  renderSlots(drawnCards);
+  document.getElementById('interpretation-panel').classList.remove('visible');
+}
+
+function interpretSpread() {
+  if(!drawnCards.length) { drawCards(); return; }
+  const panel = document.getElementById('interpretation-panel');
+  document.getElementById('interp-header').textContent = `${currentSpread.name} Reading`;
+  document.getElementById('interp-subheader').textContent = `"${currentSpread.question}"`;
+  const cardsEl = document.getElementById('interp-cards');
+  cardsEl.innerHTML = '';
+  const cardSummaries = [];
+  drawnCards.forEach((dc,i) => {
+    const cd = getCardData(dc.card, dc.reversed);
+    cardSummaries.push({pos:currentSpread.positions[i],title:cd.title,reversed:dc.reversed,tarot:cd.tarot,reading:cd.reading});
+    const div = document.createElement('div');
+    div.className = 'interp-card';
+    div.innerHTML = `
+      <div class="interp-mini-card ${cd.colorClass}${dc.reversed?' interp-mini-reversed':''}">
+        <span style="font-size:18px">${cd.symbol}</span>
+      </div>
+      <div class="interp-card-body">
+        <div class="interp-card-title">${cd.title}${dc.reversed?'<span class="reversed-pill">Reversed</span>':''}</div>
+        <div class="interp-card-pos">${currentSpread.positions[i]} · ${cd.tarot}</div>
+        <div class="interp-card-text${dc.reversed?' reversed-text':''}">${cd.reading}</div>
+      </div>`;
+    cardsEl.appendChild(div);
+  });
+  document.getElementById('combo-text').textContent = generateComboInsight(cardSummaries);
+  panel.classList.add('visible');
+  panel.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function generateComboInsight(cards) {
+  const reversedCount = cards.filter(c=>c.reversed).length;
+  const total = cards.length;
+  const allReversed = reversedCount === total;
+  const mostlyReversed = reversedCount > total/2 && !allReversed;
+  const noReversed = reversedCount === 0;
+  const hasMajor = cards.some(c=>c.tarot.includes('The ')||c.tarot.includes('Ace'));
+  const hasShadow = cards.some(c=>c.title.includes('Shadow'));
+  let insight = "";
+  if(allReversed) insight = "Every card in this spread has arrived reversed — a powerful signal that the entire reading is asking you to look inward rather than outward. The energies at play are not absent; they are inverted, internalized, or blocked. This is not a bad omen — it is an invitation to examine what is running beneath the surface of the situation. Something inside you needs attention before anything outside can move.";
+  else if(mostlyReversed) insight = `${reversedCount} of your ${total} cards are reversed. The dominant undercurrent of this reading is subterranean — energies present but not yet manifesting on the surface. The spread is asking you to attend to interior work before expecting exterior results.`;
+  else if(noReversed) insight = "All cards appear upright — a reading of direct, outward-facing energy. The forces at play are active, visible, and ready to be engaged consciously. Trust what you see. The reading is asking you to act, not to look deeper.";
+  else insight = `This spread holds a mix of upright and reversed cards — touching both the visible and the hidden. ${reversedCount > 0 ? `The reversed card${reversedCount>1?'s':''} carry the shadow dimension — the parts that require inner work or awareness.` : ''} Read the two in conversation with each other.`;
+  if(hasMajor) insight += " The presence of Major Arcana energy means a significant archetypal force is at work — something larger than daily circumstance. Pay particular attention to those cards.";
+  if(hasShadow) insight += " Dark side cards add shadow suit energy — invitations to examine what is operating below the conscious surface. Honor them as much as the light side cards.";
+  return insight;
+}
+
+function clearSpread() {
+  drawnCards = [];
+  renderSlots();
+  document.getElementById('interpretation-panel').classList.remove('visible');
+}
+
+// ═══════════════════════════════════════════════════════════════ CARD RENDERING
+
+function getSuitSymbol(n) {
+  return {Wands:"🔥","Shadow Wands":"🌑",Cups:"💧","Shadow Cups":"🩸",Swords:"⚔️","Shadow Swords":"🌪",Pentacles:"🌿","Shadow Pentacles":"💀"}[n]||"✦";
+}
+
+function createNumberedCards(suit, colorClass, isShadow) {
+  const grid = document.getElementById(`grid-${suit}`);
+  const meanings = isShadow ? shadowNumberMeanings : numberMeanings;
+  const suitInfo = suitData[suit];
+  for(let n=1;n<=9;n++) {
+    const m = meanings[n];
+    const card = document.createElement('div');
+    card.className = `uno-card ${colorClass}`;
+    card.innerHTML = `<div class="card-symbol">${getSuitSymbol(suitInfo.name)}</div><div class="card-num">${n}</div><div class="card-label">${suitInfo.name}</div>`;
+    card.onclick = () => openModal({num:n,suit,colorClass,suitInfo,meaning:m,isShadow});
+    grid.appendChild(card);
+  }
+}
+
+function createSpecialCards(side) {
+  const grid = document.getElementById(`grid-special-${side}`);
+  specialCards[side].forEach(card => {
+    const el = document.createElement('div');
+    el.className = `uno-card ${card.colorClass}`;
+    el.innerHTML = `<div class="card-symbol">${card.symbol}</div><div class="card-label">${card.label}</div>`;
+    el.onclick = () => openSpecialModal(card);
+    grid.appendChild(el);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════ MODAL
+
+function openModal({num, suit, colorClass, suitInfo, meaning, isShadow}) {
+  const overlay = document.getElementById('modal-overlay');
+  const preview = document.getElementById('modal-preview');
+  preview.className = `modal-card-preview ${colorClass}`;
+  preview.innerHTML = `<div class="card-symbol">${getSuitSymbol(suitInfo.name)}</div><div class="card-num">${num}</div><div class="card-label">${suitInfo.name}</div>`;
+
+  document.getElementById('modal-eyebrow').textContent = `${isShadow?'🌑 Shadow Side':'☀ Light Side'} · ${suitInfo.element}`;
+  document.getElementById('modal-title').textContent = `${num} of ${suitInfo.name}`;
+  document.getElementById('modal-subtitle').textContent = suitInfo.theme;
+  document.getElementById('modal-tarot').textContent = `${meaning.tarot} of ${suitInfo.name.replace('Shadow ','')}`;
+  document.getElementById('modal-meaning').textContent = meaning.meaning;
+  document.getElementById('modal-reading').textContent = meaning.reading;
+  document.getElementById('modal-reversed').textContent = meaning.reversed;
+  document.getElementById('modal-reversed-reading').textContent = meaning.reversedReading;
+
+  // Keywords
+  const kw = document.getElementById('modal-keywords');
+  kw.innerHTML = meaning.keywords.map(k=>`<span class="keyword">${k}</span>`).join('');
+  const rkw = document.getElementById('modal-reversed-keywords');
+  rkw.innerHTML = meaning.reversedKeywords.map(k=>`<span class="keyword reversed-kw">${k}</span>`).join('');
+
+  // Imagery
+  const imgData = tarotImagery[suit] && tarotImagery[suit][num];
+  if(imgData) {
+    document.getElementById('modal-imagery-icon').textContent = imgData.icon;
+    document.getElementById('modal-imagery-title').textContent = 'Traditional Card Imagery';
+    document.getElementById('modal-imagery-card-name').textContent = imgData.cardName;
+    document.getElementById('modal-imagery-scene').textContent = imgData.scene;
+    document.getElementById('modal-imagery-symbols').innerHTML = imgData.symbols.map(s=>`<span class="imagery-symbol">${s}</span>`).join('');
+    document.getElementById('modal-imagery-block').style.display = 'block';
+  } else {
+    document.getElementById('modal-imagery-block').style.display = 'none';
+  }
+
+  document.getElementById('modal').style.setProperty('--modal-glow', getGlow(suit));
+  overlay.classList.add('open');
+}
+
+function openSpecialModal(card) {
+  const overlay = document.getElementById('modal-overlay');
+  const preview = document.getElementById('modal-preview');
+  preview.className = `modal-card-preview ${card.colorClass}`;
+  preview.innerHTML = `<div class="card-symbol">${card.symbol}</div><div class="card-label">${card.label}</div>`;
+
+  document.getElementById('modal-eyebrow').textContent = 'Special Card · Major Arcana Energy';
+  document.getElementById('modal-title').textContent = card.label;
+  document.getElementById('modal-subtitle').textContent = 'Action card · Archetypal force';
+  document.getElementById('modal-tarot').textContent = card.tarot;
+  document.getElementById('modal-meaning').textContent = card.meaning;
+  document.getElementById('modal-reading').textContent = card.reading;
+  document.getElementById('modal-reversed').textContent = card.reversed;
+  document.getElementById('modal-reversed-reading').textContent = card.reversedReading;
+
+  const kw = document.getElementById('modal-keywords');
+  kw.innerHTML = card.keywords.map(k=>`<span class="keyword">${k}</span>`).join('');
+  const rkw = document.getElementById('modal-reversed-keywords');
+  rkw.innerHTML = card.reversedKeywords.map(k=>`<span class="keyword reversed-kw">${k}</span>`).join('');
+
+  // Imagery for special cards
+  if(card.imagery) {
+    document.getElementById('modal-imagery-icon').textContent = card.imagery.icon;
+    document.getElementById('modal-imagery-title').textContent = 'Traditional Card Imagery';
+    document.getElementById('modal-imagery-card-name').textContent = card.imagery.cardName;
+    document.getElementById('modal-imagery-scene').textContent = card.imagery.scene;
+    document.getElementById('modal-imagery-symbols').innerHTML = card.imagery.symbols.map(s=>`<span class="imagery-symbol">${s}</span>`).join('');
+    document.getElementById('modal-imagery-block').style.display = 'block';
+  } else {
+    document.getElementById('modal-imagery-block').style.display = 'none';
+  }
+
+  document.getElementById('modal').style.setProperty('--modal-glow','rgba(201,168,76,0.2)');
+  overlay.classList.add('open');
+}
+
+function getGlow(suit) {
+  return {red:'rgba(232,64,48,0.2)',blue:'rgba(42,107,232,0.2)',yellow:'rgba(232,192,42,0.2)',green:'rgba(42,200,84,0.2)',orange:'rgba(232,112,32,0.2)',pink:'rgba(232,64,144,0.2)',teal:'rgba(32,200,200,0.2)',purple:'rgba(128,64,232,0.2)'}[suit]||'rgba(201,168,76,0.2)';
+}
+
+function closeModal(e) { if(e.target===document.getElementById('modal-overlay')) closeModalDirect(); }
+function closeModalDirect() { document.getElementById('modal-overlay').classList.remove('open'); }
+
+// ═══════════════════════════════════════════════════════════════ NAV
+
+function showPage(p) {
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.getElementById(`page-${p}`).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function showSide(side) {
+  document.getElementById('panel-light').classList.toggle('hidden', side!=='light');
+  document.getElementById('panel-dark').classList.toggle('hidden', side!=='dark');
+  document.getElementById('btn-light').className = `toggle-btn${side==='light'?' active-light':''}`;
+  document.getElementById('btn-dark').className = `toggle-btn${side==='dark'?' active-dark':''}`;
+}
+
+// ═══════════════════════════════════════════════════════════════ INIT
+
+createNumberedCards('red',    'card-red',    false);
+createNumberedCards('blue',   'card-blue',   false);
+createNumberedCards('yellow', 'card-yellow', false);
+createNumberedCards('green',  'card-green',  false);
+createSpecialCards('light');
+createNumberedCards('orange', 'card-orange', true);
+createNumberedCards('pink',   'card-pink',   true);
+createNumberedCards('teal',   'card-teal',   true);
+createNumberedCards('purple', 'card-purple', true);
+createSpecialCards('dark');
+initSpreads();
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModalDirect(); });
 </script>
 </body>
 </html>
