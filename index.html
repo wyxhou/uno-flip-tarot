@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uno Flip Tarot Oracle</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: rgba(255,255,255,0.08);
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --text: #e8e0d0;
+    --text-muted: #8a8070;
+    --red: #e8402a; --blue: #2a6be8; --yellow: #e8c02a; --green: #2ac854;
+    --orange: #e87020; --pink: #e84090; --teal: #20c8c8; --purple: #8040e8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.15) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(2px 2px at 20% 85%, rgba(201,168,76,0.2) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 45%, rgba(201,168,76,0.15) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 65%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 50%, rgba(255,255,255,0.1) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 15%, rgba(255,255,255,0.2) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .container { position: relative; z-index: 1; max-width: 1300px; margin: 0 auto; padding: 0 24px 100px; }
+
+  /* NAV TABS */
+  .main-nav {
+    display: flex; justify-content: center; gap: 0;
+    margin: 0 auto 0; padding: 24px 0 0;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,15,0.92);
+    backdrop-filter: blur(12px);
+  }
+  .nav-tab {
+    padding: 14px 36px; border: none; background: transparent;
+    color: var(--text-muted); font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; letter-spacing: 3px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.3s ease; border-bottom: 2px solid transparent;
+    position: relative; top: 1px;
+  }
+  .nav-tab.active { color: var(--gold-light); border-bottom-color: var(--gold); }
+  .nav-tab:hover:not(.active) { color: var(--text); }
+
+  /* HEADER */
+  header { text-align: center; padding: 52px 20px 36px; }
+  header::after { content:''; display:block; width:200px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:24px auto 0; }
+  .header-eyebrow { font-size: 12px; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; opacity: 0.8; }
+  h1 { font-family: 'Cinzel Decorative', serif; font-size: clamp(24px, 4vw, 44px); color: var(--gold-light); font-weight: 400; line-height: 1.3; text-shadow: 0 0 40px rgba(201,168,76,0.3); letter-spacing: 2px; }
+  .header-sub { font-size: 18px; color: var(--text-muted); margin-top: 12px; font-style: italic; font-weight: 300; }
+
+  /* PAGE SECTIONS */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* SIDE TOGGLE */
+  .side-toggle { display:flex; justify-content:center; gap:0; margin:32px auto; border:1px solid var(--border); border-radius:50px; width:fit-content; overflow:hidden; background:var(--surface); }
+  .toggle-btn { padding:12px 36px; border:none; background:transparent; color:var(--text-muted); font-family:'Cormorant Garamond',serif; font-size:17px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s ease; }
+  .toggle-btn.active-light { background:linear-gradient(135deg,#fff8e8,#f0e0b0); color:#3a2a0a; font-weight:600; }
+  .toggle-btn.active-dark  { background:linear-gradient(135deg,#1a0a2e,#2e1050); color:#c8a0ff; font-weight:600; }
+
+  /* SECTION LABELS */
+  .section-label { font-family:'Cinzel Decorative',serif; font-size:12px; letter-spacing:5px; text-transform:uppercase; color:var(--gold); margin:52px 0 22px; opacity:0.7; display:flex; align-items:center; gap:16px; }
+  .section-label::before,.section-label::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); opacity:0.3; }
+
+  /* CARD GRID */
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:14px; margin-bottom:8px; }
+  .uno-card { aspect-ratio:2/3; border-radius:12px; cursor:pointer; position:relative; transition:transform 0.2s ease,box-shadow 0.2s ease; border:1.5px solid rgba(255,255,255,0.1); overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; text-align:center; padding:8px 4px; }
+  .uno-card:hover { transform:translateY(-7px) scale(1.05); box-shadow:0 22px 44px rgba(0,0,0,0.5),0 0 22px var(--card-glow,rgba(255,255,255,0.1)); border-color:rgba(255,255,255,0.35); z-index:2; }
+  .uno-card .card-num { font-family:'Cinzel Decorative',serif; font-size:24px; font-weight:700; line-height:1; color:rgba(255,255,255,0.95); text-shadow:0 2px 8px rgba(0,0,0,0.4); }
+  .uno-card .card-label { font-size:10px; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.8); font-family:'Cormorant Garamond',serif; font-weight:600; line-height:1.2; }
+  .uno-card .card-symbol { font-size:20px; margin-bottom:2px; }
+  .uno-card::before { content:''; position:absolute; width:80%; height:70%; background:rgba(255,255,255,0.12); border-radius:50%; transform:rotate(-10deg); }
+  .uno-card > * { position:relative; z-index:1; }
+
+  /* CARD COLOR CLASSES */
+  .card-red    { background:linear-gradient(145deg,#c82a18,#e84030); --card-glow:rgba(232,64,48,0.4); }
+  .card-blue   { background:linear-gradient(145deg,#1a4fc0,#2a6be8); --card-glow:rgba(42,107,232,0.4); }
+  .card-yellow { background:linear-gradient(145deg,#c09010,#e8c02a); --card-glow:rgba(232,192,42,0.4); }
+  .card-green  { background:linear-gradient(145deg,#18a038,#2ac854); --card-glow:rgba(42,200,84,0.4); }
+  .card-orange { background:linear-gradient(145deg,#b04010,#e87020); --card-glow:rgba(232,112,32,0.4); }
+  .card-pink   { background:linear-gradient(145deg,#a01060,#e84090); --card-glow:rgba(232,64,144,0.4); }
+  .card-teal   { background:linear-gradient(145deg,#108888,#20c8c8); --card-glow:rgba(32,200,200,0.4); }
+  .card-purple { background:linear-gradient(145deg,#5020a0,#8040e8); --card-glow:rgba(128,64,232,0.4); }
+  .card-wild-light { background:linear-gradient(145deg,#1a1a1a,#2a2a2a); position:relative; }
+  .card-wild-light::after { content:''; position:absolute; inset:-2px; border-radius:12px; background:linear-gradient(135deg,#e84030,#2a6be8,#e8c02a,#2ac854); z-index:-1; }
+  .card-wild-dark { background:linear-gradient(145deg,#0a0010,#150025); position:relative; }
+  .card-wild-dark::after { content:''; position:absolute; inset:-2px; border-radius:12px; background:linear-gradient(135deg,#e87020,#e84090,#20c8c8,#8040e8); z-index:-1; }
+  .card-flip { background:linear-gradient(145deg,#1a0a0a,#3a1a00); border:2px solid var(--gold) !important; --card-glow:rgba(201,168,76,0.5); }
+
+  .side-panel.hidden { display:none; }
+
+  /* LEGEND */
+  .legend { display:flex; flex-wrap:wrap; gap:14px; margin:24px 0; padding:22px; background:var(--surface); border:1px solid var(--border); border-radius:16px; }
+  .legend-item { display:flex; align-items:center; gap:10px; font-size:15px; color:var(--text-muted); }
+  .legend-dot { width:13px; height:13px; border-radius:3px; flex-shrink:0; }
+
+  /* ─── MODAL ─────────────────────────────────── */
+  .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.88); backdrop-filter:blur(10px); z-index:1000; display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity 0.3s ease; }
+  .modal-overlay.open { opacity:1; pointer-events:all; }
+  .modal { background:var(--surface); border:1px solid rgba(255,255,255,0.12); border-radius:24px; max-width:620px; width:100%; padding:44px; position:relative; transform:translateY(20px) scale(0.96); transition:transform 0.3s ease; box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 60px var(--modal-glow,rgba(201,168,76,0.1)); max-height:90vh; overflow-y:auto; }
+  .modal-overlay.open .modal { transform:translateY(0) scale(1); }
+  .modal-close { position:absolute; top:18px; right:22px; background:none; border:none; color:var(--text-muted); font-size:26px; cursor:pointer; line-height:1; padding:4px; transition:color 0.2s; }
+  .modal-close:hover { color:var(--text); }
+
+  .modal-card-preview { width:88px; height:132px; border-radius:12px; margin:0 auto 28px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; position:relative; overflow:hidden; }
+  .modal-card-preview::before { content:''; position:absolute; width:80%; height:70%; background:rgba(255,255,255,0.12); border-radius:50%; transform:rotate(-10deg); }
+  .modal-card-preview > * { position:relative; z-index:1; }
+  .modal-card-preview .card-num { font-family:'Cinzel Decorative',serif; font-size:32px; font-weight:700; color:rgba(255,255,255,0.95); }
+  .modal-card-preview .card-symbol { font-size:24px; }
+  .modal-card-preview .card-label { font-size:10px; letter-spacing:1px; text-transform:uppercase; color:rgba(255,255,255,0.8); }
+
+  .modal-eyebrow { text-align:center; font-size:12px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; opacity:0.8; }
+  .modal-title { font-family:'Cinzel Decorative',serif; font-size:22px; color:var(--gold-light); text-align:center; margin-bottom:7px; font-weight:400; }
+  .modal-subtitle { text-align:center; font-style:italic; color:var(--text-muted); font-size:17px; margin-bottom:30px; }
+  .modal-divider { width:100%; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); opacity:0.3; margin:22px 0; }
+  .modal-section-title { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); opacity:0.7; margin-bottom:10px; }
+  .modal-text { font-size:17px; line-height:1.85; color:var(--text); font-weight:300; }
+  .modal-keywords { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+  .keyword { background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:5px 16px; font-size:13px; color:var(--gold); letter-spacing:1px; }
+
+  .modal-tarot-badge { display:inline-flex; align-items:center; gap:10px; background:var(--surface2); border:1px solid var(--gold); border-radius:8px; padding:10px 18px; margin-bottom:22px; }
+  .tarot-badge-label { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); opacity:0.7; }
+  .tarot-badge-value { font-family:'Cinzel Decorative',serif; font-size:15px; color:var(--gold-light); }
+
+  /* Reversed section in modal */
+  .reversed-block { background:rgba(128,0,128,0.08); border:1px solid rgba(180,100,255,0.25); border-radius:14px; padding:22px; margin-top:4px; }
+  .reversed-block .modal-section-title { color:#c090ff; }
+  .reversed-block .modal-text { color:#d8c8f0; }
+  .reversed-icon { font-size:22px; display:inline-block; transform:rotate(180deg); margin-right:6px; vertical-align:middle; }
+
+  /* ─── SPREAD PAGE ───────────────────────────── */
+  .spread-intro { font-size:18px; line-height:1.9; color:var(--text-muted); font-style:italic; max-width:700px; margin:0 auto 48px; text-align:center; }
+
+  .spread-cards-container { display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin:32px 0; min-height:160px; align-items:flex-end; }
+  .spread-slot { width:96px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .spread-slot-card { width:96px; height:144px; border-radius:12px; border:2px dashed rgba(201,168,76,0.35); display:flex; align-items:center; justify-content:center; font-size:28px; cursor:pointer; position:relative; transition:all 0.25s ease; background:var(--surface); overflow:hidden; }
+  .spread-slot-card.has-card { border-style:solid; border-color:rgba(255,255,255,0.15); cursor:default; }
+  .spread-slot-card.has-card:hover { transform:translateY(-4px); box-shadow:0 16px 32px rgba(0,0,0,0.4); }
+  .spread-slot-card.reversed-card { transform:rotate(180deg); }
+  .spread-slot-card.reversed-card:hover { transform:rotate(180deg) translateY(-4px); }
+  .spread-slot-card::before { content:''; position:absolute; width:80%; height:70%; background:rgba(255,255,255,0.08); border-radius:50%; transform:rotate(-10deg); }
+  .spread-slot-card > * { position:relative; z-index:1; text-align:center; }
+  .spread-slot-label { font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); text-align:center; line-height:1.4; }
+  .spread-slot-pos { font-size:13px; color:var(--gold); opacity:0.7; font-style:italic; }
+  .reversed-tag { font-size:10px; color:#c090ff; letter-spacing:1px; text-transform:uppercase; opacity:0.9; margin-top:2px; }
+
+  .spread-controls { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin:28px 0; }
+  .spread-btn { padding:13px 30px; border:1px solid var(--border); border-radius:50px; background:var(--surface); color:var(--text); font-family:'Cormorant Garamond',serif; font-size:16px; letter-spacing:2px; cursor:pointer; transition:all 0.25s ease; text-transform:uppercase; }
+  .spread-btn:hover { border-color:var(--gold); color:var(--gold); }
+  .spread-btn.primary { background:linear-gradient(135deg,rgba(201,168,76,0.2),rgba(201,168,76,0.05)); border-color:var(--gold); color:var(--gold-light); }
+  .spread-btn.primary:hover { background:linear-gradient(135deg,rgba(201,168,76,0.35),rgba(201,168,76,0.1)); }
+  .spread-btn.danger { border-color:rgba(232,64,48,0.4); color:rgba(232,64,48,0.8); }
+  .spread-btn.danger:hover { border-color:#e84030; color:#e84030; }
+
+  .spread-selector { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-bottom:36px; }
+  .spread-type-btn { padding:10px 24px; border:1px solid var(--border); border-radius:50px; background:transparent; color:var(--text-muted); font-family:'Cormorant Garamond',serif; font-size:15px; letter-spacing:1px; cursor:pointer; transition:all 0.25s ease; }
+  .spread-type-btn.active { background:var(--surface2); border-color:var(--gold); color:var(--gold-light); }
+  .spread-type-btn:hover:not(.active) { border-color:rgba(201,168,76,0.4); color:var(--text); }
+
+  .spread-description { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px 28px; margin-bottom:32px; font-size:16px; line-height:1.8; color:var(--text-muted); max-width:700px; margin-left:auto; margin-right:auto; }
+  .spread-description strong { color:var(--text); font-weight:600; }
+
+  /* Interpretation panel */
+  .interpretation-panel { background:var(--surface); border:1px solid rgba(201,168,76,0.2); border-radius:20px; padding:36px; margin-top:40px; display:none; }
+  .interpretation-panel.visible { display:block; }
+  .interp-header { font-family:'Cinzel Decorative',serif; font-size:18px; color:var(--gold-light); margin-bottom:8px; }
+  .interp-subheader { font-size:15px; color:var(--text-muted); font-style:italic; margin-bottom:28px; }
+  .interp-card { border:1px solid var(--border); border-radius:14px; padding:22px; margin-bottom:18px; display:flex; gap:20px; align-items:flex-start; }
+  .interp-mini-card { width:52px; height:78px; border-radius:8px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:18px; position:relative; overflow:hidden; }
+  .interp-mini-card::before { content:''; position:absolute; width:80%; height:70%; background:rgba(255,255,255,0.1); border-radius:50%; transform:rotate(-10deg); }
+  .interp-mini-card > * { position:relative; z-index:1; }
+  .interp-mini-reversed { transform:rotate(180deg); }
+  .interp-card-body { flex:1; }
+  .interp-card-title { font-family:'Cinzel Decorative',serif; font-size:14px; color:var(--gold-light); margin-bottom:5px; }
+  .interp-card-pos { font-size:12px; color:var(--gold); opacity:0.7; text-transform:uppercase; letter-spacing:2px; margin-bottom:10px; }
+  .interp-card-text { font-size:16px; line-height:1.75; color:var(--text); font-weight:300; }
+  .interp-card-text.reversed-text { color:#d8c8f0; font-style:italic; }
+  .reversed-pill { display:inline-block; background:rgba(128,0,200,0.2); border:1px solid rgba(180,100,255,0.3); border-radius:20px; padding:2px 10px; font-size:11px; color:#c090ff; letter-spacing:1px; text-transform:uppercase; margin-left:8px; vertical-align:middle; }
+
+  .combo-insight { background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.03)); border:1px solid rgba(201,168,76,0.25); border-radius:14px; padding:24px; margin-top:28px; }
+  .combo-insight-title { font-family:'Cinzel Decorative',serif; font-size:14px; color:var(--gold); margin-bottom:12px; letter-spacing:2px; }
+  .combo-insight-text { font-size:17px; line-height:1.85; color:var(--text); font-weight:300; }
+
+  /* Scroll */
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:rgba(201,168,76,0.3); border-radius:3px; }
+
+  @media(max-width:600px) {
+    .card-grid { grid-template-columns:repeat(auto-fill,minmax(80px,1fr)); gap:10px; }
+    .modal { padding:28px 18px; }
+    .modal-title { font-size:18px; }
+    .nav-tab { padding:12px 18px; font-size:14px; letter-spacing:1px; }
+    .spread-slot { width:80px; }
+    .spread-slot-card { width:80px; height:120px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="header-eyebrow">✦ A mystic's companion ✦</div>
+    <h1>Uno Flip<br>Tarot Oracle</h1>
+    <p class="header-sub">Click any card to reveal its tarot correspondence</p>
+  </header>
+
+  <nav class="main-nav">
+    <button class="nav-tab active" onclick="showPage('reference')">✦ Card Reference</button>
+    <button class="nav-tab" onclick="showPage('spreads')">◈ Tarot Spreads</button>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════ REFERENCE PAGE -->
+  <div class="page active" id="page-reference">
+
+    <div class="side-toggle">
+      <button class="toggle-btn active-light" id="btn-light" onclick="showSide('light')">☀ Light Side</button>
+      <button class="toggle-btn" id="btn-dark" onclick="showSide('dark')">🌑 Dark Side</button>
+    </div>
+
+    <div class="sides-container">
+      <!-- LIGHT -->
+      <div class="side-panel" id="panel-light">
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#e8402a"></div> Red — Wands (Fire · Action)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#2a6be8"></div> Blue — Cups (Water · Emotion)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#e8c02a"></div> Yellow — Swords (Air · Mind)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#2ac854"></div> Green — Pentacles (Earth · Body)</div>
+        </div>
+        <div class="section-label">🔴 Red · Suit of Wands · Fire & Passion</div>
+        <div class="card-grid" id="grid-red"></div>
+        <div class="section-label">🔵 Blue · Suit of Cups · Water & Emotion</div>
+        <div class="card-grid" id="grid-blue"></div>
+        <div class="section-label">🟡 Yellow · Suit of Swords · Air & Mind</div>
+        <div class="card-grid" id="grid-yellow"></div>
+        <div class="section-label">🟢 Green · Suit of Pentacles · Earth & Body</div>
+        <div class="card-grid" id="grid-green"></div>
+        <div class="section-label">✦ Special Cards · Major Arcana Energy</div>
+        <div class="card-grid" id="grid-special-light"></div>
+      </div>
+
+      <!-- DARK -->
+      <div class="side-panel hidden" id="panel-dark">
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#e87020"></div> Orange — Shadow Wands (Repressed Fire)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#e84090"></div> Pink — Shadow Cups (Wounded Heart)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#20c8c8"></div> Teal — Shadow Swords (Dark Mind)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#8040e8"></div> Purple — Shadow Pentacles (Hidden Worth)</div>
+        </div>
+        <div class="section-label">🟠 Orange · Shadow Wands · Repressed Fire</div>
+        <div class="card-grid" id="grid-orange"></div>
+        <div class="section-label">🩷 Pink · Shadow Cups · Wounded Heart</div>
+        <div class="card-grid" id="grid-pink"></div>
+        <div class="section-label">🩵 Teal · Shadow Swords · Dark Mind</div>
+        <div class="card-grid" id="grid-teal"></div>
+        <div class="section-label">🟣 Purple · Shadow Pentacles · Hidden Worth</div>
+        <div class="card-grid" id="grid-purple"></div>
+        <div class="section-label">✦ Dark Special Cards · Shadow Major Arcana</div>
+        <div class="card-grid" id="grid-special-dark"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ SPREADS PAGE -->
+  <div class="page" id="page-spreads">
+    <div style="padding-top:48px;">
+      <p class="spread-intro">Choose a spread, draw your cards, and let the oracle speak. Cards drawn sideways are reversed — they carry the shadow of their upright meaning.</p>
+
+      <div class="spread-selector" id="spread-selector"></div>
+      <div class="spread-description" id="spread-description"></div>
+
+      <div class="spread-cards-container" id="spread-slots"></div>
+
+      <div class="spread-controls">
+        <button class="spread-btn primary" onclick="drawCards()">✦ Draw Cards</button>
+        <button class="spread-btn" onclick="interpretSpread()">◈ Interpret Spread</button>
+        <button class="spread-btn danger" onclick="clearSpread()">✕ Clear</button>
+      </div>
+
+      <div class="interpretation-panel" id="interpretation-panel">
+        <div class="interp-header" id="interp-header"></div>
+        <div class="interp-subheader" id="interp-subheader"></div>
+        <div id="interp-cards"></div>
+        <div class="combo-insight" id="combo-insight">
+          <div class="combo-insight-title">✦ COMBINATION INSIGHT</div>
+          <div class="combo-insight-text" id="combo-text"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div class="modal-card-preview" id="modal-preview"></div>
+    <div class="modal-eyebrow" id="modal-eyebrow"></div>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-subtitle" id="modal-subtitle"></div>
+    <div style="text-align:center;margin-bottom:22px;">
+      <div class="modal-tarot-badge">
+        <span class="tarot-badge-label">Tarot ↔</span>
+        <span class="tarot-badge-value" id="modal-tarot"></span>
+      </div>
+    </div>
+    <div class="modal-section-title">UPRIGHT MEANING</div>
+    <div class="modal-text" id="modal-meaning"></div>
+    <div class="modal-divider"></div>
+    <div class="modal-section-title">IN A READING (UPRIGHT)</div>
+    <div class="modal-text" id="modal-reading"></div>
+    <div class="modal-divider"></div>
+    <div class="reversed-block">
+      <div class="modal-section-title"><span class="reversed-icon">☽</span> REVERSED MEANING</div>
+      <div class="modal-text" id="modal-reversed"></div>
+      <div style="margin-top:18px;">
+      <div class="modal-section-title">IN A READING (REVERSED)</div>
+      <div class="modal-text" id="modal-reversed-reading"></div>
+      </div>
+    </div>
+    <div class="modal-divider"></div>
+    <div class="modal-section-title">KEYWORDS</div>
+    <div class="modal-keywords" id="modal-keywords"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════ DATA
+
+const suitData = {
+  red:    { name:"Wands",           element:"Fire",         theme:"passion, creativity, ambition" },
+  blue:   { name:"Cups",            element:"Water",        theme:"emotions, intuition, relationships" },
+  yellow: { name:"Swords",          element:"Air",          theme:"mind, conflict, truth" },
+  green:  { name:"Pentacles",       element:"Earth",        theme:"material world, body, stability" },
+  orange: { name:"Shadow Wands",    element:"Shadow Fire",  theme:"blocked passion, burnout, misdirected drive" },
+  pink:   { name:"Shadow Cups",     element:"Shadow Water", theme:"wounded emotions, illusions, deep longing" },
+  teal:   { name:"Shadow Swords",   element:"Shadow Air",   theme:"obsessive thoughts, harsh truths, mental spirals" },
+  purple: { name:"Shadow Pentacles",element:"Shadow Earth", theme:"scarcity mindset, hidden worth, buried potential" },
+};
+
+const numberMeanings = {
+  1:{ tarot:"Ace",  meaning:"Pure seed energy of the suit. Raw potential, a new beginning, an unexpected gift or spark. The universe hands you the pure essence of this element.", reading:"Something is just beginning — a fresh start in the domain of this suit. Take it. Don't overthink it.", reversed:"The potential exists but is blocked or delayed. A gift that hasn't arrived yet, or energy that needs an outlet it hasn't found. The spark is there but won't catch.", reversedReading:"Something is trying to begin and failing. Look at what is capping the energy. Sometimes this is fear; sometimes it is wrong timing. Sit with it — don't force it.", keywords:["New beginning","Pure potential","Gift","Seed","Spark"] },
+  2:{ tarot:"Two",  meaning:"Duality, choice, balance between two forces. You are at a crossroads within this suit's domain. Partnership or conflict — it depends on how you engage.", reading:"A decision or partnership is forming. Two paths or two people — your relationship to them defines your next step.", reversed:"The balance has tipped. A choice avoided too long, or a partnership becoming one-sided. Two forces are pulling apart rather than holding together.", reversedReading:"What have you been refusing to decide? Avoidance is itself a choice — and this card reversed says that choice is costing you something.", keywords:["Choice","Duality","Balance","Partnership","Crossroads"] },
+  3:{ tarot:"Three",meaning:"Initial fruition. The seed has sprouted. Collaboration, early celebration, creative expansion. Three is the first number of visible result.", reading:"Early results are showing. Celebrate the progress but know the journey has just begun.", reversed:"Growth stalled or going unrecognised. Collaboration that fell through, or work not yet bearing visible fruit. The three doesn't mean failure — it means the bloom is delayed.", reversedReading:"You may be doing more than you're being credited for. Alternatively, look at where you've been waiting for others to co-create something you need to build alone.", keywords:["Growth","Collaboration","Early success","Expansion","Community"] },
+  4:{ tarot:"Four", meaning:"Stability, pause, foundation. A plateau — either a stable resting place or stagnation depending on your mindset. Four is the number of walls and corners.", reading:"Something has solidified. Ask whether this stability is restful grounding or avoidance of the next step.", reversed:"The pause becomes restlessness, or the foundation is crumbling. What felt stable is shifting. Change cannot be held off much longer.", reversedReading:"Either you are being called out of comfort before you're ready, or you've been ready to move and haven't. The stillness is ending — willingly or not.", keywords:["Stability","Foundation","Pause","Security","Rest"] },
+  5:{ tarot:"Five", meaning:"Conflict, disruption, instability. The number of challenge. Five arrives to shake what was settled at Four. Necessary tension that demands growth.", reading:"Conflict or disruption is here. Don't resist — this friction is carving you into your next form.", reversed:"Conflict that has died down — or conflict that was never truly resolved and now festers. The dust has settled but something under the surface remains unhealed.", reversedReading:"Look for the grievance that went unaddressed. Five reversed often signals it's time to revisit an old wound before it shapes future decisions.", keywords:["Conflict","Challenge","Disruption","Tension","Change"] },
+  6:{ tarot:"Six",  meaning:"Harmony after struggle. The return of flow after Five's disruption. Giving, receiving, cycles of reciprocity. A breath after the storm.", reading:"Relief is available. A cycle of giving and receiving is in play — are you both offering and accepting?", reversed:"The harmony is superficial, or the exchange is imbalanced. Generosity without reciprocity, or receiving without gratitude. The flow is blocked somewhere.", reversedReading:"Who owes whom what, in this situation? Six reversed points to an exchange that has gone lopsided. Restore balance — either by giving what you've been withholding, or by stopping what you've been giving freely with no return.", keywords:["Harmony","Reciprocity","Recovery","Flow","Grace"] },
+  7:{ tarot:"Seven",meaning:"Mastery and testing. You've come far — now comes the challenge of wisdom. Seven asks: do you truly know this? A moment of strategic assessment.", reading:"You know more than you give yourself credit for. Trust your accumulated skill. But stay sharp — the test is real.", reversed:"Skill underutilized, or a strategy that has stopped working. The mastery is there but the confidence to use it is not. Alternatively: overconfidence leading to mistakes.", reversedReading:"Are you hiding your capability? Seven reversed often appears when someone is playing small, or when someone has stopped questioning whether their approach still works.", keywords:["Mastery","Strategy","Testing","Wisdom","Skill"] },
+  8:{ tarot:"Eight",meaning:"Movement, speed, momentum. Eight is the number of cycles completing and accelerating — things are happening quickly now. Skill in motion.", reading:"Events are moving fast. You have the ability to navigate this — act with precision, not panic.", reversed:"Stuck energy, or motion that has no purpose. Running fast in circles. The speed is still there, but it has no meaningful direction or keeps hitting the same wall.", reversedReading:"What are you spinning on? Eight reversed appears when effort is being expended but nothing is moving forward. Pause to reorient before resuming velocity.", keywords:["Speed","Momentum","Movement","Precision","Acceleration"] },
+  9:{ tarot:"Nine", meaning:"Near-completion, integration, the threshold before the end. Nine carries the weight of all that came before. Deep embodiment — you are becoming the suit.", reading:"You are close to the end of this cycle. The work is almost done. What needs to be integrated before you cross the threshold?", reversed:"Almost there — but something is keeping you from crossing over. Nine reversed often speaks of self-sabotage at the last moment, or unfinished integration of a difficult experience.", reversedReading:"What are you afraid of completing? The end of a cycle means a new one must begin. Sometimes Nine reversed is protecting you from that next step by making the current one feel endless.", keywords:["Near-completion","Integration","Threshold","Embodiment","Culmination"] },
+};
+
+const shadowNumberMeanings = {
+  1:{ tarot:"Shadow Ace",  meaning:"A potential blocked at the source. The gift of this element exists but something — fear, timing, circumstance — prevents it from being received. Suppressed beginning.", reading:"Something wants to begin but cannot yet. Examine what is holding the spark from catching.", reversed:"The block itself is lifting. What was suppressed begins to surface — not fully formed, but undeniable. The shadow is starting to speak.", reversedReading:"Something long-suppressed is coming back. Don't push it down again. This reversed shadow card asks you to finally receive what you've been refusing.", keywords:["Blocked potential","False start","Suppressed gift","Missed opportunity"] },
+  2:{ tarot:"Shadow Two",  meaning:"Paralysis between two choices. The crossroads becomes a standstill. Indecision, or a choice being made unconsciously that you haven't acknowledged yet.", reading:"You may be stuck in a loop. A choice exists — but you haven't let yourself see it clearly.", reversed:"The paralysis is breaking. You are being forced — or freed — to finally choose. What felt impossible to decide is becoming unavoidable.", reversedReading:"The fork in the road is collapsing into a single path. Ready or not, your direction is clarifying. Trust the momentum.", keywords:["Paralysis","Indecision","Hidden choice","Stalemate","Denial"] },
+  3:{ tarot:"Shadow Three",meaning:"Early effort that hasn't borne fruit, or growth that comes with unexpected cost. Collaboration gone sideways, or premature celebration.", reading:"Something built together may be showing cracks. Or you are not giving yourself credit for what has grown.", reversed:"Hidden growth suddenly becomes visible. A collaboration you thought failed yields unexpected results. The cost may still arrive — but so does the gift.", reversedReading:"Look again at something you wrote off. In shadow reversed, things that seemed broken may have been quietly healing.", keywords:["Setback","Premature celebration","Fractured collaboration","Hidden growth"] },
+  4:{ tarot:"Shadow Four",  meaning:"Stagnation mistaken for stability. Clinging to comfort when movement is needed. The foundation has become a cage.", reading:"Ask whether you are resting or hiding. The stillness feels safe — but is it?", reversed:"The cage opens. Movement that felt impossible is now possible — or even necessary. The stagnation breaks, sometimes harshly.", reversedReading:"Something is shifting whether you're ready or not. The false safety is dissolving. Step out before the walls do it for you.", keywords:["Stagnation","Avoidance","Clinging","False security","Comfort zone"] },
+  5:{ tarot:"Shadow Five",  meaning:"Conflict that has gone inward. External disruption turned into internal war. Self-sabotage, or taking the chaos of the world personally.", reading:"The battle has moved inside you. The real conflict now is with yourself.", reversed:"The internal war is softening. A truce — perhaps not full resolution, but the harshest fighting is winding down. Relief is possible.", reversedReading:"Give yourself a ceasefire. You don't have to fix everything at once. Shadow Five reversed is permission to stop fighting yourself for just a moment.", keywords:["Internal conflict","Self-sabotage","Internalized chaos","Inner war"] },
+  6:{ tarot:"Shadow Six",   meaning:"Imbalanced exchange — taking without giving, or giving without receiving. Toxic cycles of reciprocity. Nostalgia trapping you in the past.", reading:"Look at how you give and receive in this area. Is the flow healthy, or is someone draining or being drained?", reversed:"The imbalance is being corrected. Old debts — emotional or material — are being settled. A release from a nostalgic pull.", reversedReading:"Something that has been extracted from you is being repaid. Or you are finally letting go of the past and reclaiming your energy.", keywords:["Imbalance","Toxic reciprocity","Nostalgia","One-sided exchange"] },
+  7:{ tarot:"Shadow Seven", meaning:"Skill used for self-deception or manipulation. Mistrust of your own mastery. Or overconfidence masking doubt. The strategy is off.", reading:"What you think you know may need re-examination. Is the mastery real — or is it a defense?", reversed:"The self-deception is cracking. You are beginning to see through your own rationalizations — or someone else's. Honest assessment is finally possible.", reversedReading:"The fog is lifting. Whatever you've been telling yourself to justify a pattern — you're starting to see it for what it is. This is uncomfortable and essential.", keywords:["Self-deception","False mastery","Manipulation","Doubt","Overconfidence"] },
+  8:{ tarot:"Shadow Eight", meaning:"Momentum without direction. Moving fast toward the wrong thing. Feeling trapped in endless motion or frozen when speed is needed.", reading:"Are you running toward something — or away from it? Speed without direction is just chaos.", reversed:"The misdirected motion is slowing, or the frozen state is finally cracking. A new direction is emerging — not yet clear, but forming.", reversedReading:"You are about to find your direction again. The chaos is organizing itself. Stay open to the trajectory that presents itself, even if it surprises you.", keywords:["Misdirected speed","Trapped","Running away","Chaos","Frenetic energy"] },
+  9:{ tarot:"Shadow Nine",  meaning:"The weight of near-completion becomes unbearable. Anxiety, exhaustion, or nightmares before the finish line. So close — but so much fear.", reading:"The end is near and it's terrifying. The discomfort is real, but it is not a sign to stop.", reversed:"The anxiety is releasing. What felt like an impossible burden is beginning to lighten. You can breathe again — the threshold is closer than the fear made it seem.", reversedReading:"The nightmares are calming. The weight is still there but you can carry it now. Shadow Nine reversed is the first real rest you've had in a long time.", keywords:["Anxiety","Nightmares","Final resistance","Exhaustion","Fear of completion"] },
+};
+
+const specialCards = {
+  light:[
+    { id:"skip-light",    label:"Skip",          symbol:"⊘",   colorClass:"card-wild-light", tarot:"The Hermit (IX)",         meaning:"Intentional withdrawal from the outer world to seek inner wisdom. A necessary pause — not avoidance, but the kind of solitude that lights the way forward.", reading:"A situation is calling you inward. Pause the action. The answer you seek requires stepping away from the noise.", reversed:"Isolation that has overstayed its welcome. The Hermit's wisdom turns into avoidance when the pause is extended past its purpose.", reversedReading:"It's time to return. The retreat has served you — but now the world is calling and continuing to hide is its own kind of harm.", keywords:["Withdrawal","Inner wisdom","Solitude","Reflection","Guidance"] },
+    { id:"reverse-light", label:"Reverse",        symbol:"↺",   colorClass:"card-wild-light", tarot:"Wheel of Fortune (X)",    meaning:"The cycle turns. What was moving forward now moves in a new direction. Fortune shifts — not necessarily for better or worse, but irrevocably different.", reading:"A reversal is in motion. Surrender to the new direction rather than fighting it — the wheel turns for everyone.", reversed:"The wheel is stuck. A cycle that should have moved on has stalled — either through resistance or circumstances beyond your control.", reversedReading:"Something is refusing to change, or change is being refused. Ask what you're gripping so tightly that the wheel cannot turn.", keywords:["Change","Reversal","Cycles","Fortune","Turning point"] },
+    { id:"draw1-light",   label:"Draw One",       symbol:"+1",  colorClass:"card-wild-light", tarot:"The Tower (XVI) — Minor", meaning:"A smaller disruption arrives carrying something unexpected. Not the full Tower, but a warning tremor. Something must be received, addressed, or integrated.", reading:"A surprise arrives — something extra to carry. Handle it with equanimity and it becomes a gift rather than a burden.", reversed:"The disruption turns inward. Rather than something arriving from outside, this reversed card signals a self-created upset — or anxiety about a disruption that hasn't happened.", reversedReading:"Are you bracing for an impact that may not come? Or have you been the source of your own instability? Draw One reversed asks you to look inward at the tremors you've authored.", keywords:["Surprise","Minor disruption","Unexpected load","Adaptability"] },
+    { id:"draw2-light",   label:"Draw Two",       symbol:"+2",  colorClass:"card-wild-light", tarot:"The Tower (XVI)",         meaning:"The Tower arrives. Sudden disruption, the shattering of false structures, a shock that cannot be ignored. What falls was never solid to begin with.", reading:"Something is being dismantled. It may hurt. But what falls was already hollow. Let it go.", reversed:"The Tower's destruction has already happened and you are now in the aftermath. Or: you are resisting the necessary collapse and prolonging the inevitable.", reversedReading:"If it's already fallen — now is the time to clear the rubble, not mourn the structure. If it hasn't yet — stop clinging. It must come down.", keywords:["Disruption","Sudden change","Collapse","Liberation through chaos","Revelation"] },
+    { id:"wild-light",    label:"Wild",           symbol:"★",   colorClass:"card-wild-light", tarot:"The Fool (0)",            meaning:"Pure, boundless potential. The Fool stands at the cliff's edge — not foolish, but unencumbered by the past. Any direction is possible.", reading:"You are free. More free than you may realize. Choose direction not from fear, but from pure desire.", reversed:"Recklessness, naïveté, or refusing to grow up. The Fool's freedom becomes irresponsibility — leaping before looking in a way that harms yourself or others.", reversedReading:"Freedom without wisdom is just chaos. Reversed Wild asks: what are you being cavalier about that deserves real attention?", keywords:["Freedom","New journey","Unlimited potential","Innocence","Leap of faith"] },
+    { id:"wild2-light",   label:"Wild Draw Two",  symbol:"★+2", colorClass:"card-wild-light", tarot:"The Magician (I)",        meaning:"The Magician holds all four suits — complete power directed with intention. Wild Draw Two is power with consequence: you can do anything, but the energy must go somewhere.", reading:"You hold real power in this situation. Use it deliberately. What you direct your will toward will manifest.", reversed:"Power misused, talent wasted, or inability to channel ability into real-world results. The tools are all there and nothing is being built.", reversedReading:"What are you doing with your gifts? Reversed Magician is the most capable person in the room — who is also doing the least with it.", keywords:["Power","Will","Manifestation","Skill","Directed energy"] },
+    { id:"flip-light",    label:"Flip",           symbol:"◑",   colorClass:"card-flip",        tarot:"Judgement (XX) / The Sun (XIX)", meaning:"The moment of revelation — the light side becomes aware of the dark, and transformation begins. A clarion call to rise and see the full picture.", reading:"A significant shift is imminent. Something will be revealed or turned inside out. You are being called to a higher awareness.", reversed:"The awakening is being refused. The call to rise has come — and you are not answering. Or you're caught in a false awakening, a transformation that is all surface.", reversedReading:"Something in you knows it's time to change and is resisting with everything it has. The Flip reversed says: the refusal has a cost.", keywords:["Revelation","Transformation","Awakening","The full picture","Turn"] },
+  ],
+  dark:[
+    { id:"skip-dark",     label:"Skip",           symbol:"⊘",   colorClass:"card-orange",  tarot:"The Hermit — Shadow",          meaning:"Isolation that has curdled into loneliness, or avoidance disguised as wisdom. The Hermit's light dims when withdrawal becomes permanent retreat.", reading:"Are you truly seeking wisdom — or running from connection? The solitude has gone on long enough.", reversed:"The isolation is breaking open. The hermit is being pulled back into the world — willingly or not. Connection, long avoided, becomes unavoidable.", reversedReading:"You are ready to re-emerge, even if it doesn't feel like readiness. Let someone in.", keywords:["Isolation","Avoidance","Withdrawn","Loneliness","Fear of connection"] },
+    { id:"skipall-dark",  label:"Skip Everyone",  symbol:"⊘⊘", colorClass:"card-purple",  tarot:"The World — Shadow / Abyss",   meaning:"Total cessation. Either profound completion of a cycle — or total shutdown. This card carries the weight of absolute endings, or the stillness before rebirth.", reading:"Everything pauses. Something enormous has completed or collapsed. This is the silence before a new world begins.", reversed:"The stasis is cracking. After the great ending, something new insists on beginning. Life returns to the void.", reversedReading:"The void has done its work. Something is ready to be born. You don't need to understand it yet — just allow it.", keywords:["Total ending","Complete cycle","Shutdown","Pre-rebirth","Universal pause"] },
+    { id:"reverse-dark",  label:"Reverse",        symbol:"↺",   colorClass:"card-teal",    tarot:"Wheel of Fortune — Shadow",    meaning:"The wheel turns against you — or you resist what the wheel is trying to do. Fighting inevitable change, or caught in a karmic loop.", reading:"Something keeps cycling back. The pattern will repeat until something changes in you, not just around you.", reversed:"The karmic loop is breaking. What repeated again and again is finally resolving. The pattern has been seen and can now be released.", reversedReading:"You have finally learned what the cycle was trying to teach you. The wheel can turn freely now. Let it.", keywords:["Karmic loop","Resistance","Repeating patterns","Fighting change","Stuck cycle"] },
+    { id:"draw5-dark",    label:"Draw Five",      symbol:"+5",  colorClass:"card-pink",    tarot:"The Devil (XV)",               meaning:"The accumulation of excess — five cards of burden arriving at once. Addiction, attachment, and the chains we pretend we cannot remove.", reading:"What have you taken on that is no longer yours to carry? What attachment is making you collect weight?", reversed:"The chains are loosening. What had you in its grip is beginning to release. An addiction, obsession, or unhealthy attachment loses its power.", reversedReading:"You are finding your way out of something that had hold of you. This may feel abrupt or disorienting — freedom can feel like loss at first.", keywords:["Excess","Addiction","Burden","Chains","Attachment","Materialism"] },
+    { id:"wild-dark",     label:"Wild",           symbol:"★",   colorClass:"card-wild-dark", tarot:"The Fool — Shadow",          meaning:"Recklessness. Leaping without looking in a way that causes harm. The Fool's freedom becomes chaos, or a profound freedom found in the dark.", reading:"Examine the leap you're about to take. Is it true freedom or escape? The direction matters now more than ever.", reversed:"The recklessness is slowing. A moment of pause before the leap — wisdom beginning to temper wildness. Or: the escape route is being closed off, forcing a confrontation.", reversedReading:"You are being asked to stop and actually look before leaping. The impulse is still strong — but so is the part of you that knows better.", keywords:["Recklessness","Escape","Running away","Dark freedom","Chaos"] },
+    { id:"wildcolor-dark",label:"Wild Draw Color",symbol:"★🌈", colorClass:"card-wild-dark", tarot:"The Magician — Shadow",      meaning:"Power used for manipulation. The Magician's tools deployed without ethics — the ability to shape reality, turned toward self-interest or control.", reading:"There is manipulation in play — either yours or someone else's. Great power is in the room. Watch how it's being directed.", reversed:"The manipulation is being seen through. The illusion falters, the control loosens. Power returns to those it was taken from.", reversedReading:"Something that had power over you is losing its hold. Or you are beginning to see the machinery behind someone's influence — and that visibility is freedom.", keywords:["Manipulation","Abuse of power","Control","Shadow will","Coercion"] },
+    { id:"flip-dark",     label:"Flip",           symbol:"◑",   colorClass:"card-flip",    tarot:"The Moon (XVIII)",             meaning:"The Moon rules illusion, the unconscious, what lurks beneath the surface. On the dark side, Flip signals that what you thought was real may be a projection.", reading:"Something is not as it appears. Emotions are high, and clarity is low. Wait before acting — the full picture is still hidden.", reversed:"The fog of the Moon begins to lift. Illusions dissolve and what was hidden becomes seeable. The nightmare ends; dawn is coming.", reversedReading:"You are waking up from something. An illusion you were living in is becoming transparent. This clarity may sting — but you are finally seeing clearly.", keywords:["Illusion","Hidden truth","Subconscious","Fear","Confusion","The unseen"] },
+  ],
+};
+
+// ═══════════════════════════════════════════ SPREAD DEFINITIONS
+
+const spreads = [
+  {
+    id:"one",
+    name:"One Card Pull",
+    desc:"<strong>Daily oracle.</strong> A single card drawn for a simple question or daily focus. What energy surrounds me right now?",
+    positions:["Present Energy"],
+    question:"What energy surrounds me right now?"
+  },
+  {
+    id:"three",
+    name:"Past · Present · Future",
+    desc:"<strong>The classic three-card spread.</strong> A narrative arc in three beats — where you've been, where you stand, and where you're heading.",
+    positions:["Past / Root","Present / What's at Play","Future / What's Emerging"],
+    question:"Show me the arc of this situation."
+  },
+  {
+    id:"cross",
+    name:"The Cross",
+    desc:"<strong>Five-card cross spread.</strong> A deeper look at a situation — its heart, what challenges it, what supports it, and where it leads.",
+    positions:["The Heart","The Challenge","The Foundation","What to Release","The Outcome"],
+    question:"What is the full shape of this situation?"
+  },
+  {
+    id:"shadow",
+    name:"Light & Shadow",
+    desc:"<strong>Four-card duality spread.</strong> Explore both the conscious and unconscious dimensions of a question — what you see and what you carry.",
+    positions:["What You Know","What You Hide","What Serves You","What Must Be Released"],
+    question:"What am I not seeing about this?"
+  },
+  {
+    id:"celtic",
+    name:"Celtic Cross",
+    desc:"<strong>Six-card expanded cross.</strong> The full-depth reading — present, crossing forces, foundation, recent past, possible future, and the final guidance.",
+    positions:["The Present","The Crossing Force","The Foundation","Recent Past","Possible Future","Final Guidance"],
+    question:"Give me a complete picture."
+  },
+];
+
+// ═══════════════════════════════════════════ SPREAD STATE
+
+let currentSpread = spreads[0];
+let drawnCards = [];
+
+// ═══════════════════════════════════════════ CARD POOL
+
+function buildCardPool() {
+  const pool = [];
+  const lightSuits = [
+    { suit:'red',    colorClass:'card-red',    isShadow:false },
+    { suit:'blue',   colorClass:'card-blue',   isShadow:false },
+    { suit:'yellow', colorClass:'card-yellow', isShadow:false },
+    { suit:'green',  colorClass:'card-green',  isShadow:false },
+  ];
+  const darkSuits = [
+    { suit:'orange', colorClass:'card-orange', isShadow:true },
+    { suit:'pink',   colorClass:'card-pink',   isShadow:true },
+    { suit:'teal',   colorClass:'card-teal',   isShadow:true },
+    { suit:'purple', colorClass:'card-purple', isShadow:true },
+  ];
+  [...lightSuits,...darkSuits].forEach(({suit,colorClass,isShadow})=>{
+    for(let n=1;n<=9;n++){
+      pool.push({ type:'number', suit, colorClass, isShadow, num:n,
+        suitInfo: suitData[suit],
+        meaning: isShadow ? shadowNumberMeanings[n] : numberMeanings[n] });
+    }
+  });
+  [...specialCards.light,...specialCards.dark].forEach(card=>{
+    pool.push({ type:'special', ...card });
+  });
+  return pool;
+}
+
+function getCardData(card, reversed) {
+  if(card.type === 'number') {
+    const m = card.meaning;
+    return {
+      colorClass: card.colorClass,
+      symbol: getSuitSymbol(card.suitInfo.name),
+      displayNum: card.num,
+      title: `${card.num} of ${card.suitInfo.name}`,
+      tarot: `${m.tarot} of ${card.suitInfo.name.replace('Shadow ','')}`,
+      meaning: reversed ? m.reversed : m.meaning,
+      reading: reversed ? m.reversedReading : m.reading,
+      keywords: m.keywords,
+    };
+  } else {
+    return {
+      colorClass: card.colorClass,
+      symbol: card.symbol,
+      displayNum: null,
+      title: card.label,
+      tarot: card.tarot,
+      meaning: reversed ? card.reversed : card.meaning,
+      reading: reversed ? card.reversedReading : card.reading,
+      keywords: card.keywords,
+    };
+  }
+}
+
+// ═══════════════════════════════════════════ RENDER HELPERS
+
+function getSuitSymbol(n){
+  return {"Wands":"🔥","Shadow Wands":"🌑","Cups":"💧","Shadow Cups":"🩸","Swords":"⚔️","Shadow Swords":"🌪","Pentacles":"🌿","Shadow Pentacles":"💀"}[n]||"✦";
+}
+
+function getGlow(suit){
+  return {red:'rgba(232,64,48,0.2)',blue:'rgba(42,107,232,0.2)',yellow:'rgba(232,192,42,0.2)',green:'rgba(42,200,84,0.2)',orange:'rgba(232,112,32,0.2)',pink:'rgba(232,64,144,0.2)',teal:'rgba(32,200,200,0.2)',purple:'rgba(128,64,232,0.2)'}[suit]||'rgba(201,168,76,0.2)';
+}
+
+// ═══════════════════════════════════════════ CARD GRIDS
+
+function createNumberedCards(suit, colorClass, isShadow) {
+  const grid = document.getElementById(`grid-${suit}`);
+  const meanings = isShadow ? shadowNumberMeanings : numberMeanings;
+  const suitInfo = suitData[suit];
+  for(let n=1;n<=9;n++){
+    const m = meanings[n];
+    const card = document.createElement('div');
+    card.className = `uno-card ${colorClass}`;
+    card.innerHTML = `<div class="card-symbol">${getSuitSymbol(suitInfo.name)}</div><div class="card-num">${n}</div><div class="card-label">${suitInfo.name}</div>`;
+    card.onclick = ()=>openModal({ num:n, suit, colorClass, suitInfo, meaning:m, isShadow });
+    grid.appendChild(card);
+  }
+}
+
+function createSpecialCards(side) {
+  const grid = document.getElementById(`grid-special-${side}`);
+  specialCards[side].forEach(card=>{
+    const el = document.createElement('div');
+    el.className = `uno-card ${card.colorClass}`;
+    el.innerHTML = `<div class="card-symbol">${card.symbol}</div><div class="card-label">${card.label}</div>`;
+    el.onclick = ()=>openSpecialModal(card);
+    grid.appendChild(el);
+  });
+}
+
+// ═══════════════════════════════════════════ MODAL
+
+function openModal({num, suit, colorClass, suitInfo, meaning, isShadow}) {
+  const overlay = document.getElementById('modal-overlay');
+  document.getElementById('modal-preview').className = `modal-card-preview ${colorClass}`;
+  document.getElementById('modal-preview').innerHTML = `<div class="card-symbol">${getSuitSymbol(suitInfo.name)}</div><div class="card-num">${num}</div><div class="card-label">${suitInfo.name}</div>`;
+  document.getElementById('modal-eyebrow').textContent = `${isShadow?'🌑 Shadow Side':'☀ Light Side'} · ${suitInfo.element}`;
+  document.getElementById('modal-title').textContent = `${num} of ${suitInfo.name}`;
+  document.getElementById('modal-subtitle').textContent = suitInfo.theme;
+  document.getElementById('modal-tarot').textContent = `${meaning.tarot} of ${isShadow?'Shadow ':''}${suitInfo.name.replace('Shadow ','')}`;
+  document.getElementById('modal-meaning').textContent = meaning.meaning;
+  document.getElementById('modal-reading').textContent = meaning.reading;
+  document.getElementById('modal-reversed').textContent = meaning.reversed;
+  document.getElementById('modal-reversed-reading').textContent = meaning.reversedReading;
+  document.getElementById('modal-keywords').innerHTML = meaning.keywords.map(k=>`<span class="keyword">${k}</span>`).join('');
+  document.getElementById('modal').style.setProperty('--modal-glow', getGlow(suit));
+  overlay.classList.add('open');
+}
+
+function openSpecialModal(card) {
+  const overlay = document.getElementById('modal-overlay');
+  document.getElementById('modal-preview').className = `modal-card-preview ${card.colorClass}`;
+  document.getElementById('modal-preview').innerHTML = `<div class="card-symbol">${card.symbol}</div><div class="card-label">${card.label}</div>`;
+  document.getElementById('modal-eyebrow').textContent = `Special Card · Major Arcana Energy`;
+  document.getElementById('modal-title').textContent = card.label;
+  document.getElementById('modal-subtitle').textContent = "Action card · Archetypal force";
+  document.getElementById('modal-tarot').textContent = card.tarot;
+  document.getElementById('modal-meaning').textContent = card.meaning;
+  document.getElementById('modal-reading').textContent = card.reading;
+  document.getElementById('modal-reversed').textContent = card.reversed;
+  document.getElementById('modal-reversed-reading').textContent = card.reversedReading;
+  document.getElementById('modal-keywords').innerHTML = card.keywords.map(k=>`<span class="keyword">${k}</span>`).join('');
+  document.getElementById('modal').style.setProperty('--modal-glow','rgba(201,168,76,0.2)');
+  overlay.classList.add('open');
+}
+
+function closeModal(e) { if(e.target===document.getElementById('modal-overlay')) closeModalDirect(); }
+function closeModalDirect() { document.getElementById('modal-overlay').classList.remove('open'); }
+
+// ═══════════════════════════════════════════ PAGE NAVIGATION
+
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(`page-${page}`).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ═══════════════════════════════════════════ SIDE TOGGLE
+
+function showSide(side) {
+  document.getElementById('panel-light').classList.toggle('hidden', side!=='light');
+  document.getElementById('panel-dark').classList.toggle('hidden', side!=='dark');
+  document.getElementById('btn-light').className = `toggle-btn${side==='light'?' active-light':''}`;
+  document.getElementById('btn-dark').className  = `toggle-btn${side==='dark'?' active-dark':''}`;
+}
+
+// ═══════════════════════════════════════════ SPREADS
+
+function initSpreads() {
+  const sel = document.getElementById('spread-selector');
+  spreads.forEach((s,i)=>{
+    const btn = document.createElement('button');
+    btn.className = `spread-type-btn${i===0?' active':''}`;
+    btn.textContent = s.name;
+    btn.onclick = ()=>{ selectSpread(s); document.querySelectorAll('.spread-type-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); };
+    sel.appendChild(btn);
+  });
+  selectSpread(spreads[0]);
+}
+
+function selectSpread(spread) {
+  currentSpread = spread;
+  drawnCards = [];
+  document.getElementById('spread-description').innerHTML = `<strong>${spread.name}</strong> — ${spread.desc} <em style="display:block;margin-top:8px;color:var(--gold);opacity:0.8;">Question: ${spread.question}</em>`;
+  renderSlots();
+  document.getElementById('interpretation-panel').classList.remove('visible');
+}
+
+function renderSlots(cards) {
+  const container = document.getElementById('spread-slots');
+  container.innerHTML = '';
+  currentSpread.positions.forEach((pos,i)=>{
+    const slot = document.createElement('div');
+    slot.className = 'spread-slot';
+    const cardDiv = document.createElement('div');
+    const cardData = cards && cards[i];
+    if(cardData) {
+      const cd = getCardData(cardData.card, cardData.reversed);
+      cardDiv.className = `spread-slot-card has-card ${cd.colorClass}${cardData.reversed?' reversed-card':''}`;
+      cardDiv.innerHTML = `<div style="text-align:center"><div style="font-size:20px">${cd.symbol}</div>${cd.displayNum?`<div style="font-family:'Cinzel Decorative',serif;font-size:20px;color:rgba(255,255,255,0.95)">${cd.displayNum}</div>`:`<div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.8)">${cd.title}</div>`}</div>`;
+    } else {
+      cardDiv.className = 'spread-slot-card';
+      cardDiv.innerHTML = `<span style="color:var(--text-muted);font-size:24px">✦</span>`;
+    }
+    const label = document.createElement('div');
+    label.className = 'spread-slot-label';
+    label.textContent = pos;
+    const posNum = document.createElement('div');
+    posNum.className = 'spread-slot-pos';
+    posNum.textContent = `Position ${i+1}`;
+    if(cardData && cardData.reversed) {
+      const rev = document.createElement('div');
+      rev.className = 'reversed-tag';
+      rev.textContent = '↻ Reversed';
+      slot.appendChild(cardDiv); slot.appendChild(label); slot.appendChild(posNum); slot.appendChild(rev);
+    } else {
+      slot.appendChild(cardDiv); slot.appendChild(label); slot.appendChild(posNum);
+    }
+    container.appendChild(slot);
+  });
+}
+
+function drawCards() {
+  const pool = buildCardPool();
+  const count = currentSpread.positions.length;
+  const shuffled = pool.sort(()=>Math.random()-0.5);
+  drawnCards = [];
+  for(let i=0;i<count;i++) {
+    const card = shuffled[i];
+    const reversed = Math.random() < 0.35; // ~35% chance reversed
+    drawnCards.push({ card, reversed });
+  }
+  renderSlots(drawnCards);
+  document.getElementById('interpretation-panel').classList.remove('visible');
+}
+
+function interpretSpread() {
+  if(!drawnCards.length) { drawCards(); return; }
+  const panel = document.getElementById('interpretation-panel');
+  document.getElementById('interp-header').textContent = `${currentSpread.name} Reading`;
+  document.getElementById('interp-subheader').textContent = `"${currentSpread.question}"`;
+
+  const cardsEl = document.getElementById('interp-cards');
+  cardsEl.innerHTML = '';
+
+  const cardSummaries = [];
+
+  drawnCards.forEach((dc,i)=>{
+    const cd = getCardData(dc.card, dc.reversed);
+    cardSummaries.push({ pos:currentSpread.positions[i], title:cd.title, reversed:dc.reversed, tarot:cd.tarot, reading:cd.reading });
+    const div = document.createElement('div');
+    div.className = 'interp-card';
+    div.innerHTML = `
+      <div class="interp-mini-card ${cd.colorClass}${dc.reversed?' interp-mini-reversed':''}">
+        <span style="font-size:18px">${cd.symbol}</span>
+      </div>
+      <div class="interp-card-body">
+        <div class="interp-card-title">${cd.title}${dc.reversed?'<span class="reversed-pill">Reversed</span>':''}</div>
+        <div class="interp-card-pos">${currentSpread.positions[i]} · ${cd.tarot}</div>
+        <div class="interp-card-text${dc.reversed?' reversed-text':''}">${cd.reading}</div>
+      </div>`;
+    cardsEl.appendChild(div);
+  });
+
+  // Combination insight
+  const comboText = generateComboInsight(cardSummaries);
+  document.getElementById('combo-text').textContent = comboText;
+
+  panel.classList.add('visible');
+  panel.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function generateComboInsight(cards) {
+  const reversedCount = cards.filter(c=>c.reversed).length;
+  const total = cards.length;
+  const titles = cards.map(c=>c.title);
+
+  // Patterns
+  const hasMajor = cards.some(c=> c.tarot.includes('The ') || c.tarot.includes('Ace'));
+  const allReversed = reversedCount === total;
+  const mostlyReversed = reversedCount > total/2 && !allReversed;
+  const noReversed = reversedCount === 0;
+  const hasShadow = cards.some(c=> c.title.includes('Shadow'));
+
+  let insight = "";
+
+  if(allReversed) {
+    insight = "Every card in this spread has arrived reversed — a powerful signal that the entire reading is asking you to look inward rather than outward. The energies at play are not absent; they are inverted, internalized, or blocked. This is not a bad omen — it is an invitation to examine what is running beneath the surface of the situation. Something inside you needs attention before anything outside can move.";
+  } else if(mostlyReversed) {
+    insight = `${reversedCount} of your ${total} cards are reversed. The dominant undercurrent of this reading is subterranean — energies that are present but not yet manifesting on the surface. The spread is asking you to attend to interior work before expecting exterior results. The cards that are upright point to where life is flowing; the reversed cards point to where it is gathering, unprocessed.`;
+  } else if(noReversed) {
+    insight = "All cards appear upright in this spread — a reading of direct, outward-facing energy. The forces at play are active, visible, and ready to be engaged consciously. This does not mean there is no shadow; it means the surface itself is rich with information. Trust what you see. The reading is asking you to act, not to look deeper — what's needed is already in front of you.";
+  } else {
+    insight = `This spread holds a mix of upright and reversed cards — a balanced reading that touches both the visible and the hidden. ${reversedCount > 0 ? `The reversed card${reversedCount>1?'s':''} (${cards.filter(c=>c.reversed).map(c=>c.title).join(', ')}) ${reversedCount>1?'carry':'carries'} the shadow dimension of the reading — the parts that require inner work or awareness.` : ''} The upright cards show where energy is available and flowing. Read the two in conversation with each other — the reversed positions often explain the root of what the upright positions are trying to express.`;
+  }
+
+  if(hasMajor) {
+    insight += " The presence of Major Arcana energy in this spread means a significant archetypal force is at work — something larger than daily circumstance. Pay particular attention to those cards; they are not incidental.";
+  }
+
+  if(hasShadow) {
+    insight += " Dark side cards in the reading add shadow suit energy — these are not warnings, but invitations to examine what is operating below the conscious surface of the situation. Honor them as much as the light side cards.";
+  }
+
+  return insight;
+}
+
+function clearSpread() {
+  drawnCards = [];
+  renderSlots();
+  document.getElementById('interpretation-panel').classList.remove('visible');
+}
+
+// ═══════════════════════════════════════════ INIT
+
+createNumberedCards('red',    'card-red',    false);
+createNumberedCards('blue',   'card-blue',   false);
+createNumberedCards('yellow', 'card-yellow', false);
+createNumberedCards('green',  'card-green',  false);
+createSpecialCards('light');
+createNumberedCards('orange', 'card-orange', true);
+createNumberedCards('pink',   'card-pink',   true);
+createNumberedCards('teal',   'card-teal',   true);
+createNumberedCards('purple', 'card-purple', true);
+createSpecialCards('dark');
+initSpreads();
+
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModalDirect(); });
+</script>
+</body>
+</html>
