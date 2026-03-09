@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -33,169 +34,186 @@
     pointer-events:none;z-index:0;}
   .container{position:relative;z-index:1;max-width:1300px;margin:0 auto;padding:0 24px 100px;}
 
-  /* NAV */
-  .main-nav{display:flex;justify-content:center;padding:24px 0 0;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(12px);}
-  .nav-tab{padding:14px 36px;border:none;background:transparent;color:var(--text-muted);font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all 0.3s ease;border-bottom:2px solid transparent;position:relative;top:1px;}
-  .nav-tab.active{color:var(--gold-light);border-bottom-color:var(--gold);}
-  .nav-tab:hover:not(.active){color:var(--text);}
+/* NAV */
+.main-nav{display:flex;justify-content:center;padding:24px 0 0;border-bottom:1px solid var(–border);position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(12px);}
+.nav-tab{padding:14px 36px;border:none;background:transparent;color:var(–text-muted);font-family:‘Cormorant Garamond’,serif;font-size:16px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all 0.3s ease;border-bottom:2px solid transparent;position:relative;top:1px;}
+.nav-tab.active{color:var(–gold-light);border-bottom-color:var(–gold);}
+.nav-tab:hover:not(.active){color:var(–text);}
 
-  /* HEADER */
-  header{text-align:center;padding:52px 20px 36px;}
-  header::after{content:'';display:block;width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:24px auto 0;}
-  .header-eyebrow{font-size:12px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;opacity:0.8;}
-  h1{font-family:'Cinzel Decorative',serif;font-size:clamp(24px,4vw,44px);color:var(--gold-light);font-weight:400;line-height:1.3;text-shadow:0 0 40px rgba(201,168,76,0.3);letter-spacing:2px;}
-  .header-sub{font-size:18px;color:var(--text-muted);margin-top:12px;font-style:italic;font-weight:300;}
+/* HEADER */
+header{text-align:center;padding:52px 20px 36px;}
+header::after{content:’’;display:block;width:200px;height:1px;background:linear-gradient(90deg,transparent,var(–gold),transparent);margin:24px auto 0;}
+.header-eyebrow{font-size:12px;letter-spacing:6px;text-transform:uppercase;color:var(–gold);margin-bottom:16px;opacity:0.8;}
+h1{font-family:‘Cinzel Decorative’,serif;font-size:clamp(24px,4vw,44px);color:var(–gold-light);font-weight:400;line-height:1.3;text-shadow:0 0 40px rgba(201,168,76,0.3);letter-spacing:2px;}
+.header-sub{font-size:18px;color:var(–text-muted);margin-top:12px;font-style:italic;font-weight:300;}
 
-  .page{display:none;} .page.active{display:block;}
+.page{display:none;} .page.active{display:block;}
 
-  /* SIDE TOGGLE */
-  .side-toggle{display:flex;justify-content:center;margin:32px auto;border:1px solid var(--border);border-radius:50px;width:fit-content;overflow:hidden;background:var(--surface);}
-  .toggle-btn{padding:12px 36px;border:none;background:transparent;color:var(--text-muted);font-family:'Cormorant Garamond',serif;font-size:17px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s ease;}
-  .toggle-btn.active-light{background:linear-gradient(135deg,#fff8e8,#f0e0b0);color:#3a2a0a;font-weight:600;}
-  .toggle-btn.active-dark{background:linear-gradient(135deg,#1a0a2e,#2e1050);color:#c8a0ff;font-weight:600;}
+/* SIDE TOGGLE */
+.side-toggle{display:flex;justify-content:center;margin:32px auto;border:1px solid var(–border);border-radius:50px;width:fit-content;overflow:hidden;background:var(–surface);}
+.toggle-btn{padding:12px 36px;border:none;background:transparent;color:var(–text-muted);font-family:‘Cormorant Garamond’,serif;font-size:17px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s ease;}
+.toggle-btn.active-light{background:linear-gradient(135deg,#fff8e8,#f0e0b0);color:#3a2a0a;font-weight:600;}
+.toggle-btn.active-dark{background:linear-gradient(135deg,#1a0a2e,#2e1050);color:#c8a0ff;font-weight:600;}
 
-  /* SECTION LABELS */
-  .section-label{font-family:'Cinzel Decorative',serif;font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin:52px 0 22px;opacity:0.7;display:flex;align-items:center;gap:16px;}
-  .section-label::before,.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.3;}
+/* SECTION LABELS */
+.section-label{font-family:‘Cinzel Decorative’,serif;font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(–gold);margin:52px 0 22px;opacity:0.7;display:flex;align-items:center;gap:16px;}
+.section-label::before,.section-label::after{content:’’;flex:1;height:1px;background:linear-gradient(90deg,transparent,var(–gold),transparent);opacity:0.3;}
 
-  /* CARD GRID */
-  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:14px;margin-bottom:8px;}
-  .uno-card{aspect-ratio:2/3;border-radius:12px;cursor:pointer;position:relative;transition:transform 0.2s ease,box-shadow 0.2s ease;border:1.5px solid rgba(255,255,255,0.1);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;padding:8px 4px;}
-  .uno-card:hover{transform:translateY(-7px) scale(1.05);box-shadow:0 22px 44px rgba(0,0,0,0.5),0 0 22px var(--card-glow,rgba(255,255,255,0.1));border-color:rgba(255,255,255,0.35);z-index:2;}
-  .uno-card .card-num{font-family:'Cinzel Decorative',serif;font-size:24px;font-weight:700;line-height:1;color:rgba(255,255,255,0.95);text-shadow:0 2px 8px rgba(0,0,0,0.4);}
-  .uno-card .card-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.8);font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.2;}
-  .uno-card .card-symbol{font-size:20px;margin-bottom:2px;}
-  .uno-card::before{content:'';position:absolute;width:80%;height:70%;background:rgba(255,255,255,0.12);border-radius:50%;transform:rotate(-10deg);}
-  .uno-card>*{position:relative;z-index:1;}
+/* CARD GRID */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:14px;margin-bottom:8px;}
+.uno-card{aspect-ratio:2/3;border-radius:12px;cursor:pointer;position:relative;transition:transform 0.2s ease,box-shadow 0.2s ease;border:1.5px solid rgba(255,255,255,0.1);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;padding:8px 4px;}
+.uno-card:hover{transform:translateY(-7px) scale(1.05);box-shadow:0 22px 44px rgba(0,0,0,0.5),0 0 22px var(–card-glow,rgba(255,255,255,0.1));border-color:rgba(255,255,255,0.35);z-index:2;}
+.uno-card .card-num{font-family:‘Cinzel Decorative’,serif;font-size:24px;font-weight:700;line-height:1;color:rgba(255,255,255,0.95);text-shadow:0 2px 8px rgba(0,0,0,0.4);}
+.uno-card .card-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.8);font-family:‘Cormorant Garamond’,serif;font-weight:600;line-height:1.2;}
+.uno-card .card-symbol{font-size:20px;margin-bottom:2px;}
+.uno-card::before{content:’’;position:absolute;width:80%;height:70%;background:rgba(255,255,255,0.12);border-radius:50%;transform:rotate(-10deg);}
+.uno-card>*{position:relative;z-index:1;}
 
-  .card-red{background:linear-gradient(145deg,#c82a18,#e84030);--card-glow:rgba(232,64,48,0.4);}
-  .card-blue{background:linear-gradient(145deg,#1a4fc0,#2a6be8);--card-glow:rgba(42,107,232,0.4);}
-  .card-yellow{background:linear-gradient(145deg,#c09010,#e8c02a);--card-glow:rgba(232,192,42,0.4);}
-  .card-green{background:linear-gradient(145deg,#18a038,#2ac854);--card-glow:rgba(42,200,84,0.4);}
-  .card-orange{background:linear-gradient(145deg,#b04010,#e87020);--card-glow:rgba(232,112,32,0.4);}
-  .card-pink{background:linear-gradient(145deg,#a01060,#e84090);--card-glow:rgba(232,64,144,0.4);}
-  .card-teal{background:linear-gradient(145deg,#108888,#20c8c8);--card-glow:rgba(32,200,200,0.4);}
-  .card-purple{background:linear-gradient(145deg,#5020a0,#8040e8);--card-glow:rgba(128,64,232,0.4);}
-  .card-wild-light{background:linear-gradient(145deg,#1a1a1a,#2a2a2a);position:relative;}
-  .card-wild-light::after{content:'';position:absolute;inset:-2px;border-radius:12px;background:linear-gradient(135deg,#e84030,#2a6be8,#e8c02a,#2ac854);z-index:-1;}
-  .card-wild-dark{background:linear-gradient(145deg,#0a0010,#150025);position:relative;}
-  .card-wild-dark::after{content:'';position:absolute;inset:-2px;border-radius:12px;background:linear-gradient(135deg,#e87020,#e84090,#20c8c8,#8040e8);z-index:-1;}
-  .card-flip{background:linear-gradient(145deg,#1a0a0a,#3a1a00);border:2px solid var(--gold)!important;--card-glow:rgba(201,168,76,0.5);}
-  .side-panel.hidden{display:none;}
+.card-red{background:linear-gradient(145deg,#c82a18,#e84030);–card-glow:rgba(232,64,48,0.4);}
+.card-blue{background:linear-gradient(145deg,#1a4fc0,#2a6be8);–card-glow:rgba(42,107,232,0.4);}
+.card-yellow{background:linear-gradient(145deg,#c09010,#e8c02a);–card-glow:rgba(232,192,42,0.4);}
+.card-green{background:linear-gradient(145deg,#18a038,#2ac854);–card-glow:rgba(42,200,84,0.4);}
+.card-orange{background:linear-gradient(145deg,#b04010,#e87020);–card-glow:rgba(232,112,32,0.4);}
+.card-pink{background:linear-gradient(145deg,#a01060,#e84090);–card-glow:rgba(232,64,144,0.4);}
+.card-teal{background:linear-gradient(145deg,#108888,#20c8c8);–card-glow:rgba(32,200,200,0.4);}
+.card-purple{background:linear-gradient(145deg,#5020a0,#8040e8);–card-glow:rgba(128,64,232,0.4);}
+.card-wild-light{background:linear-gradient(145deg,#1a1a1a,#2a2a2a);position:relative;}
+.card-wild-light::after{content:’’;position:absolute;inset:-2px;border-radius:12px;background:linear-gradient(135deg,#e84030,#2a6be8,#e8c02a,#2ac854);z-index:-1;}
+.card-wild-dark{background:linear-gradient(145deg,#0a0010,#150025);position:relative;}
+.card-wild-dark::after{content:’’;position:absolute;inset:-2px;border-radius:12px;background:linear-gradient(135deg,#e87020,#e84090,#20c8c8,#8040e8);z-index:-1;}
+.card-flip{background:linear-gradient(145deg,#1a0a0a,#3a1a00);border:2px solid var(–gold)!important;–card-glow:rgba(201,168,76,0.5);}
+.side-panel.hidden{display:none;}
 
-  /* LEGEND */
-  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:24px 0;padding:22px;background:var(--surface);border:1px solid var(--border);border-radius:16px;}
-  .legend-item{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--text-muted);}
-  .legend-dot{width:13px;height:13px;border-radius:3px;flex-shrink:0;}
+/* LEGEND */
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:24px 0;padding:22px;background:var(–surface);border:1px solid var(–border);border-radius:16px;}
+.legend-item{display:flex;align-items:center;gap:10px;font-size:15px;color:var(–text-muted);}
+.legend-dot{width:13px;height:13px;border-radius:3px;flex-shrink:0;}
 
-  /* MODAL */
-  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(10px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
-  .modal-overlay.open{opacity:1;pointer-events:all;}
-  .modal{background:var(--surface);border:1px solid rgba(255,255,255,0.12);border-radius:24px;max-width:680px;width:100%;padding:44px;position:relative;transform:translateY(20px) scale(0.96);transition:transform 0.3s ease;box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 60px var(--modal-glow,rgba(201,168,76,0.1));max-height:90vh;overflow-y:auto;}
-  .modal-overlay.open .modal{transform:translateY(0) scale(1);}
-  .modal-close{position:absolute;top:18px;right:22px;background:none;border:none;color:var(--text-muted);font-size:26px;cursor:pointer;line-height:1;padding:4px;transition:color 0.2s;}
-  .modal-close:hover{color:var(--text);}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(10px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(–surface);border:1px solid rgba(255,255,255,0.12);border-radius:24px;max-width:680px;width:100%;padding:44px;position:relative;transform:translateY(20px) scale(0.96);transition:transform 0.3s ease;box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 60px var(–modal-glow,rgba(201,168,76,0.1));max-height:90vh;overflow-y:auto;}
+.modal-overlay.open .modal{transform:translateY(0) scale(1);}
+.modal-close{position:absolute;top:18px;right:22px;background:none;border:none;color:var(–text-muted);font-size:26px;cursor:pointer;line-height:1;padding:4px;transition:color 0.2s;}
+.modal-close:hover{color:var(–text);}
 
-  /* TAROT IMAGERY BLOCK */
-  .tarot-imagery{background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:22px;margin-bottom:22px;}
-  .imagery-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
-  .imagery-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);}
-  .imagery-title{font-family:'Cinzel Decorative',serif;font-size:13px;color:var(--gold-light);font-weight:400;}
-  .imagery-subtitle{font-size:12px;color:var(--text-muted);margin-top:2px;font-style:italic;}
-  .imagery-scene{font-size:15px;line-height:1.85;color:var(--text);font-weight:300;font-style:italic;border-left:2px solid rgba(201,168,76,0.3);padding-left:14px;}
-  .imagery-symbols{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
-  .imagery-symbol{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:3px 12px;font-size:12px;color:var(--gold);letter-spacing:0.5px;}
+/* TAROT IMAGERY BLOCK */
+.tarot-imagery{background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:22px;margin-bottom:22px;}
+.imagery-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.imagery-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);}
+.imagery-title{font-family:‘Cinzel Decorative’,serif;font-size:13px;color:var(–gold-light);font-weight:400;}
+.imagery-subtitle{font-size:12px;color:var(–text-muted);margin-top:2px;font-style:italic;}
+.imagery-scene{font-size:15px;line-height:1.85;color:var(–text);font-weight:300;font-style:italic;border-left:2px solid rgba(201,168,76,0.3);padding-left:14px;}
+.imagery-symbols{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.imagery-symbol{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:3px 12px;font-size:12px;color:var(–gold);letter-spacing:0.5px;}
 
-  .modal-card-preview{width:88px;height:132px;border-radius:12px;margin:0 auto 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;position:relative;overflow:hidden;}
-  .modal-card-preview::before{content:'';position:absolute;width:80%;height:70%;background:rgba(255,255,255,0.12);border-radius:50%;transform:rotate(-10deg);}
-  .modal-card-preview>*{position:relative;z-index:1;}
-  .modal-card-preview .card-num{font-family:'Cinzel Decorative',serif;font-size:32px;font-weight:700;color:rgba(255,255,255,0.95);}
-  .modal-card-preview .card-symbol{font-size:24px;}
-  .modal-card-preview .card-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.8);}
+.modal-card-preview{width:88px;height:132px;border-radius:12px;margin:0 auto 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;position:relative;overflow:hidden;}
+.modal-card-preview::before{content:’’;position:absolute;width:80%;height:70%;background:rgba(255,255,255,0.12);border-radius:50%;transform:rotate(-10deg);}
+.modal-card-preview>*{position:relative;z-index:1;}
+.modal-card-preview .card-num{font-family:‘Cinzel Decorative’,serif;font-size:32px;font-weight:700;color:rgba(255,255,255,0.95);}
+.modal-card-preview .card-symbol{font-size:24px;}
+.modal-card-preview .card-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.8);}
 
-  .modal-eyebrow{text-align:center;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;opacity:0.8;}
-  .modal-title{font-family:'Cinzel Decorative',serif;font-size:22px;color:var(--gold-light);text-align:center;margin-bottom:7px;font-weight:400;}
-  .modal-subtitle{text-align:center;font-style:italic;color:var(--text-muted);font-size:17px;margin-bottom:24px;}
-  .modal-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.3;margin:20px 0;}
-  .modal-section-title{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:10px;}
-  .modal-text{font-size:16px;line-height:1.85;color:var(--text);font-weight:300;}
-  .modal-keywords{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
-  .keyword{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--gold);letter-spacing:1px;}
-  .keyword.reversed-kw{background:rgba(128,0,200,0.1);border-color:rgba(180,100,255,0.25);color:#c090ff;}
+.modal-eyebrow{text-align:center;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(–gold);margin-bottom:10px;opacity:0.8;}
+.modal-title{font-family:‘Cinzel Decorative’,serif;font-size:22px;color:var(–gold-light);text-align:center;margin-bottom:7px;font-weight:400;}
+.modal-subtitle{text-align:center;font-style:italic;color:var(–text-muted);font-size:17px;margin-bottom:24px;}
+.modal-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(–gold),transparent);opacity:0.3;margin:20px 0;}
+.modal-section-title{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(–gold);opacity:0.7;margin-bottom:10px;}
+.modal-text{font-size:16px;line-height:1.85;color:var(–text);font-weight:300;}
+.modal-keywords{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.keyword{background:var(–surface2);border:1px solid var(–border);border-radius:20px;padding:5px 14px;font-size:12px;color:var(–gold);letter-spacing:1px;}
+.keyword.reversed-kw{background:rgba(128,0,200,0.1);border-color:rgba(180,100,255,0.25);color:#c090ff;}
 
-  .modal-tarot-badge{display:inline-flex;align-items:center;gap:10px;background:var(--surface2);border:1px solid var(--gold);border-radius:8px;padding:10px 18px;margin-bottom:22px;}
-  .tarot-badge-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:0.7;}
-  .tarot-badge-value{font-family:'Cinzel Decorative',serif;font-size:15px;color:var(--gold-light);}
+.modal-tarot-badge{display:inline-flex;align-items:center;gap:10px;background:var(–surface2);border:1px solid var(–gold);border-radius:8px;padding:10px 18px;margin-bottom:22px;}
+.tarot-badge-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(–gold);opacity:0.7;}
+.tarot-badge-value{font-family:‘Cinzel Decorative’,serif;font-size:15px;color:var(–gold-light);}
 
-  .reversed-block{background:rgba(80,0,150,0.08);border:1px solid rgba(180,100,255,0.2);border-radius:14px;padding:22px;margin-top:4px;}
-  .reversed-block .modal-section-title{color:#c090ff;}
-  .reversed-block .modal-text{color:#d8c8f0;}
-  .reversed-icon{font-size:18px;display:inline-block;transform:rotate(180deg);margin-right:6px;vertical-align:middle;}
+.reversed-block{background:rgba(80,0,150,0.08);border:1px solid rgba(180,100,255,0.2);border-radius:14px;padding:22px;margin-top:4px;}
+.reversed-block .modal-section-title{color:#c090ff;}
+.reversed-block .modal-text{color:#d8c8f0;}
+.reversed-icon{font-size:18px;display:inline-block;transform:rotate(180deg);margin-right:6px;vertical-align:middle;}
 
-  /* SPREADS */
-  .spread-intro{font-size:18px;line-height:1.9;color:var(--text-muted);font-style:italic;max-width:700px;margin:0 auto 48px;text-align:center;}
-  .spread-cards-container{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin:32px 0;min-height:160px;align-items:flex-end;}
-  .spread-slot{width:96px;display:flex;flex-direction:column;align-items:center;gap:10px;}
-  .spread-slot-card{width:96px;height:144px;border-radius:12px;border:2px dashed rgba(201,168,76,0.35);display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;position:relative;transition:all 0.25s ease;background:var(--surface);overflow:hidden;}
-  .spread-slot-card.has-card{border-style:solid;border-color:rgba(255,255,255,0.15);cursor:default;}
-  .spread-slot-card.has-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(0,0,0,0.4);}
-  .spread-slot-card.reversed-card{transform:rotate(180deg);}
-  .spread-slot-card.reversed-card:hover{transform:rotate(180deg) translateY(-4px);}
-  .spread-slot-card::before{content:'';position:absolute;width:80%;height:70%;background:rgba(255,255,255,0.08);border-radius:50%;transform:rotate(-10deg);}
-  .spread-slot-card>*{position:relative;z-index:1;text-align:center;}
-  .spread-slot-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);text-align:center;line-height:1.4;}
-  .spread-slot-pos{font-size:13px;color:var(--gold);opacity:0.7;font-style:italic;}
-  .reversed-tag{font-size:10px;color:#c090ff;letter-spacing:1px;text-transform:uppercase;opacity:0.9;margin-top:2px;}
+/* SPREADS */
+.spread-intro{font-size:18px;line-height:1.9;color:var(–text-muted);font-style:italic;max-width:700px;margin:0 auto 48px;text-align:center;}
+.spread-cards-container{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin:32px 0;min-height:160px;align-items:flex-end;}
+.spread-slot{width:96px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.spread-slot-card{width:96px;height:144px;border-radius:12px;border:2px dashed rgba(201,168,76,0.35);display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;position:relative;transition:all 0.25s ease;background:var(–surface);overflow:hidden;}
+.spread-slot-card.has-card{border-style:solid;border-color:rgba(255,255,255,0.15);cursor:default;}
+.spread-slot-card.has-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(0,0,0,0.4);}
+.spread-slot-card.reversed-card{transform:rotate(180deg);}
+.spread-slot-card.reversed-card:hover{transform:rotate(180deg) translateY(-4px);}
+.spread-slot-card::before{content:’’;position:absolute;width:80%;height:70%;background:rgba(255,255,255,0.08);border-radius:50%;transform:rotate(-10deg);}
+.spread-slot-card>*{position:relative;z-index:1;text-align:center;}
+.spread-slot-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(–text-muted);text-align:center;line-height:1.4;}
+.spread-slot-pos{font-size:13px;color:var(–gold);opacity:0.7;font-style:italic;}
+.reversed-tag{font-size:10px;color:#c090ff;letter-spacing:1px;text-transform:uppercase;opacity:0.9;margin-top:2px;}
 
-  .spread-controls{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:28px 0;}
-  .spread-btn{padding:13px 30px;border:1px solid var(--border);border-radius:50px;background:var(--surface);color:var(--text);font-family:'Cormorant Garamond',serif;font-size:16px;letter-spacing:2px;cursor:pointer;transition:all 0.25s ease;text-transform:uppercase;}
-  .spread-btn:hover{border-color:var(--gold);color:var(--gold);}
-  .spread-btn.primary{background:linear-gradient(135deg,rgba(201,168,76,0.2),rgba(201,168,76,0.05));border-color:var(--gold);color:var(--gold-light);}
-  .spread-btn.primary:hover{background:linear-gradient(135deg,rgba(201,168,76,0.35),rgba(201,168,76,0.1));}
-  .spread-btn.danger{border-color:rgba(232,64,48,0.4);color:rgba(232,64,48,0.8);}
-  .spread-btn.danger:hover{border-color:#e84030;color:#e84030;}
+.spread-controls{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:28px 0;}
+.spread-btn{padding:13px 30px;border:1px solid var(–border);border-radius:50px;background:var(–surface);color:var(–text);font-family:‘Cormorant Garamond’,serif;font-size:16px;letter-spacing:2px;cursor:pointer;transition:all 0.25s ease;text-transform:uppercase;}
+.spread-btn:hover{border-color:var(–gold);color:var(–gold);}
+.spread-btn.primary{background:linear-gradient(135deg,rgba(201,168,76,0.2),rgba(201,168,76,0.05));border-color:var(–gold);color:var(–gold-light);}
+.spread-btn.primary:hover{background:linear-gradient(135deg,rgba(201,168,76,0.35),rgba(201,168,76,0.1));}
+.spread-btn.danger{border-color:rgba(232,64,48,0.4);color:rgba(232,64,48,0.8);}
+.spread-btn.danger:hover{border-color:#e84030;color:#e84030;}
 
-  .spread-selector{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:36px;}
-  .spread-type-btn{padding:10px 24px;border:1px solid var(--border);border-radius:50px;background:transparent;color:var(--text-muted);font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:1px;cursor:pointer;transition:all 0.25s ease;}
-  .spread-type-btn.active{background:var(--surface2);border-color:var(--gold);color:var(--gold-light);}
-  .spread-type-btn:hover:not(.active){border-color:rgba(201,168,76,0.4);color:var(--text);}
+.spread-selector{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:36px;}
+.spread-type-btn{padding:10px 24px;border:1px solid var(–border);border-radius:50px;background:transparent;color:var(–text-muted);font-family:‘Cormorant Garamond’,serif;font-size:15px;letter-spacing:1px;cursor:pointer;transition:all 0.25s ease;}
+.spread-type-btn.active{background:var(–surface2);border-color:var(–gold);color:var(–gold-light);}
+.spread-type-btn:hover:not(.active){border-color:rgba(201,168,76,0.4);color:var(–text);}
 
-  .spread-description{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px 28px;margin-bottom:32px;font-size:16px;line-height:1.8;color:var(--text-muted);max-width:700px;margin-left:auto;margin-right:auto;}
-  .spread-description strong{color:var(--text);font-weight:600;}
+.spread-description{background:var(–surface);border:1px solid var(–border);border-radius:16px;padding:24px 28px;margin-bottom:32px;font-size:16px;line-height:1.8;color:var(–text-muted);max-width:700px;margin-left:auto;margin-right:auto;}
+.spread-description strong{color:var(–text);font-weight:600;}
 
-  .interpretation-panel{background:var(--surface);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:36px;margin-top:40px;display:none;}
-  .interpretation-panel.visible{display:block;}
-  .interp-header{font-family:'Cinzel Decorative',serif;font-size:18px;color:var(--gold-light);margin-bottom:8px;}
-  .interp-subheader{font-size:15px;color:var(--text-muted);font-style:italic;margin-bottom:28px;}
-  .interp-card{border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:18px;display:flex;gap:20px;align-items:flex-start;}
-  .interp-mini-card{width:52px;height:78px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;position:relative;overflow:hidden;}
-  .interp-mini-card::before{content:'';position:absolute;width:80%;height:70%;background:rgba(255,255,255,0.1);border-radius:50%;transform:rotate(-10deg);}
-  .interp-mini-card>*{position:relative;z-index:1;}
-  .interp-mini-reversed{transform:rotate(180deg);}
-  .interp-card-body{flex:1;}
-  .interp-card-title{font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--gold-light);margin-bottom:5px;}
-  .interp-card-pos{font-size:12px;color:var(--gold);opacity:0.7;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
-  .interp-card-text{font-size:16px;line-height:1.75;color:var(--text);font-weight:300;}
-  .interp-card-text.reversed-text{color:#d8c8f0;font-style:italic;}
-  .reversed-pill{display:inline-block;background:rgba(128,0,200,0.2);border:1px solid rgba(180,100,255,0.3);border-radius:20px;padding:2px 10px;font-size:11px;color:#c090ff;letter-spacing:1px;text-transform:uppercase;margin-left:8px;vertical-align:middle;}
+.interpretation-panel{background:var(–surface);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:36px;margin-top:40px;display:none;}
+.interpretation-panel.visible{display:block;}
+.interp-header{font-family:‘Cinzel Decorative’,serif;font-size:18px;color:var(–gold-light);margin-bottom:8px;}
+.interp-subheader{font-size:15px;color:var(–text-muted);font-style:italic;margin-bottom:28px;}
+.interp-card{border:1px solid var(–border);border-radius:14px;padding:22px;margin-bottom:18px;display:flex;gap:20px;align-items:flex-start;}
+.interp-mini-card{width:52px;height:78px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;position:relative;overflow:hidden;}
+.interp-mini-card::before{content:’’;position:absolute;width:80%;height:70%;background:rgba(255,255,255,0.1);border-radius:50%;transform:rotate(-10deg);}
+.interp-mini-card>*{position:relative;z-index:1;}
+.interp-mini-reversed{transform:rotate(180deg);}
+.interp-card-body{flex:1;}
+.interp-card-title{font-family:‘Cinzel Decorative’,serif;font-size:14px;color:var(–gold-light);margin-bottom:5px;}
+.interp-card-pos{font-size:12px;color:var(–gold);opacity:0.7;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
+.interp-card-text{font-size:16px;line-height:1.75;color:var(–text);font-weight:300;}
+.interp-card-text.reversed-text{color:#d8c8f0;font-style:italic;}
+.reversed-pill{display:inline-block;background:rgba(128,0,200,0.2);border:1px solid rgba(180,100,255,0.3);border-radius:20px;padding:2px 10px;font-size:11px;color:#c090ff;letter-spacing:1px;text-transform:uppercase;margin-left:8px;vertical-align:middle;}
 
-  .combo-insight{background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.25);border-radius:14px;padding:24px;margin-top:28px;}
-  .combo-insight-title{font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--gold);margin-bottom:12px;letter-spacing:2px;}
-  .combo-insight-text{font-size:17px;line-height:1.85;color:var(--text);font-weight:300;}
+.combo-insight{background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.25);border-radius:14px;padding:24px;margin-top:28px;}
+.combo-insight-title{font-family:‘Cinzel Decorative’,serif;font-size:14px;color:var(–gold);margin-bottom:12px;letter-spacing:2px;}
+.combo-insight-text{font-size:17px;line-height:1.85;color:var(–text);font-weight:300;}
 
-  ::-webkit-scrollbar{width:6px;}
-  ::-webkit-scrollbar-track{background:transparent;}
-  ::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.3);border-radius:3px;}
+/* DOMAIN SELECTOR */
+.domain-selector-wrap{padding:36px 0 0;text-align:center;}
+.domain-label{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(–gold);opacity:0.7;margin-bottom:18px;}
+.domain-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:900px;margin:0 auto 8px;}
+.domain-btn{padding:9px 18px;border:1px solid var(–border);border-radius:50px;background:transparent;color:var(–text-muted);font-family:‘Cormorant Garamond’,serif;font-size:15px;letter-spacing:1px;cursor:pointer;transition:all 0.25s ease;display:flex;align-items:center;gap:7px;}
+.domain-btn:hover:not(.active){border-color:rgba(201,168,76,0.4);color:var(–text);}
+.domain-btn.active{background:var(–surface2);border-color:var(–gold);color:var(–gold-light);box-shadow:0 0 14px rgba(201,168,76,0.12);}
+.domain-btn .domain-icon{font-size:16px;}
+.domain-active-banner{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px auto 0;padding:10px 20px;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.18);border-radius:10px;width:fit-content;font-size:14px;color:var(–gold);font-style:italic;max-width:600px;line-height:1.5;}
 
-  @media(max-width:600px){
-    .card-grid{grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px;}
-    .modal{padding:28px 18px;}
-    .modal-title{font-size:18px;}
-    .nav-tab{padding:12px 18px;font-size:14px;letter-spacing:1px;}
-    .spread-slot{width:80px;}
-    .spread-slot-card{width:80px;height:120px;}
-  }
+/* DOMAIN READING BLOCK in modal */
+.domain-reading-block{background:linear-gradient(135deg,rgba(40,20,80,0.3),rgba(20,10,40,0.2));border:1px solid rgba(160,100,255,0.2);border-radius:14px;padding:20px;margin-bottom:20px;}
+.domain-reading-block .modal-section-title{color:#b090e0;opacity:1;margin-bottom:8px;}
+.domain-reading-text{font-size:16px;line-height:1.85;color:#d8ccf0;font-weight:300;}
+.domain-reading-badge{display:inline-flex;align-items:center;gap:7px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#b090e0;margin-bottom:12px;opacity:0.8;}
+
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.3);border-radius:3px;}
+
+@media(max-width:600px){
+.card-grid{grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px;}
+.modal{padding:28px 18px;}
+.modal-title{font-size:18px;}
+.nav-tab{padding:12px 18px;font-size:14px;letter-spacing:1px;}
+.spread-slot{width:80px;}
+.spread-slot-card{width:80px;height:120px;}
+}
 </style>
+
 </head>
 <body>
 <div class="container">
@@ -211,7 +229,13 @@
   </nav>
 
   <!-- REFERENCE PAGE -->
+
   <div class="page active" id="page-reference">
+    <div class="domain-selector-wrap">
+      <div class="domain-label">✦ Reading Domain</div>
+      <div class="domain-grid" id="domain-grid-ref"></div>
+      <div class="domain-active-banner" id="domain-banner-ref"></div>
+    </div>
     <div class="side-toggle">
       <button class="toggle-btn active-light" id="btn-light" onclick="showSide('light')">☀ Light Side</button>
       <button class="toggle-btn" id="btn-dark" onclick="showSide('dark')">🌑 Dark Side</button>
@@ -257,8 +281,14 @@
   </div>
 
   <!-- SPREADS PAGE -->
+
   <div class="page" id="page-spreads">
     <div style="padding-top:48px;">
+      <div class="domain-selector-wrap" style="padding-top:0;margin-bottom:32px;">
+        <div class="domain-label">✦ Reading Domain</div>
+        <div class="domain-grid" id="domain-grid-spread"></div>
+        <div class="domain-active-banner" id="domain-banner-spread"></div>
+      </div>
       <p class="spread-intro">Choose a spread, draw your cards, and let the oracle speak. Cards drawn sideways are reversed — they carry the shadow of their upright meaning.</p>
       <div class="spread-selector" id="spread-selector"></div>
       <div class="spread-description" id="spread-description"></div>
@@ -282,6 +312,7 @@
 </div>
 
 <!-- MODAL -->
+
 <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
   <div class="modal" id="modal">
     <button class="modal-close" onclick="closeModalDirect()">✕</button>
@@ -296,40 +327,50 @@
       </div>
     </div>
 
-    <!-- TAROT IMAGERY -->
-    <div class="tarot-imagery" id="modal-imagery-block">
-      <div class="imagery-header">
-        <div class="imagery-icon" id="modal-imagery-icon">🎴</div>
-        <div>
-          <div class="imagery-title" id="modal-imagery-title">Traditional Card Imagery</div>
-          <div class="imagery-subtitle" id="modal-imagery-card-name"></div>
-        </div>
-      </div>
-      <div class="imagery-scene" id="modal-imagery-scene"></div>
-      <div class="imagery-symbols" id="modal-imagery-symbols"></div>
+```
+<!-- TAROT IMAGERY -->
+<div class="tarot-imagery" id="modal-imagery-block">
+  <div class="imagery-header">
+    <div class="imagery-icon" id="modal-imagery-icon">🎴</div>
+    <div>
+      <div class="imagery-title" id="modal-imagery-title">Traditional Card Imagery</div>
+      <div class="imagery-subtitle" id="modal-imagery-card-name"></div>
     </div>
+  </div>
+  <div class="imagery-scene" id="modal-imagery-scene"></div>
+  <div class="imagery-symbols" id="modal-imagery-symbols"></div>
+</div>
 
-    <div class="modal-section-title">UPRIGHT MEANING</div>
-    <div class="modal-text" id="modal-meaning"></div>
-    <div class="modal-divider"></div>
-    <div class="modal-section-title">IN A READING (UPRIGHT)</div>
-    <div class="modal-text" id="modal-reading"></div>
-    <div class="modal-divider"></div>
-    <div class="modal-section-title">KEYWORDS</div>
-    <div class="modal-keywords" id="modal-keywords"></div>
-    <div class="modal-divider"></div>
-    <div class="reversed-block">
-      <div class="modal-section-title"><span class="reversed-icon">☽</span> REVERSED MEANING</div>
-      <div class="modal-text" id="modal-reversed"></div>
-      <div style="margin-top:16px;">
-        <div class="modal-section-title">IN A READING (REVERSED)</div>
-        <div class="modal-text" id="modal-reversed-reading"></div>
-      </div>
-      <div style="margin-top:14px;">
-        <div class="modal-section-title">REVERSED KEYWORDS</div>
-        <div class="modal-keywords" id="modal-reversed-keywords"></div>
-      </div>
-    </div>
+<!-- DOMAIN READING -->
+<div class="domain-reading-block" id="modal-domain-block" style="display:none;">
+  <div class="domain-reading-badge" id="modal-domain-badge"></div>
+  <div class="modal-section-title" id="modal-domain-title">IN THIS DOMAIN</div>
+  <div class="domain-reading-text" id="modal-domain-text"></div>
+</div>
+
+<div class="modal-section-title">UPRIGHT MEANING</div>
+<div class="modal-text" id="modal-meaning"></div>
+<div class="modal-divider"></div>
+<div class="modal-section-title">IN A READING (UPRIGHT)</div>
+<div class="modal-text" id="modal-reading"></div>
+<div class="modal-divider"></div>
+<div class="modal-section-title">KEYWORDS</div>
+<div class="modal-keywords" id="modal-keywords"></div>
+<div class="modal-divider"></div>
+<div class="reversed-block">
+  <div class="modal-section-title"><span class="reversed-icon">☽</span> REVERSED MEANING</div>
+  <div class="modal-text" id="modal-reversed"></div>
+  <div style="margin-top:16px;">
+    <div class="modal-section-title">IN A READING (REVERSED)</div>
+    <div class="modal-text" id="modal-reversed-reading"></div>
+  </div>
+  <div style="margin-top:14px;">
+    <div class="modal-section-title">REVERSED KEYWORDS</div>
+    <div class="modal-keywords" id="modal-reversed-keywords"></div>
+  </div>
+</div>
+```
+
   </div>
 </div>
 
@@ -520,7 +561,593 @@ const specialCards = {
   ],
 };
 
-// ═══════════════════════════════════════════════════════════════ SPREADS
+// ═══════════════════════════════════════════════════════════════ DOMAINS
+
+const domains = [
+  {id:'general',   icon:'🌌', name:'General',        desc:'A broad reading open to all areas of life. The cards speak freely without a lens.'},
+  {id:'romance',   icon:'💕', name:'Romance',         desc:'Love, attraction, romantic longing, partnership, heartbreak, and desire.'},
+  {id:'career',    icon:'⚡', name:'Career & Purpose',desc:'Work, ambition, calling, creative projects, finances, and public identity.'},
+  {id:'family',    icon:'🌿', name:'Family & Friends',desc:'Bonds of belonging, loyalty, chosen family, inherited patterns, and friendship.'},
+  {id:'grief',     icon:'🕯️', name:'Grief & Loss',    desc:'Mourning, endings, letting go, the process of healing, and what remains.'},
+  {id:'self',      icon:'🔮', name:'Self & Identity', desc:'Who you are becoming, inner work, self-worth, authenticity, and growth.'},
+  {id:'health',    icon:'🌿', name:'Body & Health',   desc:'Physical wellbeing, energy, rest, the body\'s wisdom, and healing.'},
+  {id:'spiritual', icon:'✨', name:'Spiritual Path',  desc:'Soul growth, intuition, shadow work, mystical experience, and purpose.'},
+  {id:'change',    icon:'🌀', name:'Change & Transition', desc:'Life chapters ending or beginning, crossroads, upheaval, and transformation.'},
+  {id:'creativity',icon:'🎨', name:'Creativity',      desc:'Art, expression, inspiration, creative blocks, and making something new.'},
+  {id:'shadow',    icon:'🌑', name:'Shadow Work',     desc:'The unconscious self, hidden fears, unacknowledged parts, and inner darkness.'},
+  {id:'finances',  icon:'💰', name:'Money & Abundance',desc:'Financial decisions, scarcity, abundance mindset, material security, and resources.'},
+];
+
+// Domain-specific readings per number and suit pattern
+// Format: domainReadings[domainId][suitGroup][num] = {upright, reversed}
+// suitGroup: 'fire' (red/orange), 'water' (blue/pink), 'air' (yellow/teal), 'earth' (green/purple)
+
+const domainReadings = {
+  romance: {
+    fire: {
+      1:"A new spark of attraction — electric, undeniable. Someone or something ignites desire you weren't expecting. The romantic potential here is raw and real.",
+      2:"A choice between two people, or between love and something else. You're weighing feelings that both feel true. The tension is alive.",
+      3:"Early romance is blooming. A connection is becoming something real — shared laughter, shared time, a growing certainty. Enjoy this stage.",
+      4:"The relationship has found stability. It's comfortable, grounded — perhaps too predictable. Ask whether the comfort is contentment or stagnation.",
+      5:"Conflict in romance — a disagreement, jealousy, or competing desires. This friction isn't the end; it's asking both people to show up more honestly.",
+      6:"A tender moment of giving and receiving in love. Old sweetness returns, or a natural exchange of care flows easily between you.",
+      7:"You know this person — or this feeling — deeply now. A test of whether the love is real or a projection. Trust what you've learned.",
+      8:"Things are moving quickly in romance. A relationship is accelerating — new levels of closeness, intensity, or urgency. Stay present.",
+      9:"You are on the threshold of something deep in love. A commitment, a declaration, or a reckoning with what this relationship truly is.",
+    },
+    water: {
+      1:"The purest form of romantic feeling arrives — open heart, no armor. Someone is available to love and be loved in a way they haven't been before.",
+      2:"A deep emotional bond is forming or being examined. Two people reading each other — vulnerability offered, vulnerability received. Or not.",
+      3:"Joy in connection — a celebration of something shared. The early delight of being truly seen by someone who delights in you.",
+      4:"Emotional withdrawal in romance. One or both partners are pulled inward, unavailable, distracted by their own inner world.",
+      5:"Heartbreak, loss, or the grief of a relationship that didn't become what was hoped. What remains after the spill deserves attention.",
+      6:"Nostalgia in romance — longing for a past love, or a sweetness returning to a current one. Tenderness from the past reaching into the present.",
+      7:"Fantasy vs. reality in love. You may be in love with who someone could be rather than who they are. Examine the vision clearly.",
+      8:"Leaving a relationship that no longer feeds the soul, or moving through a period of romantic grief toward something new. Walking away is not failure.",
+      9:"Emotional fulfillment in romance — a wish granted, a love that satisfies. Be careful that contentment doesn't become complacency.",
+    },
+    air: {
+      1:"A sudden clarity about romantic feelings — a truth you can no longer deny or avoid. Something is being named that has been circling.",
+      2:"A stalemate in romance — unspoken feelings on both sides, or a painful choice between two hearts. Words are needed but not coming.",
+      3:"Pain in romance — a wound from words, a betrayal of trust, or the grief of love cut short. This isn't the end of the story.",
+      4:"A retreat from romantic life — chosen solitude, healing, or simply needing rest after an intense connection. The pause is necessary.",
+      5:"Manipulation or power games in romance. Someone is winning at a cost. Ask whether the relationship dynamic is actually serving love.",
+      6:"Moving toward calmer romantic waters after turbulence. A transition from one chapter of love into another, gentler one.",
+      7:"Strategic thinking in romance — reading between the lines, protecting yourself, or calculating your next move. Useful if ethical.",
+      8:"Your mind is racing about a romantic situation — overthinking, anxiety, or obsessive thought patterns about a person or connection.",
+      9:"Romantic anxiety at its peak — catastrophizing, worst-case thinking, nightmares about love. The mind is making this harder than it needs to be.",
+    },
+    earth: {
+      1:"The beginning of something stable and real in romance — not fireworks, but the quiet recognition of something lasting.",
+      2:"Finding balance between love and the practical demands of life — time, money, space. The juggle is real and worth it.",
+      3:"Building something together — shared goals, a home, plans for the future. Love becoming tangible and collaborative.",
+      4:"Security in romance, or over-protection of the heart. Holding on to what is safe rather than opening to something deeper.",
+      5:"Hardship in a romantic relationship — financial strain, external pressures, feeling left out in the cold by a partner.",
+      6:"Generosity in love — acts of care, material support, or imbalance in who gives and who receives. Examine the scales.",
+      7:"Pausing to assess the relationship — where has it grown, where is it stuck? A quiet evaluation of whether to invest more.",
+      8:"Building a life together through consistent action — small daily acts of love compounding into something enduring.",
+      9:"A relationship that has grown into self-sufficiency — two people complete in themselves who choose each other freely.",
+    },
+  },
+  career: {
+    fire: {
+      1:"A new project, idea, or opportunity ignites. The creative or professional spark is real — take it seriously, don't let it die on the vine.",
+      2:"Standing at a career crossroads — two directions, two offers, two callings. The tension is productive if you let it inform you.",
+      3:"Early professional success — a project gaining momentum, a collaboration beginning to produce visible results. Celebrate and keep going.",
+      4:"A career plateau — stable, secure, but not growing. Ask whether this is a necessary rest or a comfortable stagnation you've been tolerating.",
+      5:"Workplace conflict, competition, or a professional setback. The friction is real but not fatal — it's showing you where to get stronger.",
+      6:"Recognition after effort — your work is being acknowledged, or a generous opportunity flows your way. Accept it.",
+      7:"A moment of professional mastery — you know what you're doing. But the test is real and the stakes are higher than before.",
+      8:"Career momentum — things are moving fast. Deadlines, opportunities, decisions arriving quickly. Act with precision.",
+      9:"Near the completion of a major professional chapter. The work is almost done. What final integration is needed before the next level?",
+    },
+    water: {
+      1:"A career path that aligns with the heart opens — creative work, healing work, intuitive work. Following the feeling rather than the formula.",
+      2:"Torn between a career that feels meaningful and one that pays — or between two emotional investments in work. Both matter.",
+      3:"Creative collaboration producing real joy at work. A team coming together with genuine delight in what they're making.",
+      4:"Disengagement at work — emotionally checked out, missing what's right in front of you, or waiting for inspiration that isn't coming.",
+      5:"Professional disappointment — a loss, rejection, or project that didn't land. What remains after the spill is still workable.",
+      6:"Mentorship, generosity, or received support in a career context. Someone gives you a leg up — or you give one to another.",
+      7:"Dreaming too big or not big enough in your career. Examine the vision clearly against the reality of what you're actually building.",
+      8:"Leaving a career path that no longer feeds you — or transitioning toward work that does. Walking away takes courage.",
+      9:"Career fulfillment — a sense that the work is meaningful, the effort was worth it. Don't stop before you've received this.",
+    },
+    air: {
+      1:"A breakthrough idea or decision cuts through confusion about your direction. Clarity arrives about what you actually want to do.",
+      2:"A difficult professional decision — two paths requiring a choice you've been putting off. The delay is costing you momentum.",
+      3:"A professional wound — being passed over, criticized, or dealing with the sharp edges of collaboration that went wrong.",
+      4:"Necessary strategic rest — stepping back from career action to think, plan, and recover before the next move.",
+      5:"Office politics, a professional betrayal, or a hollow win. Ask whether the game you're winning is worth playing.",
+      6:"Transitioning between professional chapters — leaving one career behind and moving toward something more aligned.",
+      7:"Strategic career moves — smart positioning, knowing what you want and how to get there without showing all your cards.",
+      8:"Mental overload about career — too many thoughts, plans, anxieties, and what-ifs. The mind is running faster than the situation requires.",
+      9:"Career anxiety at its height — the fear of failure, visibility, or success itself. The worry is louder than the actual risk.",
+    },
+    earth: {
+      1:"A concrete financial or professional opportunity arrives — a job, a contract, a new income stream. This is tangible.",
+      2:"Balancing income, projects, time, or professional roles that are pulling in different directions. The juggle is unstable but manageable.",
+      3:"A team producing real, visible work. Skills recognized, collaboration succeeding, something built that stands.",
+      4:"Financial security — perhaps too tightly held. Are you hoarding resources, refusing to invest in your own growth?",
+      5:"Financial hardship, job loss, or professional exclusion. The warmth of the opportunity exists — but have you knocked on the door?",
+      6:"Financial generosity — receiving funding, support, or a mentor's resources, or being called to give what you have to others.",
+      7:"Pausing to assess your career investment. Is the return matching the effort? A quiet evaluation before committing more.",
+      8:"Skill-building as a career strategy — repetition, craft, showing up daily. Mastery through consistent work over time.",
+      9:"Professional abundance and independence — the career has matured into something self-sustaining. You've built the garden.",
+    },
+  },
+  family: {
+    fire: {
+      1:"A new energy enters the family dynamic — a birth, a reunion, a conversation that sparks something that's been dormant.",
+      2:"A choice point in a family relationship — or competing loyalties between family and chosen life. Both pulls are valid.",
+      3:"Celebration and connection in family — gathering, collaboration, the visible fruit of shared history.",
+      4:"Stability in the family structure, or the comfort of familiar roles that may no longer fit anyone involved.",
+      5:"Family conflict — old wounds, competing narratives, a clash of wills. This is asking everyone to tell the truth.",
+      6:"Care flowing within family bonds — who gives, who receives, and whether the exchange is healthy and reciprocal.",
+      7:"Knowing your family deeply — their patterns, histories, secrets. A moment to assess what to carry forward and what to set down.",
+      8:"Fast-moving events in family life — changes, transitions, decisions happening before anyone feels ready.",
+      9:"A family cycle nearing completion — a chapter closing, a relationship reaching a point of reckoning or resolution.",
+    },
+    water: {
+      1:"An opening of the heart within a family or friendship — someone makes themselves vulnerable, and it changes something.",
+      2:"A deep emotional bond between two people in your circle — an intimacy forming, or being tested.",
+      3:"Joy in the company of the people you love — gathering, shared laughter, the ease of belonging.",
+      4:"Emotional withdrawal from family or friends — someone is unavailable, unreachable, or choosing distance.",
+      5:"Grief within a relationship — a falling out, a loss, or the sadness of a friendship that has changed beyond recognition.",
+      6:"Nostalgic warmth between people — childhood memories, old connections revisited, sweetness from shared history.",
+      7:"Examining what a relationship truly is vs. what you've been projecting onto it. Who is this person, really?",
+      8:"Leaving a friendship or family pattern behind — outgrowing a dynamic that no longer serves who you're becoming.",
+      9:"Deep emotional fulfillment in your relationships — a sense of being truly known and loved. Don't take it for granted.",
+    },
+    air: {
+      1:"A truth finally spoken in a relationship — something that needed to be named. The clarity is a gift even if it's sharp.",
+      2:"Unspoken tension between two people — words that need saying but aren't. The silence has a weight.",
+      3:"Words that wounded — a fight, a betrayal of confidence, or the pain of being misunderstood by someone who should know you.",
+      4:"Distance chosen in a relationship — a deliberate retreat to process, protect, or simply breathe. Necessary, but temporary.",
+      5:"A relationship dynamic that has become competitive or zero-sum. Someone winning at the cost of the bond itself.",
+      6:"Moving toward calmer ground with a friend or family member — recovering from a difficult chapter.",
+      7:"Clever navigation of a complex family or social dynamic — knowing what to say and what to withhold.",
+      8:"Anxiety spiraling about a relationship — reading into texts, imagining worst-cases, mental rehearsals of conversations.",
+      9:"Sleepless worry about someone you love — a friend or family member's wellbeing consuming your 3am hours.",
+    },
+    earth: {
+      1:"A new beginning in a family or friendship that is tangible — a move, a commitment, a shared project that roots the bond.",
+      2:"Balancing the demands of family with everything else life requires. The juggle is real — something has to give or find its rhythm.",
+      3:"Collaborative building within a family — working together on something real, recognizing each other's contributions.",
+      4:"Protecting the family unit — or holding too tightly to a form of it that wants to change. Security vs. growth.",
+      5:"External pressures affecting a family or friendship — money, hardship, or circumstance creating distance or strain.",
+      6:"Material generosity within relationships — who takes care of whom, the flow of resources and support between people.",
+      7:"Assessing the investment of a long-term relationship — where has it grown, where is it stuck, and what does it need now?",
+      8:"Showing up consistently for someone — the daily work of love and friendship, unremarkable and essential.",
+      9:"A relationship that has matured into deep security — two people who have built something real together over time.",
+    },
+  },
+  grief: {
+    fire: {
+      1:"Grief as unexpected rebirth — a new energy emerging from loss that surprises you. The spark arrives in the middle of mourning.",
+      2:"A grief that splits you between two versions of yourself — who you were before, and who you are becoming without them.",
+      3:"The first signs of movement after loss — not resolution, but a tentative return to connection, creativity, or life.",
+      4:"The stillness of grief — the pause after loss when everything is quieter and slower than it used to be. This is not stagnation; it's necessary.",
+      5:"The raw disruption of loss — chaos, anger, the breaking of what was. Allow the fire of grief its full expression.",
+      6:"Receiving comfort from others — or offering it. The exchange of care in a time of loss that makes it survivable.",
+      7:"Grief as a teacher — what has loss shown you about what matters? What wisdom is being carved from the experience?",
+      8:"Grief in motion — processing rapidly, or cycling through stages with speed that surprises. Trust the velocity.",
+      9:"Approaching the threshold of a new chapter after loss — not the end of grief, but its integration into who you are.",
+    },
+    water: {
+      1:"An opening of the heart in grief — a moment of pure feeling after numbness, or the capacity to love again emerging.",
+      2:"Grief held between two people — shared mourning, or the complicated dynamic of grieving with someone who grieves differently.",
+      3:"The first gathering after loss — a memorial, a reunion, or the bittersweet togetherness of people bound by grief.",
+      4:"The emotional withdrawal of deep grief — pulling inward, being unreachable, needing the privacy of your own pain.",
+      5:"The central wound of grief — loss itself, the spilled cups, the before and after. What remains is still real.",
+      6:"Nostalgia as grief — longing for what was, for a person or a time that cannot be returned to. Both real and unreal.",
+      7:"Fantasy and grief — memories that feel more real than the present, or an imagined version of how things might have been.",
+      8:"Walking away from a relationship that has ended — the grief of a transition, not a death, but a loss nonetheless.",
+      9:"Grief processed deeply — not resolved, but held. The weight remains, but it has become familiar and survivable.",
+    },
+    air: {
+      1:"A truth about loss finally understood — clarity that cuts through confusion about what actually happened or what was lost.",
+      2:"Paralysis in grief — unable to move forward, caught between the past and a future that feels impossible to imagine.",
+      3:"The sharpness of grief — its cutting edges, the physical pain of loss, the wound that exists in the chest.",
+      4:"The quiet of grief — intentional withdrawal, sacred rest, the refusal to perform recovery before it is real.",
+      5:"A grief complicated by anger, injustice, or the sense that something was taken rather than lost naturally.",
+      6:"Moving through grief — the crossing from one state to another, not healed but changed, carrying the loss forward.",
+      7:"Grief and the mind — the mental loops, the replaying of what happened, the rumination that both processes and prolongs.",
+      8:"The mind in active grief — relentless thinking, inability to rest, the thoughts that won't leave you alone.",
+      9:"Grief's darkest hours — 3am, the nightmares, the inability to escape. This is real and it is not permanent.",
+    },
+    earth: {
+      1:"The concrete beginning of a new life after loss — the first practical step, the first day that looks different.",
+      2:"The material aspects of grief — handling a person's belongings, settling affairs, the practical weight of loss.",
+      3:"The community of grief — people gathering to do the work of honoring someone, building something in their memory.",
+      4:"Holding on — to objects, places, habits that belonged to what was lost. Examine what is honoring and what is preventing.",
+      5:"Material loss within grief — losing not just a person but also security, a home, a way of life. The cold is real.",
+      6:"Support received in grief — practical help, material care, the people who show up and do the concrete things.",
+      7:"Assessing what a loss has left — what remains, what has been built, what was preserved. An honest accounting.",
+      8:"The daily work of grief — showing up to your life even when it doesn't feel like yours anymore. Slow, consistent.",
+      9:"Grief that has grown into a life that carries it — not resolved, but integrated. The garden grows around the stone.",
+    },
+  },
+  self: {
+    fire: {
+      1:"A new version of yourself is emerging — a desire, an identity, a creative self that is just becoming visible.",
+      2:"A choice between two selves — who you've been and who you're becoming. The tension is the work.",
+      3:"Early self-expression bearing fruit — something creative or authentic you put into the world is being received.",
+      4:"A stable sense of self — comfortable and secure, but perhaps too fixed. Is there room to grow within this identity?",
+      5:"Internal conflict about who you are — competing drives, values in tension, the friction of becoming.",
+      6:"Self-recognition and self-acceptance — the grace of seeing yourself clearly and finding what you see worthwhile.",
+      7:"Deep self-knowledge being tested — do you know yourself as well as you think? A challenge that requires honesty.",
+      8:"Rapid self-development — you are changing faster than you can track. Trust the velocity.",
+      9:"On the threshold of a new self — almost there, almost integrated. What remains to be understood before crossing?",
+    },
+    water: {
+      1:"An emotional opening within — the heart becoming available to itself, to its own depths, in a new way.",
+      2:"Two emotional truths in tension within you — both real, both yours. The inner conflict is asking for integration.",
+      3:"A moment of inner joy — recognizing yourself with affection, celebrating what you've become.",
+      4:"Emotional self-withdrawal — turning inward past the point of insight into numbness or avoidance.",
+      5:"A grief about who you used to be, or who you expected to become by now. Mourn what needs mourning.",
+      6:"Self-compassion and nostalgia — offering your past self the tenderness it deserved then and deserves now.",
+      7:"Examining your self-image for illusion — who you believe yourself to be vs. who you actually are.",
+      8:"Walking away from a former identity — leaving behind a self that no longer fits, even if it was once beloved.",
+      9:"Emotional self-sufficiency — a deep well of inner resource and feeling, built over time. Trust it.",
+    },
+    air: {
+      1:"A breakthrough insight about who you are — clarity that cuts through the story you've been telling yourself.",
+      2:"Paralysis about identity — the inability to choose a self or direction. Both seem true and neither feels certain.",
+      3:"A wound to self-concept — a criticism internalized, a failure that struck at the root. Name it clearly.",
+      4:"Intentional retreat for self-renewal — the quiet necessary to hear your own voice again.",
+      5:"The inner critic in full force — or the aftermath of a battle with yourself that you didn't quite win.",
+      6:"Moving toward a more integrated sense of self — calmer, more honest, after a period of inner conflict.",
+      7:"Strategic self-awareness — knowing what you want, what you're capable of, how to navigate your own psychology.",
+      8:"Overthinking your identity — too many thoughts about who you are. Ground yourself in action, not analysis.",
+      9:"The dark night of the soul about self — 'who am I?' at its most anxious and relentless. This passes.",
+    },
+    earth: {
+      1:"The concrete beginning of a new identity — a new habit, a new practice, a new relationship with your own body or material life.",
+      2:"Balancing different aspects of self — the many roles you inhabit, the competing needs of your whole person.",
+      3:"Building a self with others — how community, work, and collaboration shape who you are becoming.",
+      4:"A defended self — the parts you protect so well that even you can't access them anymore.",
+      5:"Hardship as a shaper of identity — who have you become through difficulty? What was forged in the cold?",
+      6:"What you give and what you receive as part of your selfhood — the exchange at the center of your identity.",
+      7:"A pause to assess personal growth — how far have you come, what has been built, what remains to build?",
+      8:"Self-mastery through repetition — the daily practice of becoming who you want to be.",
+      9:"A self-sustained life — you have built an inner world that no longer requires constant external validation.",
+    },
+  },
+  health: {
+    fire: {
+      1:"New energy, vitality, or motivation for physical wellbeing. A spark of desire to take better care of the body.",
+      2:"A choice about health direction — two approaches, two treatments, two habits. One must be chosen.",
+      3:"Early positive results from a health practice — the body responding, energy returning, progress visible.",
+      4:"Physical stability — a plateau in health that is either necessary rest or passive avoidance of the next step.",
+      5:"A health disruption — illness, injury, or a flare that demands attention. The body is communicating.",
+      6:"Rest, recovery, and receiving care — the body asking to be tended and nourished without judgment.",
+      7:"Knowing your body well — its rhythms, its needs, its signals. Trust what years of living have taught you.",
+      8:"Fast physical change — the body processing, adapting, moving through something with unexpected speed.",
+      9:"Near the end of a health challenge — the body is almost through. What does completion require?",
+    },
+    water: {
+      1:"The emotional dimension of health — a heart that is ready to heal, or a body that is open to receiving care.",
+      2:"Emotional health in balance — or the seesaw between two emotional states affecting physical wellbeing.",
+      3:"The joy of feeling well — celebrating a return to health or a moment of genuine physical pleasure and ease.",
+      4:"Emotional numbness affecting physical health — the body carrying what the mind won't acknowledge.",
+      5:"Grief in the body — physical manifestations of emotional loss. The body keeps the score.",
+      6:"Self-compassion as medicine — offering your body and emotional life the same care you'd give to someone you love.",
+      7:"The mind-body connection under examination — what emotional pattern lives in this physical symptom?",
+      8:"Leaving a health pattern behind — releasing a habit, a story about your body, or a way of treating yourself.",
+      9:"Emotional and physical wellness in harmony — a state of deep bodily care and inner peace together.",
+    },
+    air: {
+      1:"A new understanding of your health — information, diagnosis, or insight that clarifies what the body needs.",
+      2:"A difficult health decision — two options, a choice that needs to be made with more information than you feel you have.",
+      3:"Mental strain affecting health — the mind working against the body's healing through worry or pressure.",
+      4:"Intentional rest — the body asking for stillness, recovery, and the cessation of effort.",
+      5:"Health anxiety or the aftermath of difficult health news. The mind may be making this harder.",
+      6:"Moving toward better health — a transition away from illness or an old way of treating the body.",
+      7:"Smart health strategies — researching, planning, advocating for yourself in medical contexts.",
+      8:"Health anxiety in overdrive — catastrophizing about symptoms, obsessive health monitoring.",
+      9:"The 3am of health worry — insomnia, nighttime fear about the body, the mind terrorizing itself with what-ifs.",
+    },
+    earth: {
+      1:"A new relationship with the physical body — a practice, a nourishment, a concrete step toward better health.",
+      2:"Balancing health with the rest of life — time, energy, and resources in motion.",
+      3:"Building health through community — a gym class, a wellness program, accountability with others.",
+      4:"Physical security — the body stable, but perhaps too defended or sedentary. Movement is needed.",
+      5:"Material health hardship — access, resources, or conditions affecting physical wellbeing.",
+      6:"Receiving physical care — a doctor, a healer, a person who supports your body's needs. Accept the help.",
+      7:"Assessing your health investment — what has your body built from your care? What needs more attention?",
+      8:"The craft of health — the daily repetition of nourishment, movement, rest. Mastery through consistency.",
+      9:"A body that has been tended well over time — self-sustaining, resilient, cared for.",
+    },
+  },
+  spiritual: {
+    fire: {
+      1:"A spiritual awakening spark — something stirs in the soul that was dormant. An encounter, a vision, a hunger.",
+      2:"A choice between two spiritual paths or practices — or between the life of the spirit and the demands of the world.",
+      3:"Early spiritual community — finding others who share your path, a practice beginning to bear visible fruit.",
+      4:"Spiritual stability — a practice that is regular, grounding, and sustainable. Or spiritual complacency.",
+      5:"Spiritual disruption — a crisis of faith, a confrontation with doubt, a test of what you actually believe.",
+      6:"Spiritual reciprocity — giving and receiving in your spiritual community, or the grace of a practice that gives back.",
+      7:"Deep spiritual knowing — the accumulated wisdom of practice and experience. You know more than you think.",
+      8:"Rapid spiritual development — downloads, synchronicities, revelations arriving quickly. Integration is needed.",
+      9:"On the threshold of spiritual completion — an initiation almost complete, a stage of the path almost crossed.",
+    },
+    water: {
+      1:"The heart of spiritual life — pure devotion, an open channel, love as spiritual practice.",
+      2:"Two spiritual truths in tension — two traditions, two understandings, two versions of the divine.",
+      3:"Joy in spiritual community — the delight of shared ritual, collective meaning, celebration of the sacred.",
+      4:"Spiritual dryness — going through the motions of practice without the feeling of connection.",
+      5:"Spiritual grief — the pain of losing a belief, a community, or a sense of the divine you once had.",
+      6:"Spiritual nostalgia — longing for a simpler faith, or the sweetness of what you believed before complexity arrived.",
+      7:"Spiritual discernment — examining what you believe vs. what you've been told to believe. What is yours?",
+      8:"Leaving a spiritual tradition or teacher — the painful and necessary departure from what once held you.",
+      9:"Deep spiritual contentment — a soul that has found its home in a practice, a path, a way of being.",
+    },
+    air: {
+      1:"A spiritual breakthrough — insight that illuminates, a concept that reorganizes everything you thought you knew.",
+      2:"Spiritual paralysis — unable to choose, commit, or believe. Both faith and doubt feel equally impossible.",
+      3:"Spiritual wounding — a community that hurt you, a teaching that left a mark, a sacred thing that was profaned.",
+      4:"The spiritual retreat — intentional solitude, silence, and withdrawal as a practice of deepening.",
+      5:"Spiritual conflict — competing worldviews, a battle with a tradition, or the shadow side of a spiritual community.",
+      6:"The spiritual journey — moving from one understanding to another, crossing from confusion toward clarity.",
+      7:"Spiritual strategy and discernment — knowing what serves growth and what is spiritual ego.",
+      8:"Spiritual anxiety — the relentless questioning, the inability to rest in not-knowing.",
+      9:"The dark night of the soul — the most profound and painful spiritual experience. It precedes dawn.",
+    },
+    earth: {
+      1:"A spiritual practice made physical — a ritual, a body-based practice, a sacred relationship with the material world.",
+      2:"Balancing spiritual life with material demands — the challenge of bringing the sacred into the ordinary.",
+      3:"Sacred work in the world — using spiritual gifts in community, building something that serves.",
+      4:"Material spiritual security — the stability of a regular practice, a community, a tradition that grounds.",
+      5:"Material spiritual hardship — the loss of a community, a sacred space, access to practice.",
+      6:"Spiritual generosity — tithing, service, offering your gifts to the sacred community.",
+      7:"Assessing your spiritual progress — what has been built, what remains to build, what the harvest actually is.",
+      8:"The daily craft of spiritual life — showing up to practice even when nothing extraordinary happens.",
+      9:"A spiritual life become self-sustaining — a relationship with the sacred that no longer requires external validation.",
+    },
+  },
+  change: {
+    fire: {
+      1:"The first spark of change — a desire, a disruption, a new possibility that signals that something is shifting.",
+      2:"Standing at a fork in the road — two directions equally compelling, a choice that will define what comes next.",
+      3:"Early change bearing its first fruit — the initial results of a transition becoming visible.",
+      4:"Change that has arrived at a stable point — not the end, but a resting place within transformation.",
+      5:"The disruptive phase of change — the chaos and conflict that comes when one chapter resists ending.",
+      6:"The grace that arrives mid-transition — receiving help, finding flow, recognizing that you're not doing this alone.",
+      7:"Knowing yourself within change — the accumulated wisdom that helps you navigate the unfamiliar.",
+      8:"Change moving very fast — events cascading, decisions required, transformation accelerating.",
+      9:"Almost through — a major transition nearing completion. What is needed for the final crossing?",
+    },
+    water: {
+      1:"An emotional opening within change — the heart becoming available to what is new, released from what was.",
+      2:"Two emotional realities of transition — the grief of what is ending and the hope of what is beginning.",
+      3:"Community within change — the people who celebrate with you as you move into something new.",
+      4:"Emotional withdrawal during transition — pulling inward to process before moving forward.",
+      5:"The emotional core of change — loss, grief, the pain of leaving behind what was familiar and loved.",
+      6:"The nostalgia of change — looking back with tenderness at what is ending even as you move forward.",
+      7:"The illusions of change — what you thought this transition would feel like vs. what it actually feels like.",
+      8:"Moving through an emotional transition — leaving behind an old feeling, an old story, an old way of being.",
+      9:"Emotional completion of a transition — feeling the full weight of what has changed and finding it survivable.",
+    },
+    air: {
+      1:"A sudden clarity about what needs to change — or the first moment you can clearly see the other side.",
+      2:"Paralysis within transition — stuck between what was and what might be, unable to fully commit to the crossing.",
+      3:"The sharpness of change — the cuts that transition makes, the losses that are inseparable from growth.",
+      4:"The intentional pause within change — the breath taken before the next step.",
+      5:"Conflict during transition — resistance, power struggles, the parts of you or your life that don't want to change.",
+      6:"Moving through — the crossing from one chapter to another, propelled by something stronger than fear.",
+      7:"Navigating change strategically — using what you know to move through what you don't.",
+      8:"Mental chaos during transition — too many thoughts, plans, fears arriving at once. Ground yourself.",
+      9:"The anxiety of being almost through a transition — so close, and the fear is loudest here.",
+    },
+    earth: {
+      1:"The first concrete step of change — the application sent, the lease signed, the decision made material.",
+      2:"Balancing stability with the need for change — juggling what must stay and what must go.",
+      3:"Building something new within change — the first collaboration or project of the new chapter.",
+      4:"Holding onto material security during change — understandable, but examine what you're afraid of releasing.",
+      5:"Material disruption of change — the hardship that comes with transition, the cost of crossing over.",
+      6:"Support received during change — practical help, resources, people who ease the material burden of transition.",
+      7:"Assessing the change — what has actually shifted, what has been built, what the new landscape truly looks like.",
+      8:"The daily work of change — showing up to the new life even before it feels like yours.",
+      9:"A new life that has become self-sustaining — the transition complete, the new chapter established.",
+    },
+  },
+  creativity: {
+    fire: {
+      1:"A pure creative spark — an idea, an image, a desire to make something. This is the beginning. Honor it.",
+      2:"Two creative directions — two projects, two voices, two ways of expressing. The tension is productive.",
+      3:"A creative project bearing its first real fruit — early success, collaboration, a work beginning to be recognized.",
+      4:"Creative stability — a practice established, a process reliable. Or creative stagnation dressed as professionalism.",
+      5:"Creative conflict — competition, self-doubt, the clash between your vision and external feedback.",
+      6:"Creative recognition — your work acknowledged, your vision received, a graceful exchange with your audience.",
+      7:"Mastery in your creative practice — you know your craft. But the test is whether you're still being challenged.",
+      8:"Creative momentum — the work is flowing, ideas arriving fast, a productive period in full swing.",
+      9:"A creative work nearing completion — almost done. What final act of courage or craft does it require?",
+    },
+    water: {
+      1:"Creative inspiration from the heart — work that comes from feeling, from love, from authentic inner life.",
+      2:"The emotional truth of a creative work — what the piece is really about, beneath the surface.",
+      3:"The joy of making — the pure pleasure of creative work shared with others who understand it.",
+      4:"Creative block — the inspiration that won't come, the page that stays blank, the disconnection from the creative source.",
+      5:"Creative disappointment — a work that didn't land, a vision that didn't translate, a loss of creative faith.",
+      6:"Nostalgia in creative work — making something about the past, or returning to a style or subject from earlier.",
+      7:"The gap between creative vision and creative reality — what you imagine vs. what you can currently make.",
+      8:"Leaving a creative phase behind — finishing a body of work, outgrowing a style, moving toward what's next.",
+      9:"Creative fulfillment — a work that satisfies, a practice that nourishes, a life that makes room for making.",
+    },
+    air: {
+      1:"A creative breakthrough — an idea that solves the problem, a concept that unlocks the work.",
+      2:"The paralysis of the blank page — two equally good ideas, or no idea at all. The choosing is the work.",
+      3:"The wound of critique — feedback that cuts, a creative rejection, words that struck at your core.",
+      4:"The intentional creative retreat — stepping away from output to let the deeper current replenish.",
+      5:"Creative theft, competition, or hollow victory — winning at something that doesn't feel like winning.",
+      6:"Moving through a creative block — transitioning from silence toward expression again.",
+      7:"Strategic creativity — knowing your voice, your market, your audience, and how to reach them.",
+      8:"The creative mind in overdrive — too many ideas, too much input, the anxiety of creative overload.",
+      9:"Creative anxiety before release — the work is done but the fear of putting it out is overwhelming.",
+    },
+    earth: {
+      1:"A concrete creative beginning — the sketchbook opened, the first draft started, the studio rented.",
+      2:"Balancing the creative life with material survival — the eternal tension of the working artist.",
+      3:"Collaborative creative building — a team, a studio, a collective making something visible together.",
+      4:"Protecting creative work — or hoarding it. At some point, the work needs to be shared.",
+      5:"Material creative hardship — the financial cost of making things, the gatekeeping, the lack of resources.",
+      6:"Creative patronage or support — someone investing in your work, or you investing in someone else's.",
+      7:"Assessing creative output — what has been made, what has been learned, what the body of work actually is.",
+      8:"The craft of creativity — the daily practice, the showing up, the making regardless of inspiration.",
+      9:"A creative life built over time — self-sustaining, generative, yours.",
+    },
+  },
+  shadow: {
+    fire: {
+      1:"A shadow impulse at its seed stage — a desire you haven't admitted to yourself yet, or a drive that comes from a wound rather than a want.",
+      2:"Two shadow selves in tension — the part that wants to act out and the part that knows better. The friction is the work.",
+      3:"Shadow work showing its first results — a pattern named, a behavior understood, a beginning of integration.",
+      4:"The shadow stabilized — a defended self, walls maintained so long they've become the architecture of identity.",
+      5:"Shadow conflict — the parts of yourself at war. The disruption is necessary and uncomfortable.",
+      6:"Recognizing shadow patterns in your relationships — what you give others that you won't give yourself.",
+      7:"Knowing your shadow — the deep familiarity with what lives in the dark. A moment of strategic integration.",
+      8:"Shadow material moving fast — old patterns triggered, unconscious content rising quickly to the surface.",
+      9:"The shadow at the threshold — almost integrated, almost seen in full. The last resistance is the loudest.",
+    },
+    water: {
+      1:"An emotional shadow surfacing — a feeling you've been avoiding that is ready, now, to be felt.",
+      2:"Two suppressed emotional truths — both real, both yours, both asking to be acknowledged.",
+      3:"A shadow community — the parts of yourself that have been in exile, beginning to gather and be recognized.",
+      4:"Emotional shadow defended — the feelings buried so deep you've stopped believing they're there.",
+      5:"The grief of shadow work — mourning the self that developed these patterns as a survival strategy.",
+      6:"Shadow nostalgia — longing for the familiar darkness of old patterns over the unfamiliar work of change.",
+      7:"The illusion the shadow creates — the story it tells about who you are and what you deserve. Examine it.",
+      8:"Walking away from a shadow pattern — the beginning of release, leaving behind what has kept you small.",
+      9:"The emotional depth of shadow integration — feeling the weight of what has been carried and the relief of setting it down.",
+    },
+    air: {
+      1:"The shadow's first words — a thought you didn't expect, a belief you didn't know you held, a truth the unconscious is trying to say.",
+      2:"Paralysis between knowing and not-knowing — the shadow content is at the edge of consciousness and you're deciding whether to look.",
+      3:"The wound that created the shadow — the originating pain beneath the pattern. Naming it is the beginning.",
+      4:"The intentional stillness of shadow work — the quiet required to hear what has been suppressed.",
+      5:"The shadow in conflict with the waking self — the war between who you think you are and who you also are.",
+      6:"Moving through shadow material — processing, integrating, carrying it toward the light side.",
+      7:"Shadow intelligence — the patterns that were adaptive once. Understand the strategy before releasing it.",
+      8:"Shadow thought loops — the obsessive mental content that signals unconscious material demanding attention.",
+      9:"The shadow's darkest hour — the content that emerges at 3am, the worst of what you believe about yourself. It is not the whole truth.",
+    },
+    earth: {
+      1:"A concrete shadow pattern becoming visible — a behavior, a habit, a material consequence of unconscious material.",
+      2:"Shadow in the body — physical tension, somatic symptoms, the material weight of unprocessed shadow content.",
+      3:"The shadow built into structure — patterns embedded in how you work, relate, and inhabit daily life.",
+      4:"Shadow hoarding — clinging to old wounds, old identities, old grievances because they feel like security.",
+      5:"Material shadow consequences — how shadow patterns have shaped your external circumstances.",
+      6:"The exchange at the heart of shadow — what you take from others to avoid your own depths, or what you give to avoid receiving.",
+      7:"Assessing shadow work progress — what has been integrated, what remains, what the work has actually produced.",
+      8:"The daily practice of shadow work — consistent, unglamorous, essential. Showing up for the uncomfortable material.",
+      9:"A shadow substantially integrated — not resolved, but known. The garden grows around what was once buried.",
+    },
+  },
+  finances: {
+    fire: {
+      1:"A new financial opportunity — a spark of income, an idea that could become revenue, a door opening.",
+      2:"A financial decision between two paths — an investment, a job offer, a spending choice. One must be chosen.",
+      3:"Early financial growth — a project generating return, a collaboration beginning to pay off.",
+      4:"Financial stability — enough, for now. Or holding so tightly to what's accumulated that you can't invest in growth.",
+      5:"Financial conflict — a dispute, a loss, a market shift, or competition cutting into what you'd built.",
+      6:"Financial grace — money flowing in, generosity received, or the opportunity to give from a position of abundance.",
+      7:"Financial mastery — knowing your numbers, your patterns, your relationship with money at depth.",
+      8:"Financial momentum — income accelerating, opportunities multiplying, things moving faster than expected.",
+      9:"Near the completion of a financial goal — almost there. What final discipline or decision is required?",
+    },
+    water: {
+      1:"An emotional relationship with money becoming available to change — a new feeling about abundance and worth.",
+      2:"The emotional weight of financial decision — fear, hope, and history all present in what seems like a practical choice.",
+      3:"The emotional relief of financial improvement — celebrating a turnaround, a windfall, a return to ease.",
+      4:"Emotional disengagement from finances — avoiding looking at the numbers because the feelings are too much.",
+      5:"Financial grief — mourning a loss of money, security, or the life that money was going to make possible.",
+      6:"Financial nostalgia — longing for a more abundant past, or the memory of what it felt like to not worry about money.",
+      7:"The gap between what you believe about your financial potential and what is actually possible. Examine the story.",
+      8:"Leaving behind financial patterns rooted in emotion — releasing scarcity mindset, old money wounds.",
+      9:"Financial emotional fulfillment — a felt sense of enough, of security, of peace with money.",
+    },
+    air: {
+      1:"Financial clarity — a new understanding of your situation, a number finally known, a decision point reached.",
+      2:"Financial paralysis — two options, too much information, or the inability to commit to a financial direction.",
+      3:"Financial wound — a debt, a loss, a financial situation that has struck at your sense of security and worth.",
+      4:"Intentional financial rest — a pause in income, a sabbatical, a deliberate period of reduced activity.",
+      5:"Financial conflict — a dispute, a theft, a loss of something you worked hard to build.",
+      6:"Financial transition — moving from one economic chapter to another, carrying what was learned forward.",
+      7:"Smart financial strategy — knowing the terrain, making calculated decisions, protecting what you've built.",
+      8:"Financial anxiety — the racing mind over money, the catastrophizing, the sleepless calculations.",
+      9:"Financial dread at its most extreme — 3am worry about money, the catastrophic thoughts that feel true.",
+    },
+    earth: {
+      1:"A tangible financial beginning — the first paycheck, the account opened, the budget created.",
+      2:"Balancing income and expenses, investments and needs — the ongoing juggle of material life.",
+      3:"Building financial stability through collaboration — a business, a team, a shared financial project.",
+      4:"Holding tightly to financial security — understandable, but examine whether the grip is preventing growth.",
+      5:"Financial hardship — the cold outside the warm window of abundance. It's real, and it is not permanent.",
+      6:"Financial generosity and exchange — giving, receiving, the flow of material resources between people.",
+      7:"A financial assessment — what has been built, what has been invested, what the return actually is.",
+      8:"The daily financial practice — tracking, saving, showing up consistently to the work of building.",
+      9:"Financial self-sufficiency — a material life built over time that no longer depends on external validation.",
+    },
+  },
+};
+
+// Map suits to element groups for domain lookups
+function getSuitGroup(suit) {
+  if(['red','orange'].includes(suit)) return 'fire';
+  if(['blue','pink'].includes(suit)) return 'water';
+  if(['yellow','teal'].includes(suit)) return 'air';
+  if(['green','purple'].includes(suit)) return 'earth';
+  return null;
+}
+
+let currentDomain = 'general';
+
+function initDomains() {
+  ['ref','spread'].forEach(page => {
+    const grid = document.getElementById(`domain-grid-${page}`);
+    domains.forEach(d => {
+      const btn = document.createElement('button');
+      btn.className = `domain-btn${d.id===currentDomain?' active':''}`;
+      btn.dataset.domain = d.id;
+      btn.dataset.page = page;
+      btn.innerHTML = `<span class="domain-icon">${d.icon}</span>${d.name}`;
+      btn.onclick = () => selectDomain(d.id);
+      grid.appendChild(btn);
+    });
+    updateDomainBanner(page);
+  });
+}
+
+function selectDomain(id) {
+  currentDomain = id;
+  document.querySelectorAll('.domain-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.domain === id);
+  });
+  updateDomainBanner('ref');
+  updateDomainBanner('spread');
+}
+
+function updateDomainBanner(page) {
+  const d = domains.find(x=>x.id===currentDomain);
+  const el = document.getElementById(`domain-banner-${page}`);
+  if(d.id==='general') {
+    el.style.display='none';
+  } else {
+    el.style.display='flex';
+    el.innerHTML = `<span>${d.icon}</span><span><strong>${d.name}:</strong> ${d.desc}</span>`;
+  }
+}
+
+function getDomainReading(suit, num) {
+  if(currentDomain==='general') return null;
+  const group = getSuitGroup(suit);
+  if(!group) return null;
+  const domainData = domainReadings[currentDomain];
+  if(!domainData || !domainData[group]) return null;
+  return domainData[group][num] || null;
+}
+
+// ═══════════════════════════════════════════════════════════════ DOMAINS
 
 const spreads = [
   {name:"One Card",question:"What energy is present right now?",positions:["Present Energy"],desc:"<strong>The Single Card Pull.</strong> The simplest and most direct oracle. One card, one question, one honest answer. Draw when you need clarity without complexity."},
@@ -655,6 +1282,21 @@ function interpretSpread() {
     cardSummaries.push({pos:currentSpread.positions[i],title:cd.title,reversed:dc.reversed,tarot:cd.tarot,reading:cd.reading});
     const div = document.createElement('div');
     div.className = 'interp-card';
+
+    // Get domain-specific reading
+    let domainLine = '';
+    if(currentDomain !== 'general' && dc.card.type === 'number') {
+      const dReading = getDomainReading(dc.card.suit, dc.card.num);
+      if(dReading) {
+        const d = domains.find(x=>x.id===currentDomain);
+        domainLine = `<div style="margin-top:10px;padding:10px 14px;background:rgba(40,20,80,0.25);border-left:2px solid rgba(160,100,255,0.4);border-radius:6px;font-size:14px;color:#c8b8e8;font-style:italic;">${d.icon} <strong style="color:#b090e0">${d.name}:</strong> ${dReading}</div>`;
+      }
+    } else if(currentDomain !== 'general' && dc.card.type === 'special') {
+      const dNote = getSpecialCardDomainNote(dc.card.data.id, currentDomain);
+      const d = domains.find(x=>x.id===currentDomain);
+      domainLine = `<div style="margin-top:10px;padding:10px 14px;background:rgba(40,20,80,0.25);border-left:2px solid rgba(160,100,255,0.4);border-radius:6px;font-size:14px;color:#c8b8e8;font-style:italic;">${d.icon} <strong style="color:#b090e0">${d.name}:</strong> ${dNote}</div>`;
+    }
+
     div.innerHTML = `
       <div class="interp-mini-card ${cd.colorClass}${dc.reversed?' interp-mini-reversed':''}">
         <span style="font-size:18px">${cd.symbol}</span>
@@ -663,6 +1305,7 @@ function interpretSpread() {
         <div class="interp-card-title">${cd.title}${dc.reversed?'<span class="reversed-pill">Reversed</span>':''}</div>
         <div class="interp-card-pos">${currentSpread.positions[i]} · ${cd.tarot}</div>
         <div class="interp-card-text${dc.reversed?' reversed-text':''}">${cd.reading}</div>
+        ${domainLine}
       </div>`;
     cardsEl.appendChild(div);
   });
@@ -762,6 +1405,19 @@ function openModal({num, suit, colorClass, suitInfo, meaning, isShadow}) {
     document.getElementById('modal-imagery-block').style.display = 'none';
   }
 
+  // Domain reading
+  const domainText = getDomainReading(suit, num);
+  const domainEl = document.getElementById('modal-domain-block');
+  if(domainText && currentDomain!=='general') {
+    const d = domains.find(x=>x.id===currentDomain);
+    document.getElementById('modal-domain-badge').innerHTML = `${d.icon} ${d.name} Reading`;
+    document.getElementById('modal-domain-title').textContent = `IN THE CONTEXT OF ${d.name.toUpperCase()}`;
+    document.getElementById('modal-domain-text').textContent = domainText;
+    domainEl.style.display='block';
+  } else {
+    domainEl.style.display='none';
+  }
+
   document.getElementById('modal').style.setProperty('--modal-glow', getGlow(suit));
   overlay.classList.add('open');
 }
@@ -798,6 +1454,18 @@ function openSpecialModal(card) {
     document.getElementById('modal-imagery-block').style.display = 'none';
   }
 
+  // Domain note for special cards
+  const domainEl = document.getElementById('modal-domain-block');
+  if(currentDomain !== 'general') {
+    const d = domains.find(x=>x.id===currentDomain);
+    document.getElementById('modal-domain-badge').innerHTML = `${d.icon} ${d.name} Reading`;
+    document.getElementById('modal-domain-title').textContent = `IN THE CONTEXT OF ${d.name.toUpperCase()}`;
+    document.getElementById('modal-domain-text').textContent = getSpecialCardDomainNote(card.id, currentDomain);
+    domainEl.style.display='block';
+  } else {
+    domainEl.style.display='none';
+  }
+
   document.getElementById('modal').style.setProperty('--modal-glow','rgba(201,168,76,0.2)');
   overlay.classList.add('open');
 }
@@ -825,6 +1493,26 @@ function showSide(side) {
   document.getElementById('btn-dark').className = `toggle-btn${side==='dark'?' active-dark':''}`;
 }
 
+function getSpecialCardDomainNote(cardId, domainId) {
+  const notes = {
+    'skip-light':   {romance:"Step back from the romantic situation. The answer won't come from pushing — it comes from solitude and reflection.",career:"A strategic retreat from the professional arena. Not quitting — thinking, planning, finding your own counsel.",family:"Distance yourself temporarily from the family dynamic. You need your own perspective before you can return clearly.",grief:"The hermit phase of grief — intentional withdrawal to process what cannot be processed in company.",self:"Turn inward. The self-knowledge you need is not available outside. Go quiet.",health:"Rest as medicine. The body is asking for solitude and stillness, not action.",spiritual:"A period of intentional spiritual retreat — solitude, silence, your own direct experience of the sacred.",change:"The pause within transition — necessary stillness before the next movement.",creativity:"Creative solitude — the work requires time away from input, from feedback, from the noise of the world.",shadow:"Shadow work requires solitude. Go inward without an audience.",finances:"Step back from financial decisions. You need your own counsel before you can see clearly.",},
+    'rev-light':    {romance:"A romantic turning point — the relationship is changing direction whether you're ready or not.",career:"A career reversal — a pivot, a redirect, an unexpected change of professional direction.",family:"A shift in a family dynamic — old patterns reversing, new roles emerging.",grief:"The grief cycle turning — something is shifting in how you carry the loss.",self:"An identity reversal — who you've been is giving way to who you're becoming.",health:"A health turnaround — either improving or declining. The cycle is moving.",spiritual:"A spiritual turning point — a belief, a practice, or an understanding is being reorganized.",change:"The wheel of change turns. This is not chaos — it is the arc of transformation doing what it does.",creativity:"A creative reversal — a block becoming flow, or a productive period shifting.",shadow:"The shadow is turning — a pattern that ran one direction is reversing, revealing its other side.",finances:"A financial reversal — a tide turning, a situation changing direction.",},
+    'd2-light':     {romance:"A sudden shock in romance — a revelation, a rupture, or a truth arriving without warning.",career:"A professional disruption — the Tower has arrived at work. What was false is being dismantled.",family:"A family rupture — something that was hidden comes to light, shattering a false stability.",grief:"The Tower of loss — the sudden, complete nature of what has ended. What falls cannot be rebuilt as it was.",self:"A disruption to self-concept — a belief about yourself that can no longer be sustained.",health:"A sudden health development that cannot be ignored. The body has escalated.",spiritual:"A spiritual Tower — the collapse of a belief system, a community, or a false teacher. Necessary.",change:"The Tower is the agent of change itself — sudden, total, irreversible. What comes next is built on truth.",creativity:"Creative disruption — a project destroyed, a direction abandoned. The lightning makes room.",shadow:"The shadow erupts — what was suppressed has broken through the surface. This is the necessary rupture.",finances:"A sudden financial shock — a loss, a collapse, something that cannot be recovered from within the old structure.",},
+    'wild-light':   {romance:"Complete romantic freedom — the potential for love in any direction. An open heart, an open future.",career:"The career leap — everything is possible. No path is foreclosed. What do you actually want?",family:"A fresh beginning in how you relate to family or chosen community. Old roles released.",grief:"The Fool after loss — the terrifying and liberating freedom of a life reorganized by grief.",self:"You are at the beginning of yourself. All selves are available. Choose from desire, not fear.",health:"A fresh relationship with your body — radical openness to a new way of inhabiting physical life.",spiritual:"The soul before it has settled into dogma — pure openness, pure seeking. Trust the step.",change:"The Fool is the spirit of change itself — willing, unencumbered, moving toward the unknown.",creativity:"The blank page made sacred. Everything is possible. Begin.",shadow:"The shadow before it was formed — the openness before the wound. A return to original freedom.",finances:"Financial freedom as potential — not yet realized, but available. What would you build with an open hand?",},
+    'flip-light':   {romance:"A romantic revelation — something hidden about this relationship or this person is about to surface.",career:"A professional awakening — a calling clarifying, a direction revealing itself fully.",family:"A family truth surfacing — a revelation that reorganizes how you understand your people.",grief:"The flip of grief — the moment when the loss is finally, fully real, and the integration begins.",self:"A self-revelation — something about who you are that has been beneath the surface becomes visible.",health:"A health revelation — a diagnosis, a pattern recognized, a truth about the body finally known.",spiritual:"The judgement call of spiritual life — a moment of awakening that cannot be undone.",change:"The great flip — the transition point between one chapter and another. Everything that follows will be different.",creativity:"A creative awakening — your voice, your vision, your medium suddenly clarifying in full.",shadow:"The shadow revealed — the flip is the moment the unconscious content becomes conscious. Don't look away.",finances:"A financial revelation — the true state of things becomes visible. Truth before strategy.",},
+    'skip-dark':    {romance:"Isolation in love — withdrawing from connection out of fear rather than wisdom. The solitude has curdled.",career:"Professional isolation — refusing mentorship, collaboration, or visibility. The retreat has become hiding.",family:"Cutting yourself off from family or friends not out of discernment but out of unprocessed pain.",grief:"Grief that has become isolation — the withdrawal extending past its healthy limit.",self:"Shadow self-isolation — protecting yourself from yourself as much as from others.",health:"Health-related isolation — withdrawing from care, from people, from activities that sustain wellbeing.",spiritual:"Spiritual bypassing through isolation — using solitude to avoid the world rather than to return to it transformed.",change:"Refusing the return — staying in the transition space rather than crossing into the new chapter.",creativity:"Creative isolation becoming stagnation — the retreat from the world extending until the work withers.",shadow:"Shadow isolation — the part of you that has gone so deep inward it has lost connection to the surface.",finances:"Financial withdrawal — refusing to look at numbers, avoiding financial decisions, hiding from the reality of your situation.",},
+    'd5-dark':      {romance:"Romantic attachment that has become binding — a relationship held not by love but by fear of leaving.",career:"Professional chains — a job, a boss, or a structure that controls through fear rather than serving growth.",family:"Family patterns that bind rather than connect — inherited dynamics held in place by obligation and fear.",grief:"Grief as possession — the loss owning you rather than you carrying it. The attachment to mourning itself.",self:"The shadow's chains — the patterns, the beliefs, the self-concepts that keep you small. They are not locked.",health:"Health patterns driven by addiction, avoidance, or compulsion. The chain is real and it can be slipped.",spiritual:"Spiritual bondage — a tradition, a teacher, or a belief held not from faith but from fear of the alternative.",change:"The refusal of change dressed as stability. The chains are comfortable and they are keeping you from your life.",creativity:"Creative chains — comparison, perfectionism, fear of judgment binding the work before it can be made.",shadow:"The shadow in its most binding form — the attachments to pain, to smallness, to the known darkness. They can be released.",finances:"Financial chains — debt, scarcity mindset, or a material attachment that controls more than it serves.",},
+    'flip-dark':    {romance:"Romantic illusion at its height — seeing what you want to see rather than what is actually there.",career:"Professional illusion — a role, a company, or a self-story about your career that is not what it appears.",family:"Family illusion — the story told about your family that is not the whole truth. The Moon reveals what daylight hides.",grief:"The Moon of grief — the distortions that loss creates, the figures that emerge from grief's dark water.",self:"Shadow self-illusion — who you believe yourself to be in the dark is not necessarily who you are. Examine it.",health:"Health illusion — symptoms misread, patterns misunderstood, or the body's signals distorted by fear.",spiritual:"Spiritual illusion — a path, a teacher, or a belief that appears to be the truth but is a reflection of the moon rather than the sun.",change:"The Moon of transition — you cannot see clearly where you're going. Trust the path, not the vision.",creativity:"Creative illusion — a project, a style, or a self-assessment that is more projection than reality.",shadow:"The Moon is shadow work itself — the realm of the unconscious, the undiscovered, the feared and unexamined.",finances:"Financial illusion — a misread situation, a false sense of security or insecurity. Get the real numbers.",},
+    'skip-dark-skipall':{romance:"A total pause in love — everything in the romantic domain has come to a stop. Enormous ending, enormous beginning.",career:"A complete professional cessation — an era ending, a career chapter completing, the silence before reinvention.",family:"A family chapter fully closed — a generation ended, a dynamic completed, the silence before a new form.",grief:"The completion of grief — not the end of missing, but the end of the acute phase. A profound resting place.",self:"Total self-completion — one version of yourself has ended. The silence before the new self.",health:"A complete health chapter — a treatment course ended, a crisis passed, the body entering a new phase.",spiritual:"The World of shadow — complete spiritual completion, or total spiritual dissolution before rebirth.",change:"The complete transition — the crossing is done. Everything has changed and will not return to its former shape.",creativity:"A complete creative cycle — a body of work finished, an era ended, the silence before the next creative life.",shadow:"Total shadow confrontation — the full encounter with what was hidden. Nothing left to avoid. Now, integration.",finances:"A complete financial era ending — a debt paid, a career ended, a resource cycle completing.",},
+  };
+  const cardNotes = notes[cardId] || notes[cardId+'all'];
+  if(!cardNotes) return `In the domain of ${domains.find(x=>x.id===domainId)?.name||domainId}, this archetypal card brings its full weight to bear. The Major Arcana energy it carries operates at a level beyond any single life domain — it is asking for transformation at the root.`;
+  return cardNotes[domainId] || `This card's energy operates powerfully in the domain of ${domains.find(x=>x.id===domainId)?.name||domainId}. Sit with its archetype and ask what it is pointing to in this specific area of your life.`;
+}
+
+// Also update getCardData to include domain reading for spread interpretations
+const _originalGetCardData = getCardData;
+
 // ═══════════════════════════════════════════════════════════════ INIT
 
 createNumberedCards('red',    'card-red',    false);
@@ -838,7 +1526,9 @@ createNumberedCards('teal',   'card-teal',   true);
 createNumberedCards('purple', 'card-purple', true);
 createSpecialCards('dark');
 initSpreads();
+initDomains();
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModalDirect(); });
 </script>
+
 </body>
 </html>
